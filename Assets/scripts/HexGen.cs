@@ -15,7 +15,7 @@ public class HexGen : MonoBehaviour {
 				 one = 1f,
 				 negPntFive = -.5f,
 				 pntFive = .5f;
-	public float floorLevel = 1f;
+	public float floorLevel = 0f;
 
 	
 	void Awake () {
@@ -83,7 +83,6 @@ public class HexGen : MonoBehaviour {
 	// distributes the hexagon to correct 
 	void tagDistributer () {
 
-
 		verts = new Vector3[]
 		{
 			new Vector3 (negOne, floorLevel, negPntFive),
@@ -93,7 +92,11 @@ public class HexGen : MonoBehaviour {
 			new Vector3 (one, floorLevel, negPntFive),
 			new Vector3 (zero, floorLevel, negOne)
 		};
-	}	
+	}
+
+	public bool HitByRay () {
+			return true;
+		}
 }
 
 
