@@ -52,9 +52,13 @@ public class HexGen : MonoBehaviour {
 		
 
 		//add a mesh filter to the GO the script is attached to; cache it for later
-		MeshFilter meshFilter = gameObject.AddComponent<MeshFilter>();
+		MeshFilter meshFilter = gameObject.AddComponent<MeshFilter> ();
+
 		//add a mesh renderer to the GO the script is attached to
-		gameObject.AddComponent<MeshRenderer>();
+		gameObject.AddComponent<MeshRenderer> ();
+
+		//add collider to object
+		MeshCollider meshC = gameObject.AddComponent<MeshCollider> ();
 			
 		//create a mesh object to pass our data into
 		Mesh mesh = new Mesh();
@@ -71,12 +75,16 @@ public class HexGen : MonoBehaviour {
 			
 		//set the GO's meshFilter's mesh to be the one we just made
 		meshFilter.mesh = mesh;
-			
+
+		// sets shared mesh to this mesh
+		meshC.sharedMesh = meshFilter.mesh;
+
 		//UV TESTING
 		Material transparent = new Material ( Shader.Find("Transparent/Diffuse") );
 			
 		renderer.material = transparent;
 		renderer.material.mainTexture = texture;
+	
 	
 	}
 

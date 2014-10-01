@@ -27,18 +27,4 @@ public class CharController : MonoBehaviour {
 		}	
 			transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * speed);
 	}
-
-//	bool ifHit () {
-//			
-//		Plane playerPlane = new Plane(Vector3.up, transform.position);
-//		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-//		RaycastHit hit;
-//
-//		if (Physics.Raycast (Ray, hit, playerPlane.Raycast (ray, out hit)))
-//				if (hit.collider.tag.ToLower == "untagged")
-//						return false;
-//				else
-//						return true;
-//
-//	}
 }
