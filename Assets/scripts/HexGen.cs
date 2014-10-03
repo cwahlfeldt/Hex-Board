@@ -17,13 +17,15 @@ public class HexGen : MonoBehaviour {
 				 pntFive = .5f;
 	public float floorLevel = 0f;
 
+
 	
 	void Awake () {
 		// generates single hexagon
-		HexGenerator ();
+		GameObject go = new GameObject(this.gameObject.name);
+		HexGenerator (go);
 	}
 
-	void HexGenerator () {
+	void HexGenerator (GameObject go) {
 		
 		// Gets verts for game board
 		tagDistributer ();
@@ -49,16 +51,15 @@ public class HexGen : MonoBehaviour {
 		};
 
 		//creates the mesh
-		
 
 		//add a mesh filter to the GO the script is attached to; cache it for later
-		MeshFilter meshFilter = gameObject.AddComponent<MeshFilter> ();
+		MeshFilter meshFilter = go.AddComponent<MeshFilter> ();
 
 		//add a mesh renderer to the GO the script is attached to
-		gameObject.AddComponent<MeshRenderer> ();
+		go.AddComponent<MeshRenderer> ();
 
 		//add collider to object
-		MeshCollider meshC = gameObject.AddComponent<MeshCollider> ();
+		MeshCollider meshC = go.AddComponent<MeshCollider> ();
 			
 		//create a mesh object to pass our data into
 		Mesh mesh = new Mesh();
@@ -79,12 +80,17 @@ public class HexGen : MonoBehaviour {
 		// sets shared mesh to this mesh
 		meshC.sharedMesh = meshFilter.mesh;
 
+		go.transform.parent = this.transform;
+
+		go.transform.position = this.transform.position;
+		go.transform.rotation = this.transform.rotation;
+
 		//UV TESTING
 		Material transparent = new Material ( Shader.Find("Transparent/Diffuse") );
 			
-		renderer.material = transparent;
-		renderer.material.mainTexture = texture;
-	
+		go.renderer.material = transparent;
+		go.renderer.material.mainTexture = texture;
+
 	
 	}
 

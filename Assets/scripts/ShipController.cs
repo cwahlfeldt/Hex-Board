@@ -14,9 +14,9 @@ public class ShipController : MonoBehaviour {
 		{
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			
+
 			if (Physics.Raycast(ray, out hit)) {
-				if (!hit.transform.tag.Equals("Untagged") )Debug.Log( gameObject.tag + " is clicked by mouse");
+				if (!hit.transform.Equals("")) Debug.Log( hit.transform.gameObject.name + " is clicked by mouse: " + Input.mousePosition.y);
 			}
 		}
 	}
