@@ -21,7 +21,7 @@ public class CharController : MonoBehaviour {
 				
 				if (playerPlane.Raycast (ray, out hitdist) 
 			    && Physics.Raycast(ray, out hit) 
-			    && !hit.transform.Equals("")) {
+			    && !hit.transform.Equals ("")) {
 					var targetPoint = ray.GetPoint(hitdist);
 					targetPosition = ray.GetPoint(hitdist);
 					var targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
