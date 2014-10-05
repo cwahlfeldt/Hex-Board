@@ -81,6 +81,7 @@ public class HexGen : MonoBehaviour {
 		meshC.sharedMesh = meshFilter.mesh;
 
 		go.transform.parent = this.transform;
+		go.name = "child-" + this.name;
 
 		go.transform.position = this.transform.position;
 		go.transform.rotation = this.transform.rotation;
@@ -90,7 +91,6 @@ public class HexGen : MonoBehaviour {
 			
 		go.renderer.material = transparent;
 		go.renderer.material.mainTexture = texture;
-
 	
 	}
 
@@ -107,10 +107,6 @@ public class HexGen : MonoBehaviour {
 			new Vector3 (zero, floorLevel, negOne)
 		};
 	}
-
-	public bool HitByRay () {
-			return true;
-		}
 }
 
 
