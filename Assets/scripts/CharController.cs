@@ -19,13 +19,20 @@ public class CharController : MonoBehaviour {
 			float hitdist = 0.0f;
 			RaycastHit hit;
 				
-				if (playerPlane.Raycast (ray, out hitdist) 
-			    && Physics.Raycast(ray, out hit) 
-			    && !hit.transform.Equals ("")) {
-					var targetPoint = ray.GetPoint(hitdist);
-					targetPosition = ray.GetPoint(hitdist);
-					var targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
-					transform.rotation = targetRotation;
+			 if (playerPlane.Raycast (ray, out hitdist) 
+			 && Physics.Raycast(ray, out hit) 
+			 && !hit.transform.Equals ("")) {
+
+				GameObject go = GameObject.Find(hit.transform.gameObject.name);
+
+				Vector3 childPieceLocation = new Vector3(go.transform.position.x, go.transform.position.y + 1.3f, go.transform.position.z);
+
+				var targetPoint = childPieceLocation;
+				targetPosition = childPieceLocation;
+
+				transform.rotation = Quaternion.LookRotation(targetPoint - transform.position);
+
+				print(Mathf.Round(hitdist));
 			}
 		}	
 

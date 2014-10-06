@@ -20,7 +20,7 @@ public class HexGen : MonoBehaviour {
 
 	
 	void Awake () {
-		// generates single hexagon
+		// generates single hexagon at the location of an empty object
 		GameObject go = new GameObject(this.gameObject.name);
 		HexGenerator (go);
 	}
@@ -28,7 +28,15 @@ public class HexGen : MonoBehaviour {
 	void HexGenerator (GameObject go) {
 		
 		// Gets verts for game board
-		tagDistributer ();
+		verts = new Vector3[]
+		{
+			new Vector3 (negOne, floorLevel, negPntFive),
+			new Vector3 (negOne, floorLevel, pntFive),
+			new Vector3 (zero, floorLevel, one),
+			new Vector3 (one, floorLevel, pntFive),
+			new Vector3 (one, floorLevel, negPntFive),
+			new Vector3 (zero, floorLevel, negOne)
+		};
 
 		//sets triangles
 		tris = new int[]
@@ -94,19 +102,7 @@ public class HexGen : MonoBehaviour {
 	
 	}
 
-	// distributes the hexagon to correct 
-	void tagDistributer () {
 
-		verts = new Vector3[]
-		{
-			new Vector3 (negOne, floorLevel, negPntFive),
-			new Vector3 (negOne, floorLevel, pntFive),
-			new Vector3 (zero, floorLevel, one),
-			new Vector3 (one, floorLevel, pntFive),
-			new Vector3 (one, floorLevel, negPntFive),
-			new Vector3 (zero, floorLevel, negOne)
-		};
-	}
 }
 
 

@@ -48,7 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\scripts\CharController.cs" />
      <Compile Include="Assets\scripts\HexGen.cs" />
-     <Compile Include="Assets\scripts\ShipController.cs" />
+     <Compile Include="Assets\scripts\MapController.cs" />
      <None Include="Assets\imported-assets\Skyboxes\_skybox info.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
