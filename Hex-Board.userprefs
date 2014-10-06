@@ -2,9 +2,9 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\MapController.cs">
     <Files>
-      <File FileName="Assets\scripts\CharController.cs" Line="14" Column="18" />
-      <File FileName="Assets\scripts\HexGen.cs" Line="19" Column="2" />
-      <File FileName="Assets\scripts\MapController.cs" Line="4" Column="32" />
+      <File FileName="Assets\scripts\CharController.cs" Line="19" Column="25" />
+      <File FileName="Assets\scripts\HexGen.cs" Line="13" Column="23" />
+      <File FileName="Assets\scripts\MapController.cs" Line="6" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
