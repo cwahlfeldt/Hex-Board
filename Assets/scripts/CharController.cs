@@ -8,16 +8,19 @@ public class CharController : MonoBehaviour {
 	
 	public int smooth; // Determines how quickly object moves towards position
 	private Vector3 targetPosition;
-	float speed = 5f;
+	float speed = 8f;
 	HexGen hexGen;
-	
+
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.Mouse0))
 		{
 			Plane playerPlane = new Plane(Vector3.up, transform.position);
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+			Camera charCamera = GameObject.Find("shipCamera").camera;
+			Ray shipRay = charCamera.ScreenPointToRay (Input.mousePosition);
 			float hitdist = 0.0f;
-			RaycastHit hit;
+			RaycastHit hit, hit1;
+
 				
 			 if (playerPlane.Raycast (ray, out hitdist) 
 			 && Physics.Raycast(ray, out hit) 
@@ -32,10 +35,15 @@ public class CharController : MonoBehaviour {
 
 				transform.rotation = Quaternion.LookRotation(targetPoint - transform.position);
 
-				print(Mathf.Round(hitdist));
+				//not working
+				if (Physics.Raycast(shipRay, out hit1)) {
+					print(hit1.distance);
+				}
+
+
 			}
 		}	
-
+	
 		transform.position = Vector3.MoveTowards (transform.position, targetPosition, Time.deltaTime * speed);
 	}
 }
