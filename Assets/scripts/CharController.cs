@@ -17,7 +17,7 @@ public class CharController : MonoBehaviour {
 			Plane playerPlane = new Plane(Vector3.up, transform.position);
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			Camera charCamera = GameObject.Find("shipCamera").camera;
-			Ray shipRay = charCamera.ScreenPointToRay (Input.mousePosition);
+			Ray shipRay = charCamera.ScreenPointToRay(Input.mousePosition);
 			float hitdist = 0.0f;
 			RaycastHit hit, hit1;
 
@@ -35,12 +35,10 @@ public class CharController : MonoBehaviour {
 
 				transform.rotation = Quaternion.LookRotation(targetPoint - transform.position);
 
-				//not working
+				//not working.....
 				if (Physics.Raycast(shipRay, out hit1)) {
-					print(hit1.distance);
+					print(hit1.point);
 				}
-
-
 			}
 		}	
 	
