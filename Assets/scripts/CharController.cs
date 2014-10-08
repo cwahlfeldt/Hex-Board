@@ -10,21 +10,24 @@ public class CharController : MonoBehaviour {
 	private Vector3 targetPosition;
 	float speed = 8f;
 	HexGen hexGen;
+	RaycastHit hit;
+	float lastHitDist = 0f;
+	
 
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.Mouse0))
 		{
-			Plane playerPlane = new Plane(Vector3.up, transform.position);
+			Plane playerPlane = new Plane(Vector3.up, transform.position), playerPlane1 = new Plane(Vector3.up, transform.position);
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-			Camera charCamera = GameObject.Find("shipCamera").camera;
-			Ray shipRay = charCamera.ScreenPointToRay(Input.mousePosition);
+			Ray ray1 = camera.ScreenPointToRay(Input.mousePosition);
 			float hitdist = 0.0f;
-			RaycastHit hit, hit1;
+			RaycastHit hit1;
 
-				
-			 if (playerPlane.Raycast (ray, out hitdist) 
-			 && Physics.Raycast(ray, out hit) 
-			 && !hit.transform.Equals ("")) {
+			// checks for distance to tile and sets it to the target position
+			// also sets rotation of object
+			if (playerPlane.Raycast (ray, out hitdist) 
+			&& Physics.Raycast(ray, out hit) 
+			&& !hit.transform.Equals ("")) {
 
 				GameObject go = GameObject.Find(hit.transform.gameObject.name);
 
@@ -35,13 +38,27 @@ public class CharController : MonoBehaviour {
 
 				transform.rotation = Quaternion.LookRotation(targetPoint - transform.position);
 
-				//not working..... 
-				if (Physics.Raycast(shipRay, out hit1)) {
-					print(hit1.point);
-				}
+				print (hitdist);
 			}
 		}	
-	
-		transform.position = Vector3.MoveTowards (transform.position, targetPosition, Time.deltaTime * speed);
+
+
+
+		if ((lastHitDist - hit.distance) <= 2 || (lastHitDist - hit.distance) >= -2)
+			transform.position = Vector3.MoveTowards (transform.position, targetPosition, Time.deltaTime * speed);
+		else
+			print("not working");
+
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
