@@ -35,7 +35,7 @@ public class CharController : MonoBehaviour {
 
 				transform.rotation = Quaternion.LookRotation(targetPoint - transform.position);
 
-				//not working.....
+				//not working..... 
 				if (Physics.Raycast(shipRay, out hit1)) {
 					print(hit1.point);
 				}
