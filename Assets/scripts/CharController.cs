@@ -55,9 +55,16 @@ public class CharController : MonoBehaviour {
 			
 //   			if (oneTileRestriction ())	
 						transform.position = Vector3.MoveTowards (transform.position, targetPosition, Time.deltaTime * speed);
+<<<<<<< HEAD
 //				else {
 //						print ("Can only move one tile at a time");
 //					 }
+=======
+				else {
+						print ("Can only move one tile at a time");
+						return;
+				}
+>>>>>>> origin
 
 		}
 
