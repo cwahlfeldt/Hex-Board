@@ -12,16 +12,18 @@ public class CharController : MonoBehaviour {
 	public HexGen hexGen;
 	public RaycastHit hit;
 	public ArrayList hitDistances = new ArrayList();
-	
+
+	void Start () {
+		hitDistances.Add (6f);
+	}
 
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.Mouse0))
 		{
-			Plane playerPlane = new Plane(Vector3.up, transform.position), 
-					playerPlane1 = new Plane(Vector3.up, transform.position);
-
+			Plane playerPlane = new Plane(Vector3.up, transform.position);
+		
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-			Ray ray1 = camera.ScreenPointToRay(Input.mousePosition);
+			//Ray ray1 = camera.ScreenPointToRay(Input.mousePosition);
 
 			float hitdist = 0.0f;
 
@@ -30,8 +32,6 @@ public class CharController : MonoBehaviour {
 			if (playerPlane.Raycast (ray, out hitdist) 
 			&& Physics.Raycast(ray, out hit) 
 			&& !hit.transform.Equals ("")) {
-
-				hitDistances.Add(hitdist);
 
 				GameObject go = GameObject.Find(hit.transform.gameObject.name);
 
@@ -43,13 +43,41 @@ public class CharController : MonoBehaviour {
 
 				transform.rotation = Quaternion.LookRotation(targetPoint - transform.position);
 
-				print (hitdist);
-			}
-		}	
+				hitdist = Mathf.Ceil(hitdist);
 
-		transform.position = Vector3.MoveTowards (transform.position, targetPosition, Time.deltaTime * speed);
+				print(hitdist);
 
-	}
+				hitDistances.Add(hitdist);
+
+				}
+			}	
+			
+		if (oneTileRestriction ())	
+						transform.position = Vector3.MoveTowards (transform.position, targetPosition, Time.deltaTime * speed);
+				else {
+						print ("Can only move one tile at a time");
+						//return;
+				}
+
+		}
+
+	//
+	bool oneTileRestriction () {
+
+		int i = 0;
+	
+		foreach (float rayDist in hitDistances)
+						i++;
+
+		float last = (float)hitDistances[i - 1];
+		float secondToLast = (float)hitDistances [i - 2];
+
+		if ((last - secondToLast) <= 2 || (last - secondToLast) <= -2)
+						return true;
+				else
+						return false;
+
+		}
 }
 
 
