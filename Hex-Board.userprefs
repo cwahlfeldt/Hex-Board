@@ -1,10 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\CharController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/CharController.cs">
     <Files>
-      <File FileName="Assets\scripts\CharController.cs" Line="32" Column="35" />
-      <File FileName="Assets\scripts\HexGen.cs" Line="32" Column="4" />
-      <File FileName="Assets\scripts\MapController.cs" Line="14" Column="43" />
+      <File FileName="Assets/scripts/CharController.cs" Line="61" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

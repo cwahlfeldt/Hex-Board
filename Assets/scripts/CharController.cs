@@ -18,6 +18,7 @@ public class CharController : MonoBehaviour {
 	}
 
 	void Update () {
+
 		if(Input.GetKeyDown(KeyCode.Mouse0))
 		{
 			Plane playerPlane = new Plane(Vector3.up, transform.position);
@@ -52,12 +53,11 @@ public class CharController : MonoBehaviour {
 				}
 			}	
 			
-		if (oneTileRestriction ())	
+//   			if (oneTileRestriction ())	
 						transform.position = Vector3.MoveTowards (transform.position, targetPosition, Time.deltaTime * speed);
-				else {
-						print ("Can only move one tile at a time");
-						//return;
-				}
+//				else {
+//						print ("Can only move one tile at a time");
+//					 }
 
 		}
 
@@ -72,12 +72,11 @@ public class CharController : MonoBehaviour {
 		float last = (float)hitDistances[i - 1];
 		float secondToLast = (float)hitDistances [i - 2];
 
-		if ((last - secondToLast) <= 2 || (last - secondToLast) <= -2)
+		if ((last - secondToLast) <= 2 || (last - secondToLast) <= -2) 
 						return true;
 				else
 						return false;
-
-		}
+			}
 }
 
 
