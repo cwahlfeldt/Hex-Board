@@ -56,7 +56,7 @@ public class CharController : MonoBehaviour {
 						transform.position = Vector3.MoveTowards (transform.position, targetPosition, Time.deltaTime * speed);
 				else {
 						print ("Can only move one tile at a time");
-						//return;
+						return;
 				}
 
 		}
