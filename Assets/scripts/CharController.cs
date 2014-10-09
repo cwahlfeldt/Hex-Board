@@ -1,93 +1,83 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CharController : MonoBehaviour {
-
+public class CharController: MonoBehaviour {
+	
 	// Click To Move script
 	// Moves the object towards the mouse position on left mouse click
 	
 	public int smooth; // Determines how quickly object moves towards position
 	private Vector3 targetPosition;
-	public float speed = 8f;
+	public float speed;
 	public HexGen hexGen;
-	public RaycastHit hit;
-	public ArrayList hitDistances = new ArrayList();
-
-	void Start () {
-		hitDistances.Add (6f);
+	public RaycastHit hit, shiphit;
+	public ArrayList hitDistances;
+	//global index for update var basically finds how man clicks when clicking on object
+	public int i = 0;
+	public Vector3 fwd;
+	GameObject go;
+	Vector3 childPieceLocation;
+	float dist;
+	
+	void Start() {
+		hitDistances = new ArrayList();
+		shiphit.distance = 5f;
+		hitDistances.Add(2f);
+		speed = 8f;
 	}
-
-	void Update () {
-
-		if(Input.GetKeyDown(KeyCode.Mouse0))
-		{
-			Plane playerPlane = new Plane(Vector3.up, transform.position);
+	
+	void Update() {
+		GameObject ship = GameObject.FindGameObjectWithTag("Player");
 		
-			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+		if (Input.GetKeyDown(KeyCode.Mouse0)) {
+			Plane playerPlane = new Plane(Vector3.up, transform.position);
+			
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			//Ray ray1 = camera.ScreenPointToRay(Input.mousePosition);
-
+			
 			float hitdist = 0.0f;
-
+			
 			// checks for distance to tile and sets it to the target position
 			// also sets rotation of object
-			if (playerPlane.Raycast (ray, out hitdist) 
-			&& Physics.Raycast(ray, out hit) 
-			&& !hit.transform.Equals ("")) {
-
-				GameObject go = GameObject.Find(hit.transform.gameObject.name);
-
-				Vector3 childPieceLocation = new Vector3
-					(go.transform.position.x, go.transform.position.y + 1.3f, go.transform.position.z);
-
+			if (playerPlane.Raycast(ray, out hitdist) && Physics.Raycast(ray, out hit) && !hit.transform.Equals("")) {
+				
+				go = GameObject.Find(hit.transform.gameObject.name);
+				
+				childPieceLocation = new Vector3(go.transform.position.x, go.transform.position.y + 1.3f, go.transform.position.z);
+				
+				fwd = go.transform.TransformDirection(Vector3.forward);
+				
+				
 				var targetPoint = childPieceLocation;
 				targetPosition = childPieceLocation;
-
+				
 				transform.rotation = Quaternion.LookRotation(targetPoint - transform.position);
-
-				hitdist = Mathf.Ceil(hitdist);
-
-				print(hitdist);
-
+				
+				hitdist = Mathf.Floor(hitdist);
+				
 				hitDistances.Add(hitdist);
+				i++;
 
-				}
-			}	
-			
-//   			if (oneTileRestriction ())	
-						transform.position = Vector3.MoveTowards (transform.position, targetPosition, Time.deltaTime * speed);
-//				else {
-//						print ("Can only move one tile at a time");
-//					 }
-				//else {
-//						print ("Can only move one tile at a time");
-//						return;
-				}
-	
-
-	bool oneTileRestriction () {
-
-		int i = 0;
-	
-		foreach (float rayDist in hitDistances)
-						i++;
-
-		float last = (float)hitDistances[i - 1];
-		float secondToLast = (float)hitDistances [i - 2];
-
-		if ((last - secondToLast) <= 2 || (last - secondToLast) <= -2) 
-						return true;
-				else
-						return false;
+				// gets dist from current click
+				dist = Vector3.Distance(ship.transform.position, childPieceLocation);
+				
+				
+				Ray shipRay = new Ray(ship.transform.position, childPieceLocation - ship.transform.position);
+				Plane shipPlane = new Plane(Vector3.up, ship.transform.position);
+				
 			}
-}
-
-
-
-
-
-
-
-
-
-
-
+			
+		}
+		Debug.DrawRay(ship.transform.position, childPieceLocation - ship.transform.position, Color.green);
+		
+		if (dist < 3) {
+			transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * speed);
+		}
+		
+	} // end of update function
+	
+	public static float DistanceToLine(Ray ray, Vector3 point) {
+		return Vector3.Cross(ray.direction, point - ray.origin).magnitude;
+	}
+	
+} // end of class

@@ -68,6 +68,7 @@ public class HexGen : MonoBehaviour {
 
 		//add collider to object
 		MeshCollider meshC = go.AddComponent<MeshCollider> ();
+		BoxCollider meshBox = go.AddComponent<BoxCollider> ();
 			
 		//create a mesh object to pass our data into
 		Mesh mesh = new Mesh();
