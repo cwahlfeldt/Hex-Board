@@ -6,7 +6,7 @@ public class CharController: MonoBehaviour {
 	// Click To Move script
 	// Moves the object towards the mouse position on left mouse click
 	
-	public int smooth; // Determines how quickly object moves towards position
+	public float smooth; // Determines how quickly object moves towards position
 	private Vector3 targetPosition;
 	public float speed;
 	public HexGen hexGen;
@@ -24,6 +24,7 @@ public class CharController: MonoBehaviour {
 		shiphit.distance = 5f;
 		hitDistances.Add(2f);
 		speed = 8f;
+		smooth = 2f;
 	}
 	
 	void Update() {
@@ -51,8 +52,7 @@ public class CharController: MonoBehaviour {
 				var targetPoint = childPieceLocation;
 				targetPosition = childPieceLocation;
 				
-				transform.rotation = Quaternion.LookRotation(targetPoint - transform.position);
-				
+
 				hitdist = Mathf.Floor(hitdist);
 				
 				hitDistances.Add(hitdist);
@@ -61,23 +61,22 @@ public class CharController: MonoBehaviour {
 				// gets dist from current click
 				dist = Vector3.Distance(ship.transform.position, childPieceLocation);
 				
-				
-				Ray shipRay = new Ray(ship.transform.position, childPieceLocation - ship.transform.position);
-				Plane shipPlane = new Plane(Vector3.up, ship.transform.position);
+
 				
 			}
 			
 		}
+
+		Vector3 relPosition = childPieceLocation - ship.transform.position;
+		Quaternion quat = Quaternion.LookRotation (relPosition);
 		Debug.DrawRay(ship.transform.position, childPieceLocation - ship.transform.position, Color.green);
 		
 		if (dist < 3) {
-			transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * speed);
+			transform.rotation = Quaternion.Slerp(ship.transform.rotation, quat, Time.deltaTime * (speed + 9f));
+			transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * (speed - 3f));
+
 		}
 		
 	} // end of update function
-	
-	public static float DistanceToLine(Ray ray, Vector3 point) {
-		return Vector3.Cross(ray.direction, point - ray.origin).magnitude;
-	}
 	
 } // end of class
