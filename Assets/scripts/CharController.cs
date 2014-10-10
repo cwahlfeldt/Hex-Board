@@ -15,6 +15,7 @@ public class CharController: MonoBehaviour {
 
 	void Start() {
 
+		// initializes speed var
 		speed = 8f;
 
 	}
@@ -44,7 +45,7 @@ public class CharController: MonoBehaviour {
 				// gets dist from current click
 				dist = Vector3.Distance(ship.transform.position, childPieceLocation);
 
-				// the reletive position of ship to the tile location
+				// the relative position of ship to the tile location
 				relPosition = childPieceLocation - ship.transform.position;
 
 				// sets a quaternion where to rotate basd on the relative position 
@@ -53,6 +54,9 @@ public class CharController: MonoBehaviour {
 			}
 			
 		}
+
+		// draws a ray to the tile clicked
+		Debug.DrawRay (ship.transform.position, childPieceLocation - ship.transform.position, Color.green);
 
 		// will only move to one tile at a time.
 		if (dist < 3) {
