@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Pathfinding;
 
 public class HexGen : MonoBehaviour {
 
@@ -19,7 +20,7 @@ public class HexGen : MonoBehaviour {
 
 
 	
-	void Awake () {
+	void Start () {
 		// generates single hexagon at the location of an empty object
 		GameObject go = new GameObject(this.gameObject.name);
 		HexGenerator (go);
@@ -92,12 +93,14 @@ public class HexGen : MonoBehaviour {
 		go.transform.parent = this.transform;
 		go.name = "child-" + this.name;
 
+		go.tag = "tile";
+
 		go.transform.position = this.transform.position;
 		go.transform.rotation = this.transform.rotation;
 
 		//UV TESTING
 		Material transparent = new Material ( Shader.Find("Transparent/Diffuse") );
-			
+					
 		go.renderer.material = transparent;
 		go.renderer.material.mainTexture = texture;
 	
