@@ -19,7 +19,7 @@ public class HexGen : MonoBehaviour {
 
 
 	
-	void Awake () {
+	void Start () {
 		// generates single hexagon at the location of an empty object
 		GameObject go = new GameObject(this.gameObject.name);
 		HexGenerator (go);

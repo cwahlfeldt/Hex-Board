@@ -37,9 +37,11 @@ public class CharController: MonoBehaviour {
 			
 			// checks for distance to tile and sets it to the target position
 			if (playerPlane.Raycast(ray, out hitdist) && Physics.Raycast(ray, out hit) && !hit.transform.Equals("")) {
-				
+
+				// gets current clicked child piece
 				go = GameObject.Find(hit.transform.gameObject.name);
-				
+
+				// gets child piece location of current clicked child piece
 				childPieceLocation = new Vector3(go.transform.position.x, go.transform.position.y + 1.3f, go.transform.position.z);		
 
 				// gets dist from current click
@@ -50,6 +52,8 @@ public class CharController: MonoBehaviour {
 
 				// sets a quaternion where to rotate basd on the relative position 
 				quat = Quaternion.LookRotation (relPosition);
+
+				print (Mathf.Floor(dist));
 
 			}
 			
