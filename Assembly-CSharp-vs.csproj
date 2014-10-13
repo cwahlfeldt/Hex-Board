@@ -117,6 +117,7 @@
      <Compile Include="Assets\scripts\AstarPathfindingProject\Utilities\ProfileHelper.cs" />
      <Compile Include="Assets\scripts\AstarPathfindingProject\Utilities\UnityReferenceHelper.cs" />
      <Compile Include="Assets\scripts\AstarPathfindingProject\changelog.cs" />
+     <Compile Include="Assets\scripts\CameraAspect.cs" />
      <Compile Include="Assets\scripts\CharController.cs" />
      <Compile Include="Assets\scripts\HexGen.cs" />
      <Compile Include="Assets\scripts\MapController.cs" />
