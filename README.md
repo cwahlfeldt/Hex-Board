@@ -1,12 +1,17 @@
 Hex-Board
 =========
 
+About
+-----
 
-This is a turn-based/4X...ish game prototype made with unity (free version)
+This is a turn-based/rouge-like/4X...ish game prototype made with unity (free version) 
+
+WIP
 
 
 Todo List:
- 	
+----------
+	
 - Enemy AI : 
  	eventually different types of enemies (example: "ranged" or "melee..")
  	..
