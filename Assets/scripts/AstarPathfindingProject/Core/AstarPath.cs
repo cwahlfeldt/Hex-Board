@@ -661,8 +661,6 @@ public class AstarPath : MonoBehaviour {
 	private void Update () {
 		PerformBlockingActions();
 
-
-		
 		//Process paths
 		if (threadEnumerator != null) {
 			try {
@@ -687,10 +685,12 @@ public class AstarPath : MonoBehaviour {
 			}
 		}
 
-		Scan ();
-		
 		//Return calculated paths
 		ReturnPaths(true);
+	}
+
+	private void FixedUpdate () {
+		Scan ();
 	}
 	
 	private void PerformBlockingActions (bool force = false, bool unblockOnComplete = true) {
