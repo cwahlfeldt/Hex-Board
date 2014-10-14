@@ -1,13 +1,9 @@
 Hex-Board
 =========
 
-About
------
-
 This is a turn-based/rouge-like/4X...ish game prototype made with unity (free version) 
 
 WIP
-
 
 Todo List:
 ----------
