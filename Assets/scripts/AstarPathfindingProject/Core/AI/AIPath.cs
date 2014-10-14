@@ -190,6 +190,7 @@ public class AIPath : MonoBehaviour {
 			
 			StartCoroutine (RepeatTrySearchPath ());
 		}
+
 	}
 	
 	public void OnDisable () {
@@ -308,6 +309,9 @@ public class AIPath : MonoBehaviour {
 			}
 
 		}
+
+		canMove = true;
+
 	}
 	
 	public virtual Vector3 GetFeetPosition () {
@@ -317,9 +321,15 @@ public class AIPath : MonoBehaviour {
 
 		return tr.position;
 	}
+
+	bool leftMouseDown = false;
 	
 	public virtual void Update () {
-		
+
+		if (Input.GetMouseButtonDown (0)) {
+			leftMouseDown = true;
+		}
+
 		if (!canMove) { return; }
 		
 		Vector3 dir = CalculateVelocity (GetFeetPosition());
@@ -334,6 +344,33 @@ public class AIPath : MonoBehaviour {
 			rigid.AddForce (dir);
 		} else {
 			transform.Translate (dir*Time.deltaTime, Space.World);
+		}
+
+
+	}
+
+	public virtual void FixedUpdate () {
+		if (leftMouseDown) {
+
+			GameObject ship = GameObject.FindGameObjectWithTag("Player");
+			GameObject button = GameObject.FindGameObjectWithTag("FTL");
+			RaycastHit hit;
+
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			
+			if (Physics.Raycast (ray, out hit)) {
+				GameObject go = GameObject.Find(hit.transform.gameObject.name);
+
+				if (Mathf.Ceil(Vector3.Distance(ship.transform.position, go.transform.position)) <= 3) {
+
+					target = go.transform;
+				}
+
+				print ((Vector3.Distance(ship.transform.position, go.transform.position)));
+
+				leftMouseDown = false;
+			}
+	
 		}
 	}
 	

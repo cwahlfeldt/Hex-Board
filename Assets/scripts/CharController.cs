@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Pathfinding;
 
 // Moves the charObject to a tile object when the tile is clicked
 public class CharController: MonoBehaviour {
