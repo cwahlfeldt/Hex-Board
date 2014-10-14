@@ -20,14 +20,14 @@ public class MapController : MonoBehaviour {
 		int rando6 = (int)Random.Range(15f, 19f);
 		int rando7 = (int)Random.Range(12f, 19f);
 
-//		Destroy (pieces [rando]);
-//		Destroy (pieces [rando1]);
-//		Destroy (pieces [rando2]);
-//		Destroy (pieces [rando3]);
-//		Destroy (pieces [rando4]);
-//		Destroy (pieces [rando5]);
-//		Destroy (pieces [rando6]);
-//		Destroy (pieces [rando7]);
+		Destroy (pieces [rando]);
+		Destroy (pieces [rando1]);
+		Destroy (pieces [rando2]);
+		Destroy (pieces [rando3]);
+		Destroy (pieces [rando4]);
+		Destroy (pieces [rando5]);
+		Destroy (pieces [rando6]);
+		Destroy (pieces [rando7]);
 
 	}
 }

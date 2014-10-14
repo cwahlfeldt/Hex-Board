@@ -352,6 +352,8 @@ public class AIPath : MonoBehaviour {
 	public virtual void FixedUpdate () {
 		if (leftMouseDown) {
 
+
+
 			GameObject ship = GameObject.FindGameObjectWithTag("Player");
 			GameObject button = GameObject.FindGameObjectWithTag("FTL");
 			RaycastHit hit;
@@ -361,10 +363,11 @@ public class AIPath : MonoBehaviour {
 			if (Physics.Raycast (ray, out hit)) {
 				GameObject go = GameObject.Find(hit.transform.gameObject.name);
 
-				if (Mathf.Ceil(Vector3.Distance(ship.transform.position, go.transform.position)) <= 3) {
+				//if (Mathf.Round(Vector3.Distance(ship.transform.position, go.transform.position)) <= 5) {
 
 					target = go.transform;
-				}
+
+				//}
 
 				print ((Vector3.Distance(ship.transform.position, go.transform.position)));
 
