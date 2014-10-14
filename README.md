@@ -3,7 +3,7 @@ Hex-Board
 
 
 This is a turn-based/4X...ish game prototype made with unity (free version)
----------------------------------------------------------------------------
+
 
 Todo List:
  	
