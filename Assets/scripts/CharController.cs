@@ -31,8 +31,9 @@ public class CharController: MonoBehaviour {
 
 			// creates a plane for the character and it acts as the 'ground'
 			Plane playerPlane = new Plane(Vector3.up, transform.position);
-			
+
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
 			
 			float hitdist = 0.0f;
 			

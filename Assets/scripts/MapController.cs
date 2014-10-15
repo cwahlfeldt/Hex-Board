@@ -11,10 +11,10 @@ public class MapController : MonoBehaviour {
 
 		GameObject[] pieces = GameObject.FindGameObjectsWithTag("pieceTag");
 		int i = 0;
-		foreach (GameObject go in pieces) {
-			print (i + ": " + go.name);
-			i++;
-		}
+//		foreach (GameObject go in pieces) {
+//			print (i + ": " + go.name);
+//			i++;
+//		}
 
 
 		int rando = (int)Random.Range(18f, 25f);
