@@ -17,8 +17,6 @@ public class HexGen : MonoBehaviour {
 				 negPntFive = -.5f,
 				 pntFive = .5f;
 	public float floorLevel = 0f;
-
-
 	
 	void Start () {
 		// generates single hexagon at the location of an empty object
