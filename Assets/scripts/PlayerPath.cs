@@ -27,6 +27,8 @@ public class PlayerPath : MonoBehaviour {
 
 	public RaycastHit hit;
 
+	public GameObject enemy;
+
 	public void Start () {
 		seeker = GetComponent<Seeker>();
 		//player = this.gameObject;
@@ -68,9 +70,12 @@ public class PlayerPath : MonoBehaviour {
 		RotateTowards (dir);
 		controller.Move (dir);
 
+		enemy = GameObject.FindGameObjectWithTag ("Enemy");
+
 		if (Vector3.Distance (transform.position,path.vectorPath[currentWaypoint]) < nextWaypointDistance) {
 			if (currentWaypoint != 1) {
 				currentWaypoint++;
+				print (Vector3.Distance(transform.position, enemy.transform.position));
 			}
 			return;
 		}
