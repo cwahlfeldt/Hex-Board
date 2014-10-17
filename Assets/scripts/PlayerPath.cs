@@ -29,6 +29,8 @@ public class PlayerPath : MonoBehaviour {
 
 	public GameObject enemy;
 
+	public bool inAttackRange;
+
 	public void Start () {
 		seeker = GetComponent<Seeker>();
 		//player = this.gameObject;
@@ -36,6 +38,8 @@ public class PlayerPath : MonoBehaviour {
 		targetPosition = Vector3.zero;
 		//Start a new path to the targetPosition, return the result to the OnPathComplete function
 		seeker.StartPath (transform.position, targetPosition, OnPathComplete);
+		inAttackRange = false;
+		enemy = GameObject.FindGameObjectWithTag ("Enemy");
 	}
 	
 	public void Update () {
@@ -70,15 +74,32 @@ public class PlayerPath : MonoBehaviour {
 		RotateTowards (dir);
 		controller.Move (dir);
 
-		enemy = GameObject.FindGameObjectWithTag ("Enemy");
+		if (enemy != null)
+			enemy = GameObject.FindGameObjectWithTag ("Enemy");
+		else
+			print ("enemy is fucking dead");
 
 		if (Vector3.Distance (transform.position,path.vectorPath[currentWaypoint]) < nextWaypointDistance) {
+			// allows for only one space per 'turn'
 			if (currentWaypoint != 1) {
 				currentWaypoint++;
-				print (Vector3.Distance(transform.position, enemy.transform.position));
+
+				// checks if in attack range
+				if (Vector3.Distance(transform.position, enemy.transform.position) < 2.75f) {
+					inAttackRange = true;
+				}
 			}
 			return;
 		}
+		print (Vector3.Distance(transform.position, enemy.transform.position));
+
+		// attacking stuff
+		if (inAttackRange) {
+			if (Vector3.Distance(transform.position, enemy.transform.position) < 1.90f){
+				Destroy (enemy);
+			}
+		}
+
 	}
 
 	public void OnPathComplete (Path p) {

@@ -18,7 +18,7 @@ public class HexGen : MonoBehaviour {
 				 pntFive = .5f;
 	public float floorLevel = 0f;
 	
-	void Start () {
+	void Awake () {
 		// generates single hexagon at the location of an empty object
 		GameObject go = new GameObject(this.gameObject.name);
 		HexGenerator (go);

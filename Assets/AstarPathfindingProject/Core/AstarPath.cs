@@ -146,7 +146,7 @@ public class AstarPath : MonoBehaviour {
 	 * If you disable this, you will have to call \link Scan AstarPath.active.Scan () \endlink yourself to enable pathfinding,
 	 * alternatively you could load a saved graph from a file.
 	 */
-	public bool scanOnStartup = true;
+	public bool scanOnStartup = false;
 	
 	/** Do a full GetNearest search for all graphs.
 	 * Additinal searches will normally only be done on the graph which in the first, fast searches proved to have the closest node.

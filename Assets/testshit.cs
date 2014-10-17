@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour {
 		seeker = GetComponent<Seeker>();
 		controller = GetComponent<CharacterController>();
 		targetPosition = transform.position;
-		_myT = transform;
+		//_myT = transform;
 	}
 	// Update is called once per frame
 	void Update () {
@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour {
 		Vector3 dir = (path.vectorPath[currentWaypoint]-transform.position).normalized;
 		dir *= speed * Time.fixedDeltaTime;
 		controller.Move (dir * speed);
-		Vector3 rot = path.vectorPath[currentWaypoint];
+		//Vector3 rot = path.vectorPath[currentWaypoint];
 		if (Vector3.Distance (transform.position,path.vectorPath[currentWaypoint]) < nextWaypointDistance) {
 			currentWaypoint++;
 			return;
