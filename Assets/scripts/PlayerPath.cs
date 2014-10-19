@@ -4,6 +4,7 @@ using System.Collections;
 //This line should always be present at the top of scripts which use pathfinding
 using Pathfinding;
 public class PlayerPath : MonoBehaviour {
+
 	//The point to move to
 	public Vector3 targetPosition;
 	
@@ -25,36 +26,50 @@ public class PlayerPath : MonoBehaviour {
 	//The waypoint we are currently moving towards
 	private int currentWaypoint = 0;
 
+	// raycast hit for screen to mouse input
 	public RaycastHit hit;
 
+	// enemy object
 	public GameObject enemy;
 
+	public PlayerTurn pt;
+
+	public EnemyTurn et;
+
+	// checks if in attack range .. see #pathchecker
 	public bool inAttackRange;
 
+	public void Awake () {
+
+		// turn stuff
+		pt = GetComponent<PlayerTurn> ();
+		et = GetComponent<EnemyTurn> ();
+		pt.turn = true;
+		et.turn = false;
+	}
+
 	public void Start () {
-		seeker = GetComponent<Seeker>();
+
+		// gets seeker component
+		seeker = GetComponent<Seeker>( );
+
 		//player = this.gameObject;
-		controller = GetComponent<CharacterController>();
+		controller = GetComponent<CharacterController>( );
+
+		// first path is to the starting point of the level
 		targetPosition = Vector3.zero;
+
 		//Start a new path to the targetPosition, return the result to the OnPathComplete function
 		seeker.StartPath (transform.position, targetPosition, OnPathComplete);
 		inAttackRange = false;
 		enemy = GameObject.FindGameObjectWithTag ("Enemy");
+
 	}
 	
 	public void Update () {
-		if (Input.GetKeyDown (KeyCode.Mouse0)) {
-			
-			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-			GameObject go;
-			
-			if (Physics.Raycast (ray, out hit)) {
-				go = GameObject.Find (hit.transform.gameObject.name);
-				
-				targetPosition = go.transform.position;
-				seeker.StartPath (transform.position, targetPosition, OnPathComplete);
-			}
-		}
+
+		// starts path when the left mouse is clicked on a tile
+		LeftMouseClick ();
 
 		if (path == null) {
 			controller.Move (Vector3.zero);
@@ -67,53 +82,82 @@ public class PlayerPath : MonoBehaviour {
 		}
 
 		//Direction to the next waypoint
-		//Check if we are close enough to the next waypoint
-		//If we are, proceed to follow the next waypoint
-		Vector3 dir = (path.vectorPath[currentWaypoint]-transform.position);
-		dir *= speed * Time.fixedDeltaTime;
-		RotateTowards (dir);
-		controller.Move (dir);
+		Move ();
 
 		if (enemy != null)
 			enemy = GameObject.FindGameObjectWithTag ("Enemy");
-		else
-			print ("enemy is fucking dead");
+//		else
+//			print ("enemy is fucking dead");
 
+		// Check if we are close enough to the next waypoint
+		// If we are, proceed to follow the next waypoint
+		// also restricts path and checks attack range
+		PathChecker ();
+
+//		if (enemy != null)
+//			print (Vector3.Distance(transform.position, enemy.transform.position));
+
+		// Destroys enemy when in attack range.. needs way cooler 'animation' and effects
+		Attack ();
+
+	}
+
+	public void LeftMouseClick () {
+		if (Input.GetKeyDown (KeyCode.Mouse0)) {
+			
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+			GameObject go;
+			
+			if (Physics.Raycast (ray, out hit)) {
+				go = GameObject.Find (hit.transform.gameObject.name);
+				
+				targetPosition = go.transform.position;
+				seeker.StartPath (transform.position, targetPosition, OnPathComplete);
+			}
+		}
+	}
+
+	public void PathChecker () {
 		if (Vector3.Distance (transform.position,path.vectorPath[currentWaypoint]) < nextWaypointDistance) {
 			// allows for only one space per 'turn'
 			if (currentWaypoint != 1) {
 				currentWaypoint++;
-
+				
 				// checks if in attack range
-				if (Vector3.Distance(transform.position, enemy.transform.position) < 2.75f) {
+				if ((enemy != null) && (Vector3.Distance(transform.position, enemy.transform.position) < 2.75f)) {
 					inAttackRange = true;
 				}
 			}
 			return;
 		}
-		print (Vector3.Distance(transform.position, enemy.transform.position));
+	}
 
-		// attacking stuff
+	public void Move () {
+		Vector3 dir = (path.vectorPath[currentWaypoint]-transform.position);
+		dir *= speed * Time.fixedDeltaTime;
+		RotateTowards (dir);
+		controller.Move (dir);
+	}
+
+	public void Attack () {
 		if (inAttackRange) {
 			if (Vector3.Distance(transform.position, enemy.transform.position) < 1.90f){
 				Destroy (enemy);
+				inAttackRange = false;
 			}
 		}
-
 	}
 
 	public void OnPathComplete (Path p) {
-		Debug.Log ("Yay, we got a path back. Did it have an error? "+p.error);
+	
+		Debug.Log ("Yay, we got a path back. Did it have an error? " + p.error);
+
 		if (!p.error) {
 			path = p;
 			//Reset the waypoint counter
 			currentWaypoint = 0;
 		}
 	}
-
-	public void OnDisable () {
-		seeker.pathCallback -= OnPathComplete;
-	} 
 
 	protected virtual void RotateTowards (Vector3 dir) {
 		
@@ -130,4 +174,16 @@ public class PlayerPath : MonoBehaviour {
 		
 		transform.rotation = rot;
 	}
+
+	public void OnDisable () {
+		seeker.pathCallback -= OnPathComplete;
+	} 
+
 } 
+
+
+
+
+
+
+

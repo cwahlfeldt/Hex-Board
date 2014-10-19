@@ -131,9 +131,12 @@
      <Compile Include="Assets\scripts\CharController.cs" />
      <Compile Include="Assets\scripts\EnemyAIPath.cs" />
      <Compile Include="Assets\scripts\EnemyPath.cs" />
+     <Compile Include="Assets\scripts\EnemyTurn.cs" />
      <Compile Include="Assets\scripts\HexGen.cs" />
      <Compile Include="Assets\scripts\MapController.cs" />
      <Compile Include="Assets\scripts\PlayerPath.cs" />
+     <Compile Include="Assets\scripts\PlayerTurn.cs" />
+     <Compile Include="Assets\scripts\Turn.cs" />
      <Compile Include="Assets\testshit.cs" />
      <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh2.shader" />
      <None Include="Assets\AstarPathfindingProject\Plugins\DotNetZip\License.txt" />

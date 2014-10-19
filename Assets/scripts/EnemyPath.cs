@@ -27,6 +27,7 @@ public class EnemyPath : MonoBehaviour {
 	private int currentWaypoint = 0;
 
 	public RaycastHit hit;
+	
 
 	public void Start () {
 		seeker = GetComponent<Seeker>();
@@ -35,21 +36,14 @@ public class EnemyPath : MonoBehaviour {
 		targetPosition = new Vector3 (45,0,45);
 		//Start a new path to the targetPosition, return the result to the OnPathComplete function
 		seeker.StartPath (transform.position, targetPosition, OnPathComplete);
+
+		// turn stuff
+		// fix the turn system!!!!!
 	}
 	
 	public void Update () {
 
-		go = GameObject.FindGameObjectWithTag("Player");
-
-		if (Input.GetKeyDown (KeyCode.Mouse0)) {
-			
-			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-
-			if (Physics.Raycast (ray, out hit)) {
-				targetPosition = go.transform.position;
-				seeker.StartPath (transform.position, targetPosition, OnPathComplete);
-			}
-		}
+		LeftMouseClick ();
 
 		if (path == null) {
 			controller.Move (Vector3.zero);
@@ -62,16 +56,39 @@ public class EnemyPath : MonoBehaviour {
 		}
 
 		//Direction to the next waypoint
+		Move ();
+
+		//Check if we are close enough to the next waypoint
+		//If we are, proceed to follow the next waypoint
+		EnemyPathChecker ();
+
+	}
+
+	public void LeftMouseClick () {
+		if (Input.GetKeyDown (KeyCode.Mouse0)) {
+
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+			
+			if (Physics.Raycast (ray, out hit)) {
+				go = GameObject.FindGameObjectWithTag("Player");
+				
+				targetPosition = go.transform.position;
+				seeker.StartPath (transform.position, targetPosition, OnPathComplete);
+			}
+		}
+	}
+
+	public void Move () {
 		Vector3 dir = (path.vectorPath[currentWaypoint]-transform.position);
 		dir *= speed * Time.fixedDeltaTime;
 		RotateTowards (dir);
 		controller.Move (dir);
+	}
 
-		//Check if we are close enough to the next waypoint
-		//If we are, proceed to follow the next waypoint
+	public void EnemyPathChecker () {
 		if (Vector3.Distance (transform.position, path.vectorPath[currentWaypoint]) < nextWaypointDistance) {
 			if (currentWaypoint != 1) {
-			currentWaypoint++;
+				currentWaypoint++;
 			}
 			return;
 		}
@@ -79,6 +96,7 @@ public class EnemyPath : MonoBehaviour {
 
 	public void OnPathComplete (Path p) {
 		Debug.Log ("Yay, we got a path back. Did it have an error? "+p.error);
+
 		if (!p.error) {
 			path = p;
 			//Reset the waypoint counter
