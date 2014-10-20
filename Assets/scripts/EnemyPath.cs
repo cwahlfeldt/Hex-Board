@@ -3,6 +3,7 @@ using System.Collections;
 using Pathfinding;
 
 public class EnemyPath : MonoBehaviour {
+
 	//The point to move to
 	public Vector3 targetPosition;
 	
@@ -10,7 +11,7 @@ public class EnemyPath : MonoBehaviour {
 	//private GameObject player;
 	private CharacterController controller;
 
-	private GameObject go;
+	private GameObject player;
 	
 	//The calculated path
 	public Path path;
@@ -27,18 +28,32 @@ public class EnemyPath : MonoBehaviour {
 	private int currentWaypoint = 0;
 
 	public RaycastHit hit;
-	
+
+	public bool turn;
+
+	public PlayerPath pp;
+
+	public void Awake () {
+
+		// initializes turn
+		turn = false;
+
+		// gets seeker component
+		seeker = GetComponent<Seeker>( );
+		
+		//player = this.gameObject;
+		controller = GetComponent<CharacterController>( );
+
+	}
 
 	public void Start () {
-		seeker = GetComponent<Seeker>();
-		//player = this.gameObject;
-		controller = GetComponent<CharacterController>();
+
+		// sets the target position to the node across from the player
 		targetPosition = new Vector3 (45,0,45);
+
 		//Start a new path to the targetPosition, return the result to the OnPathComplete function
 		seeker.StartPath (transform.position, targetPosition, OnPathComplete);
-
-		// turn stuff
-		// fix the turn system!!!!!
+	
 	}
 	
 	public void Update () {
@@ -67,14 +82,11 @@ public class EnemyPath : MonoBehaviour {
 	public void LeftMouseClick () {
 		if (Input.GetKeyDown (KeyCode.Mouse0)) {
 
-			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-			
-			if (Physics.Raycast (ray, out hit)) {
-				go = GameObject.FindGameObjectWithTag("Player");
+			player = GameObject.FindGameObjectWithTag("Player");
 				
-				targetPosition = go.transform.position;
-				seeker.StartPath (transform.position, targetPosition, OnPathComplete);
-			}
+			targetPosition = player.transform.position;
+			seeker.StartPath (transform.position, targetPosition, OnPathComplete);
+
 		}
 	}
 

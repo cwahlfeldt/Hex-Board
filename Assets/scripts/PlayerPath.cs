@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-//Note this line, if it is left out, the script won't know that the class 'Path' exists and it will throw compiler errors
-//This line should always be present at the top of scripts which use pathfinding
 using Pathfinding;
+
 public class PlayerPath : MonoBehaviour {
 
 	//The point to move to
@@ -32,36 +31,40 @@ public class PlayerPath : MonoBehaviour {
 	// enemy object
 	public GameObject enemy;
 
-	public PlayerTurn pt;
+	public bool turn;
 
-	public EnemyTurn et;
+	public EnemyPath et;
 
 	// checks if in attack range .. see #pathchecker
 	public bool inAttackRange;
 
+	// earlier initialization
 	public void Awake () {
 
-		// turn stuff
-		pt = GetComponent<PlayerTurn> ();
-		et = GetComponent<EnemyTurn> ();
-		pt.turn = true;
-		et.turn = false;
-	}
-
-	public void Start () {
+		// initializes turn
+		turn = true;
 
 		// gets seeker component
 		seeker = GetComponent<Seeker>( );
-
+		
 		//player = this.gameObject;
 		controller = GetComponent<CharacterController>( );
+
+		//initializes in attack range
+		inAttackRange = false;
+	}
+
+	// initialization at start
+	public void Start () {
+
 
 		// first path is to the starting point of the level
 		targetPosition = Vector3.zero;
 
-		//Start a new path to the targetPosition, return the result to the OnPathComplete function
+		// Start a new path to the targetPosition, return the result to the OnPathComplete function
 		seeker.StartPath (transform.position, targetPosition, OnPathComplete);
-		inAttackRange = false;
+
+		// initializes enemy game object
 		enemy = GameObject.FindGameObjectWithTag ("Enemy");
 
 	}
@@ -83,6 +86,9 @@ public class PlayerPath : MonoBehaviour {
 
 		//Direction to the next waypoint
 		Move ();
+
+		// prints if its moving... this is my ticket to turn based movement.
+		print (controller.velocity.magnitude);
 
 		if (enemy != null)
 			enemy = GameObject.FindGameObjectWithTag ("Enemy");
