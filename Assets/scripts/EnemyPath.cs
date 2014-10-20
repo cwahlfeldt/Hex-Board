@@ -39,24 +39,29 @@ public class EnemyPath : MonoBehaviour {
 		turn = false;
 
 		// gets seeker component
-		seeker = GetComponent<Seeker>( );
+		seeker = GetComponent<Seeker> ();
 		
 		//player = this.gameObject;
-		controller = GetComponent<CharacterController>( );
+		controller = GetComponent<CharacterController> ();
+
+		player = GameObject.FindGameObjectWithTag("Player");
+
+		pp = player.GetComponent<PlayerPath> ();
 
 	}
 
 	public void Start () {
 
 		// sets the target position to the node across from the player
-		targetPosition = new Vector3 (45,0,45);
+		//targetPosition = new Vector3 (45,0,45);
 
 		//Start a new path to the targetPosition, return the result to the OnPathComplete function
-		seeker.StartPath (transform.position, targetPosition, OnPathComplete);
 	
 	}
 	
-	public void Update () {
+	public void FixedUpdate () {
+
+		pp = player.GetComponent<PlayerPath> ();
 
 		LeftMouseClick ();
 
@@ -71,16 +76,25 @@ public class EnemyPath : MonoBehaviour {
 		}
 
 		//Direction to the next waypoint
-		Move ();
+		if (pp.controller.velocity.magnitude <= 1) {
+			turn =  true;
+			pp.turn = false;
+			Move ();
+		}
+		if (controller.velocity.magnitude < 1)
+			pp.turn = true;
+			turn = false;
 
 		//Check if we are close enough to the next waypoint
 		//If we are, proceed to follow the next waypoint
 		EnemyPathChecker ();
 
+		
+
 	}
 
 	public void LeftMouseClick () {
-		if (Input.GetKeyDown (KeyCode.Mouse0)) {
+		if (Input.GetKeyDown (KeyCode.Mouse0) && turn == false) {
 
 			player = GameObject.FindGameObjectWithTag("Player");
 				

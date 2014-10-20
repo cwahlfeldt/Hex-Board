@@ -8,8 +8,8 @@ public class PlayerPath : MonoBehaviour {
 	public Vector3 targetPosition;
 	
 	private Seeker seeker;
-	//private GameObject player;
-	private CharacterController controller;
+
+	public CharacterController controller;
 	
 	//The calculated path
 	public Path path;
@@ -33,7 +33,7 @@ public class PlayerPath : MonoBehaviour {
 
 	public bool turn;
 
-	public EnemyPath et;
+	public EnemyPath ep;
 
 	// checks if in attack range .. see #pathchecker
 	public bool inAttackRange;
@@ -45,31 +45,31 @@ public class PlayerPath : MonoBehaviour {
 		turn = true;
 
 		// gets seeker component
-		seeker = GetComponent<Seeker>( );
+		seeker = GetComponent<Seeker> ();
 		
 		//player = this.gameObject;
-		controller = GetComponent<CharacterController>( );
+		controller = GetComponent<CharacterController> ();
 
 		//initializes in attack range
 		inAttackRange = false;
+
+		enemy = GameObject.FindGameObjectWithTag ("Enemy");
+
+
 	}
 
 	// initialization at start
 	public void Start () {
 
-
-		// first path is to the starting point of the level
-		targetPosition = Vector3.zero;
-
-		// Start a new path to the targetPosition, return the result to the OnPathComplete function
-		seeker.StartPath (transform.position, targetPosition, OnPathComplete);
-
 		// initializes enemy game object
-		enemy = GameObject.FindGameObjectWithTag ("Enemy");
+
 
 	}
 	
-	public void Update () {
+	public void FixedUpdate () {
+
+		if (enemy != null)
+			ep = enemy.GetComponent<EnemyPath> ();
 
 		// starts path when the left mouse is clicked on a tile
 		LeftMouseClick ();
@@ -86,9 +86,6 @@ public class PlayerPath : MonoBehaviour {
 
 		//Direction to the next waypoint
 		Move ();
-
-		// prints if its moving... this is my ticket to turn based movement.
-		print (controller.velocity.magnitude);
 
 		if (enemy != null)
 			enemy = GameObject.FindGameObjectWithTag ("Enemy");
@@ -109,7 +106,8 @@ public class PlayerPath : MonoBehaviour {
 	}
 
 	public void LeftMouseClick () {
-		if (Input.GetKeyDown (KeyCode.Mouse0)) {
+		if (Input.GetKeyDown (KeyCode.Mouse0) && turn == true) {
+			turn = false;
 			
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			GameObject go;
@@ -147,7 +145,7 @@ public class PlayerPath : MonoBehaviour {
 
 	public void Attack () {
 		if (inAttackRange) {
-			if (Vector3.Distance(transform.position, enemy.transform.position) < 1.90f){
+			if (Vector3.Distance(transform.position, enemy.transform.position) < 2.1f){
 				Destroy (enemy);
 				inAttackRange = false;
 			}
@@ -157,7 +155,7 @@ public class PlayerPath : MonoBehaviour {
 	public void OnPathComplete (Path p) {
 	
 		Debug.Log ("Yay, we got a path back. Did it have an error? " + p.error);
-
+		turn = false;
 		if (!p.error) {
 			path = p;
 			//Reset the waypoint counter
