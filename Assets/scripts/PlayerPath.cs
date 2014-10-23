@@ -36,7 +36,6 @@ public class PlayerPath : MonoBehaviour {
 	public EnemyPath ep;
 
 	// checks if in attack range .. see #pathchecker
-	public bool inAttackRange;
 
 	// earlier initialization
 	public void Awake () {
@@ -51,17 +50,12 @@ public class PlayerPath : MonoBehaviour {
 		controller = GetComponent<CharacterController> ();
 
 		//initializes in attack range
-		inAttackRange = false;
 
 		enemy = GameObject.FindGameObjectWithTag ("Enemy");
-
-
 	}
 
 	// initialization at start
 	public void Start () {
-
-		// initializes enemy game object
 
 
 	}
@@ -101,7 +95,7 @@ public class PlayerPath : MonoBehaviour {
 //			print (Vector3.Distance(transform.position, enemy.transform.position));
 
 		// Destroys enemy when in attack range.. needs way cooler 'animation' and effects
-		Attack ();
+		// Attack ();
 
 	}
 
@@ -128,9 +122,6 @@ public class PlayerPath : MonoBehaviour {
 				currentWaypoint++;
 				
 				// checks if in attack range
-				if ((enemy != null) && (Vector3.Distance(transform.position, enemy.transform.position) < 2.75f)) {
-					inAttackRange = true;
-				}
 			}
 			return;
 		}
@@ -143,14 +134,13 @@ public class PlayerPath : MonoBehaviour {
 		controller.Move (dir);
 	}
 
-	public void Attack () {
-		if (inAttackRange) {
-			if (Vector3.Distance(transform.position, enemy.transform.position) < 2.1f){
-				Destroy (enemy);
-				inAttackRange = false;
-			}
-		}
-	}
+//	public void Attack () {
+//		if (inAttackRange) {
+//			if (Vector3.Distance(transform.position, enemy.transform.position) < 2.1f){
+//				Destroy (enemy);
+//			}
+//		}
+//	}
 
 	public void OnPathComplete (Path p) {
 	

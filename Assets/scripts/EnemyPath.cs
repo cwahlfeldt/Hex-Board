@@ -12,7 +12,7 @@ public class EnemyPath : MonoBehaviour {
 	private CharacterController controller;
 
 	private GameObject player;
-	
+
 	//The calculated path
 	public Path path;
 	
@@ -81,25 +81,30 @@ public class EnemyPath : MonoBehaviour {
 			pp.turn = false;
 			Move ();
 		}
-		if (controller.velocity.magnitude < 1)
+		if (controller.velocity.magnitude < 1) {
 			pp.turn = true;
 			turn = false;
+		}
 
 		//Check if we are close enough to the next waypoint
 		//If we are, proceed to follow the next waypoint
 		EnemyPathChecker ();
-
-		
 
 	}
 
 	public void LeftMouseClick () {
 		if (Input.GetKeyDown (KeyCode.Mouse0) && turn == false) {
 
-			player = GameObject.FindGameObjectWithTag("Player");
-				
-			targetPosition = player.transform.position;
-			seeker.StartPath (transform.position, targetPosition, OnPathComplete);
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+
+			if (Physics.Raycast(ray, out hit)) {
+				if (hit.transform.name != "Player") {
+					player = GameObject.FindGameObjectWithTag("Player");
+						
+					targetPosition = player.transform.position;
+					seeker.StartPath (transform.position, targetPosition, OnPathComplete);
+				}
+			}
 
 		}
 	}
