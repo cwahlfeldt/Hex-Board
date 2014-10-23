@@ -108,14 +108,12 @@ public class NeighborTiles : MonoBehaviour {
 					playerAttackTiles.Clear ();
 			} 
 			// end of player attack
-
 		}
 
 		// or else it just sets the material back to the default hex material
 		else {
 			foreach (GameObject neighbors in neighborTiles) 
 				neighbors.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile");
-
 		}
 		#endregion
 
