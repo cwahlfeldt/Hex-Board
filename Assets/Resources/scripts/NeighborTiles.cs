@@ -10,6 +10,10 @@ public class NeighborTiles : MonoBehaviour {
 	private GameObject playerTile, enemyTile;
 
 	private CharacterController playerCC, enemyCC;
+
+	private CharController playerCharC;
+
+	private Rigidbody playerRB;
 	
 	// ray cast hit i like to call hitter....
 	private RaycastHit hitter;
@@ -42,7 +46,8 @@ public class NeighborTiles : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag("Player");
 		enemy = GameObject.FindGameObjectWithTag("Enemy");
 
-		playerCC = player.GetComponent<CharacterController> ();
+		playerCharC = player.GetComponent<CharController> ();
+
 		//enemyCC = enemy.GetComponent<CharacterController> ();
 
 		playerTile = GameObject.Find("child-piece1");
@@ -62,7 +67,7 @@ public class NeighborTiles : MonoBehaviour {
 		CurrentTileOnBoard(enemy);
 
 		#region Finds neighbor tiles in realtime!! fucking awesome!!!
-		if (playerCC.velocity.magnitude <= 1) {
+		if (playerCharC.isontile == true) {
 			if (neighborTiles != null )
 				neighborTiles.Clear();
 
@@ -95,7 +100,7 @@ public class NeighborTiles : MonoBehaviour {
 
 				if (Vector3.Distance(playerTile.transform.position, neighbors.transform.position) <= 3 &&
 				    Vector3.Distance(enemyTile.transform.position, neighbors.transform.position) <= 3 &&
-				    Vector3.Distance(playerTile.transform.position, enemyTile.transform.position) <= 3) {
+				    Vector3.Distance(playerTile.transform.position, enemyTile.transform.position) <= 3 && atk.attack != true) {
 
 					playerAttackTiles.Add(neighbors);
 					foreach (GameObject playerAtkTiles in playerAttackTiles)
@@ -106,15 +111,7 @@ public class NeighborTiles : MonoBehaviour {
 			} 
 			// end of player attack
 		}
-		// NOT WORKING
-//		else if (atk.isattackover == true){
-//			foreach (GameObject neighbors in neighborTiles) 
-//				neighbors.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile");
-//
-//			playerAttackTiles.Clear();
-//
-//			atk.isattackover = false;
-//		}
+
 		// or else it just sets the material back to the default hex material
 		else {
 			foreach (GameObject neighbors in neighborTiles) 

@@ -7,17 +7,22 @@ public class CharController: MonoBehaviour {
 
 	public float speed;
 	public HexGen hexGen;
-	public RaycastHit hit, shiphit;
+	public RaycastHit hit, shiphit, hitter;
 	public GameObject go;
 	public Vector3 childPieceLocation;
 	public float dist;
 	public Vector3 relPosition;
 	public Quaternion quat;
+	private CharacterController playercont;
+	public bool isontile;
 
 	void Start() {
 
 		// initializes speed var
+		isontile = false;
 		speed = 8f;
+		playercont = transform.GetComponent<CharacterController> ();
+		go = new GameObject ();
 
 	}
 	
@@ -44,7 +49,7 @@ public class CharController: MonoBehaviour {
 				go = GameObject.Find(hit.transform.gameObject.name);
 
 				// gets child piece location of current clicked child piece
-				childPieceLocation = new Vector3(go.transform.position.x, go.transform.position.y + 1.3f, go.transform.position.z);		
+				childPieceLocation = new Vector3(go.transform.position.x, go.transform.position.y, go.transform.position.z);		
 
 				// gets dist from current click
 				dist = Vector3.Distance(ship.transform.position, childPieceLocation);
@@ -65,14 +70,25 @@ public class CharController: MonoBehaviour {
 		Debug.DrawRay (ship.transform.position, childPieceLocation - ship.transform.position, Color.green);
 
 		// will only move to one tile at a time.
-		if (dist <= 3) {
+		if (dist <= 4) {
 
 			// smooth rotation using slerp
 			transform.rotation = Quaternion.Slerp(ship.transform.rotation, quat, Time.deltaTime * (speed + 9f));
 
 			// smooth transform position using lerp
 			transform.position = Vector3.Lerp(transform.position, childPieceLocation, Time.deltaTime * (speed - 3f));
+			//playercont.Move(childPieceLocation);
+
 		}
+
+		if (Physics.Raycast (transform.position, Vector3.down, out hitter, 3f)) {
+			if (hitter.transform.name == go.transform.name) {
+				isontile = true;
+			}
+			else
+				isontile = false;
+		}
+
 		
 	} // end of update function
 	

@@ -31,7 +31,9 @@ public class EnemyPath : MonoBehaviour {
 
 	public bool turn;
 
-	public PlayerPath pp;
+	private CharController playerCharC;
+
+//	public PlayerPath pp;
 
 	public void Awake () {
 
@@ -45,8 +47,9 @@ public class EnemyPath : MonoBehaviour {
 		controller = GetComponent<CharacterController> ();
 
 		player = GameObject.FindGameObjectWithTag("Player");
+		playerCharC = player.GetComponent<CharController> ();
 
-		pp = player.GetComponent<PlayerPath> ();
+//		pp = player.GetComponent<PlayerPath> ();
 
 	}
 
@@ -61,8 +64,6 @@ public class EnemyPath : MonoBehaviour {
 	
 	public void FixedUpdate () {
 
-		pp = player.GetComponent<PlayerPath> ();
-
 		LeftMouseClick ();
 
 		if (path == null) {
@@ -75,25 +76,29 @@ public class EnemyPath : MonoBehaviour {
 			return;
 		}
 
-		//Direction to the next waypoint
-		if (pp.controller.velocity.magnitude <= 1) {
-			turn =  true;
-			pp.turn = false;
+		if (playerCharC.isontile == true)
 			Move ();
-		}
-		if (controller.velocity.magnitude < 1) {
-			pp.turn = true;
-			turn = false;
-		}
+
+//		//Direction to the next waypoint
+//		if (pp.controller.velocity.magnitude <= 1) {
+//			turn =  true;
+//			pp.turn = false;
+//			Move ();
+//		}
+//		if (controller.velocity.magnitude < 1) {
+//			pp.turn = true;
+//			turn = false;
+//		}
 
 		//Check if we are close enough to the next waypoint
 		//If we are, proceed to follow the next waypoint
 		EnemyPathChecker ();
 
+
 	}
 
 	public void LeftMouseClick () {
-		if (Input.GetKeyDown (KeyCode.Mouse0) && turn == false) {
+		if (Input.GetKeyDown (KeyCode.Mouse0)) {
 
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 

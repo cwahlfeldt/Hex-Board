@@ -46,22 +46,16 @@ public class Attack : MonoBehaviour {
 			// custom wait timer 26 higher the number longer it takes to kill enemy
 			i++;
 			if (i == 26) {
-				Destroy (enemy);
+
+				enemy.SetActive(false);
 				attack = false;
 				playerComponent.enabled = !playerComponent.enabled;
 			}
-
-//			if (Physics.Raycast (player.transform.position, player.transform.forward, out hitter1, 3.5f)) {
-//				if (hitter1.transform.name == "Enemy") {
-//					Destroy (enemy);
-//				}
-//				
-//			}
-
 		}
 	}
 
 	void Clicked () {
+
 
 		relPosition = enemy.transform.position - player.transform.position;
 		
