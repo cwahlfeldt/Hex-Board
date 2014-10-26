@@ -9,12 +9,8 @@ public class NeighborTiles : MonoBehaviour {
 	// current enemy tile and player tile
 	private GameObject playerTile, enemyTile;
 
-	private CharacterController playerCC, enemyCC;
-
 	private CharController playerCharC;
 
-	private Rigidbody playerRB;
-	
 	// ray cast hit i like to call hitter....
 	private RaycastHit hitter;
 
@@ -23,9 +19,6 @@ public class NeighborTiles : MonoBehaviour {
 	private ArrayList neighborTiles, attackTiles, playerAttackTiles;
 
 	private GameObject[] tiles;
-
-	// make this equal to a texture file at startup !!!!!!plz!!!!!!
-	public Texture texture;
 
 	private Attack atk;
 
@@ -48,8 +41,6 @@ public class NeighborTiles : MonoBehaviour {
 
 		playerCharC = player.GetComponent<CharController> ();
 
-		//enemyCC = enemy.GetComponent<CharacterController> ();
-
 		playerTile = GameObject.Find("child-piece1");
 		enemyTile = GameObject.Find("child-piece25");
 
@@ -64,7 +55,8 @@ public class NeighborTiles : MonoBehaviour {
 
 		// always gets tile on update
 		CurrentTileOnBoard(player);
-		CurrentTileOnBoard(enemy);
+		if (enemy != null)
+			CurrentTileOnBoard(enemy);
 
 		#region Finds neighbor tiles in realtime!! fucking awesome!!!
 		if (playerCharC.isontile == true) {

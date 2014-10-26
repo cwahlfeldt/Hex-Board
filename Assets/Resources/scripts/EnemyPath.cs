@@ -33,8 +33,6 @@ public class EnemyPath : MonoBehaviour {
 
 	private CharController playerCharC;
 
-//	public PlayerPath pp;
-
 	public void Awake () {
 
 		// initializes turn
@@ -49,16 +47,9 @@ public class EnemyPath : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag("Player");
 		playerCharC = player.GetComponent<CharController> ();
 
-//		pp = player.GetComponent<PlayerPath> ();
-
 	}
 
 	public void Start () {
-
-		// sets the target position to the node across from the player
-		//targetPosition = new Vector3 (45,0,45);
-
-		//Start a new path to the targetPosition, return the result to the OnPathComplete function
 	
 	}
 	
@@ -78,17 +69,6 @@ public class EnemyPath : MonoBehaviour {
 
 		if (playerCharC.isontile == true)
 			Move ();
-
-//		//Direction to the next waypoint
-//		if (pp.controller.velocity.magnitude <= 1) {
-//			turn =  true;
-//			pp.turn = false;
-//			Move ();
-//		}
-//		if (controller.velocity.magnitude < 1) {
-//			pp.turn = true;
-//			turn = false;
-//		}
 
 		//Check if we are close enough to the next waypoint
 		//If we are, proceed to follow the next waypoint
@@ -110,7 +90,6 @@ public class EnemyPath : MonoBehaviour {
 					seeker.StartPath (transform.position, targetPosition, OnPathComplete);
 				}
 			}
-
 		}
 	}
 

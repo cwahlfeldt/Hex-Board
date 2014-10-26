@@ -7,26 +7,32 @@ public class CharController: MonoBehaviour {
 
 	public float speed;
 	public HexGen hexGen;
-	public RaycastHit hit, shiphit, hitter;
+	public RaycastHit hit, hitter;
 	public GameObject go;
 	public Vector3 childPieceLocation;
 	public float dist;
 	public Vector3 relPosition;
 	public Quaternion quat;
-	private CharacterController playercont;
 	public bool isontile;
 
 	void Start() {
 
-		// initializes speed var
+		// initializes vars
 		isontile = false;
 		speed = 8f;
-		playercont = transform.GetComponent<CharacterController> ();
 		go = new GameObject ();
 
 	}
 	
 	void Update() {
+
+		if (Physics.Raycast (transform.position, Vector3.down, out hitter, 1f)) {
+			if (hitter.transform.name == go.transform.name) {
+				isontile = true;
+			}
+			else
+				isontile = false;
+		}
 
 		//finds the ship on update so that it updates the coordinates
 		GameObject ship = GameObject.FindGameObjectWithTag("Player");
@@ -60,8 +66,6 @@ public class CharController: MonoBehaviour {
 				// sets a quaternion where to rotate basd on the relative position 
 				quat = Quaternion.LookRotation (relPosition);
 
-				print (Mathf.Floor(dist));
-
 			}
 			
 		}
@@ -77,16 +81,7 @@ public class CharController: MonoBehaviour {
 
 			// smooth transform position using lerp
 			transform.position = Vector3.Lerp(transform.position, childPieceLocation, Time.deltaTime * (speed - 3f));
-			//playercont.Move(childPieceLocation);
 
-		}
-
-		if (Physics.Raycast (transform.position, Vector3.down, out hitter, 3f)) {
-			if (hitter.transform.name == go.transform.name) {
-				isontile = true;
-			}
-			else
-				isontile = false;
 		}
 
 		

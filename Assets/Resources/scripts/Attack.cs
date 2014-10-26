@@ -3,10 +3,10 @@ using System.Collections;
 
 public class Attack : MonoBehaviour {
 
-	private RaycastHit hitter, hitter1;
+	private RaycastHit hitter;
 
 	private GameObject player, enemy, dest, actions;
-	private CharacterController playerCont, enemyCont;
+	private CharController charController;
 
 	public bool attack = false, isattackover = false;
 
@@ -18,7 +18,10 @@ public class Attack : MonoBehaviour {
 	private PlayerPath playerComponent;
 	private EnemyPath enemyComponent;
 
+	// this will help decide if the enemie was killed
+	public int enemiesKilled, playerHealth;
 	private int i = 0;
+
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
@@ -27,11 +30,9 @@ public class Attack : MonoBehaviour {
 
 		speed = 7f;
 
-		playerComponent = player.GetComponent<PlayerPath> ();
 		enemyComponent = enemy.GetComponent<EnemyPath> ();
+		charController = player.GetComponent<CharController> ();
 
-		playerCont = player.GetComponent<CharacterController> ();
-		enemyCont = enemy.GetComponent<CharacterController> ();
 	}
 	
 	// Update is called once per frame
@@ -45,19 +46,19 @@ public class Attack : MonoBehaviour {
 
 			// custom wait timer 26 higher the number longer it takes to kill enemy
 			i++;
-			if (i == 26) {
-
-				enemy.SetActive(false);
+			if (i == 30) {
+				charController.enabled = !charController.enabled;
+				Destroy (enemy);
+//				enemy.SetActive(false);
 				attack = false;
-				playerComponent.enabled = !playerComponent.enabled;
 			}
 		}
 	}
 
 	void Clicked () {
 
-
-		relPosition = enemy.transform.position - player.transform.position;
+		if (enemy != null)
+			relPosition = enemy.transform.position - player.transform.position;
 		
 		quat = Quaternion.LookRotation (relPosition);
 
@@ -65,16 +66,20 @@ public class Attack : MonoBehaviour {
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
 			if (Physics.Raycast(ray, out hitter)) {
+				print (hitter.transform.renderer.material.mainTexture);
 				if (hitter.transform.renderer.material.mainTexture == Resources.Load("textures/trans-tile-attack")) {
 
-					enemyComponent.enabled = !enemyComponent.enabled;
-					playerComponent.enabled = !playerComponent.enabled;
+					if (enemy != null)
+						enemyComponent.enabled = !enemyComponent.enabled;
+
+					charController.enabled = !charController.enabled;
 
 					dest = hitter.transform.gameObject;
 
+					print (hitter.transform.renderer.material.mainTexture);
+
 					attack = true;
 				}
-
 			}
 		}
 	}
