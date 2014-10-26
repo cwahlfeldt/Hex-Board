@@ -1,26 +1,40 @@
-Hex-Board
-=========
+**Hex-Board**
+=============
 
-This is a turn-based/rouge-like/4X...ish game prototype made with unity (free version) 
+This is a turn-based/rouge-like/strategy game built with unity.
 
-WIP
-
-Todo List:
+**Ultimate Things Todo List:**
 ----------
 	
-Reset tile checker.
+~~Reset tile checker~~ (a little buggy)
 
 ~~Change the character movement to something simpler and easier. (See CharController.cs)~~
 
-Add funtionality for more than one enemy.
+Multiple enemies on board at once
+
+Graphical representation of health
+
+Make it so the enemy cannot move to player tile
+
+Fix when enemies can move after the player has moved
+
+Multiple Types of enemies e.g. (archer, mage, bomber, berzerker...) this also means different ai behavior for each type
+
+Create upgrades e.g. (uses of longshot, teleports to other parts of map, sheild, FTL boosts) that can be found on board during gameplay
+
+Player can toggle a longer shot with a button, to kill something further away from him (by 2 tiles)
+
+Start Screen
+
+End game
+
+Reset game
+
+Save game (maybe?)
+
+At end of level queue harder level/increase dificulty from stage to stage
+
 
 ===========================================================================
 
  	 
- 	 
- 	 	
- 	 
- 	 
- 	  
- 
- 	
