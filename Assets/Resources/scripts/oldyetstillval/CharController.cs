@@ -67,7 +67,6 @@ public class CharController: MonoBehaviour {
 				quat = Quaternion.LookRotation (relPosition);
 
 			}
-			
 		}
 
 		// draws a ray to the tile clicked
@@ -77,13 +76,12 @@ public class CharController: MonoBehaviour {
 		if (dist <= 4) {
 
 			// smooth rotation using slerp
-			transform.rotation = Quaternion.Slerp(ship.transform.rotation, quat, Time.deltaTime * (speed + 9f));
+			transform.rotation = Quaternion.Slerp(ship.transform.rotation, quat, Time.deltaTime * (speed + 5f));
 
 			// smooth transform position using lerp
 			transform.position = Vector3.Lerp(transform.position, childPieceLocation, Time.deltaTime * (speed - 3f));
 
 		}
-
 		
 	} // end of update function
 	

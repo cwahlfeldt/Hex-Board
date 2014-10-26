@@ -49,10 +49,6 @@ public class EnemyPath : MonoBehaviour {
 
 	}
 
-	public void Start () {
-	
-	}
-	
 	public void FixedUpdate () {
 
 		LeftMouseClick ();
@@ -67,14 +63,13 @@ public class EnemyPath : MonoBehaviour {
 			return;
 		}
 
-		if (playerCharC.isontile == true)
+		// kind of buggy but gives the ai some character...
+		if (playerCharC.isontile != false)
 			Move ();
 
 		//Check if we are close enough to the next waypoint
 		//If we are, proceed to follow the next waypoint
 		EnemyPathChecker ();
-
-
 	}
 
 	public void LeftMouseClick () {

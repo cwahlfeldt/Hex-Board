@@ -23,6 +23,7 @@ public class NeighborTiles : MonoBehaviour {
 	private Attack atk;
 
 	// Use this for initialization
+	#region Start ()
 	void Start () {
 
 		// initializes new array list the will get populated by the neighbor tiles
@@ -31,7 +32,7 @@ public class NeighborTiles : MonoBehaviour {
 		playerAttackTiles = new ArrayList ();
 
 		atk = GameObject.Find ("Actions").GetComponent<Attack> ();
-		atk.attack = false;
+		atk.playerattack = false;
 
 		tiles = GameObject.FindGameObjectsWithTag("tile");
 
@@ -50,6 +51,7 @@ public class NeighborTiles : MonoBehaviour {
 
 		GetNeighborTiles(playerTile);
 	}
+	#endregion
 	
 	void Update () {
 
@@ -58,58 +60,70 @@ public class NeighborTiles : MonoBehaviour {
 		if (enemy != null)
 			CurrentTileOnBoard(enemy);
 
-		#region Finds neighbor tiles in realtime!! fucking awesome!!!
-		if (playerCharC.isontile == true) {
-			if (neighborTiles != null )
-				neighborTiles.Clear();
+		// this is the jam!!!
+		NeighborFinder ();
 
-			GetNeighborTiles(playerTile);
-			// sets players range tiles
-			foreach (GameObject neighbors in neighborTiles) {
+		if (atk.isattackover == true)
+			ReUp ();
+	}
 
-				// change the texture on neibors then 
-				neighbors.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile-player");
-			}
+	#region NeighborFinder () = Finds neighbor tiles in realtime!! fucking awesome!!!
+	void NeighborFinder () {
 
-			// for enemy attack
-			foreach (GameObject neighbors in neighborTiles) {
+		if (neighborTiles != null )
+			neighborTiles.Clear();
+		
+		GetNeighborTiles(playerTile);
 
-				if (Vector3.Distance(playerTile.transform.position, neighbors.transform.position) <= 3 &&
-				    Vector3.Distance(enemyTile.transform.position, neighbors.transform.position) <= 3 &&
-				    Vector3.Distance(playerTile.transform.position, enemyTile.transform.position) > 3) {
-
-					attackTiles.Add (neighbors);
-					foreach (GameObject atkneighbors in attackTiles)
-						atkneighbors.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile-enemy");
-				}
-				else
-					attackTiles.Clear ();
-			} 
-			// end of enemy attack
-
-			// for player attack
-			foreach (GameObject neighbors in neighborTiles) {
-
-				if (Vector3.Distance(playerTile.transform.position, neighbors.transform.position) <= 3 &&
-				    Vector3.Distance(enemyTile.transform.position, neighbors.transform.position) <= 3 &&
-				    Vector3.Distance(playerTile.transform.position, enemyTile.transform.position) <= 3 && atk.attack != true) {
-
-					playerAttackTiles.Add(neighbors);
-					foreach (GameObject playerAtkTiles in playerAttackTiles)
-						playerAtkTiles.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile-attack");
-				}
-				else
-					playerAttackTiles.Clear ();
-			} 
-			// end of player attack
+		// sets players range tiles
+		foreach (GameObject neighbors in neighborTiles) {
+			neighbors.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile-player");
 		}
+		
+		// for enemy attack
+		foreach (GameObject neighbors in neighborTiles) {
+			
+			if (Vector3.Distance(playerTile.transform.position, neighbors.transform.position) <= 3 &&
+			    Vector3.Distance(enemyTile.transform.position, neighbors.transform.position) <= 3 &&
+			    Vector3.Distance(playerTile.transform.position, enemyTile.transform.position) > 3 && enemy != null) {
+				
+				attackTiles.Add (neighbors);
+				foreach (GameObject atkneighbors in attackTiles)
+					atkneighbors.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile-enemy");
+			}
+			else
+				attackTiles.Clear ();
+		} 
+		// end of enemy attack
+		
+		// for player attack
+		foreach (GameObject neighbors in neighborTiles) {
+			
+			if (Vector3.Distance(playerTile.transform.position, neighbors.transform.position) <= 3 &&
+			    Vector3.Distance(enemyTile.transform.position, neighbors.transform.position) <= 3 &&
+			    Vector3.Distance(playerTile.transform.position, enemyTile.transform.position) <= 3 && atk.playerattack != true && enemy != null) {
+				
+				playerAttackTiles.Add(neighbors);
+				foreach (GameObject playerAtkTiles in playerAttackTiles)
+					playerAtkTiles.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile-attack");
+			}
+			else
+				playerAttackTiles.Clear ();
+		} 
+		// end of player attack
 
-		// or else it just sets the material back to the default hex material
-		else {
+		// updates based on current positions
+		if (playerCharC.isontile == false) {
 			foreach (GameObject neighbors in neighborTiles) 
 				neighbors.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile");
 		}
-		#endregion
+	}
+	#endregion
+
+	// clears the entire board
+	void ReUp () {
+		foreach (GameObject thetile in tiles) 
+			thetile.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile");
 	}
 
 	#region GetNeighborTiles (GameObject insertTile) insertTile will == player or enemy tiles! 
@@ -117,7 +131,7 @@ public class NeighborTiles : MonoBehaviour {
 
 		foreach (GameObject theTiles in tiles) {
 			if (Vector3.Distance(insertTile.transform.position, theTiles.transform.position) <= 3 && (
-				Vector3.Distance(insertTile.transform.position, theTiles.transform.position) != 0)) {
+				Vector3.Distance(insertTile.transform.position, theTiles.transform.position) != 0) && theTiles) {
 				neighborTiles.Add (theTiles);
 			}
 		}
@@ -134,8 +148,4 @@ public class NeighborTiles : MonoBehaviour {
 		}
 	}
 	#endregion
-
-	void InAttackRange () {
-		//if ()
-	}
 }
