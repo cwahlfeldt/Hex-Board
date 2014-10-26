@@ -9,7 +9,7 @@ Todo List:
 ----------
 	
 Reset tile checker.
-(ADDED) Change the character movement to something simpler and easier. (See CharController.cs)
+~~Change the character movement to something simpler and easier. (See CharController.cs)~~
 Add funtionality for more than one enemy.
 
 ===========================================================================
