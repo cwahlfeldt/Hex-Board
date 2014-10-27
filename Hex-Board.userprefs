@@ -2,13 +2,11 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="README.md">
     <Files>
-      <File FileName="Assets\Resources\scripts\Attack.cs" Line="70" Column="47" />
-      <File FileName="Assets\Resources\scripts\NeighborTiles.cs" Line="87" Column="58" />
-      <File FileName="..\hex-board\Assets\Resources\scripts\oldyetstillval\CharController.cs" Line="33" Column="8" />
-      <File FileName="Assets\Resources\scripts\EnemyPath.cs" Line="73" Column="3" />
-      <File FileName="Assets\Resources\scripts\Health.cs" Line="17" Column="2" />
-      <File FileName="README.md" Line="34" Column="11" />
-      <File FileName="Assets\Resources\scripts\HexGen.cs" Line="86" Column="3" />
+      <File FileName="../hex-board/Assets/Resources/scripts/Attack.cs" Line="1" Column="1" />
+      <File FileName="../hex-board/Assets/Resources/scripts/AllEnemies.cs" Line="12" Column="2" />
+      <File FileName="README.md" Line="34" Column="1" />
+      <File FileName="Assets/Resources/scripts/NeighborTiles.cs" Line="86" Column="4" />
+      <File FileName="../hex-board/Assets/Resources/scripts/Health.cs" Line="3" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

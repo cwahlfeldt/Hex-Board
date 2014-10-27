@@ -4,7 +4,7 @@ using System.Collections;
 public class Health : MonoBehaviour {
 
 	public float health = 3f;
-	private GameObject player, health1, health2, health3;
+	private GameObject player, health1, health2, health3, allHealth;
 
 	// Use this for initialization
 	void Awake () {
@@ -12,7 +12,14 @@ public class Health : MonoBehaviour {
 		health1 = GameObject.Find ("health1");
 		health2 = GameObject.Find ("health2");
 		health3  = GameObject.Find ("health3");
+		allHealth = GameObject.FindGameObjectWithTag ("health");
+	}
 
+	void Start () {
+
+		allHealth = GameObject.FindGameObjectWithTag ("health");
+		allHealth.SetActive (true);
+		
 	}
 	
 	// Update is called once per frame
