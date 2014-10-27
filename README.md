@@ -1,11 +1,11 @@
 **Hex-Board**
-=============
+__________________________________________________________________________________
 
 This is a turn-based/rouge-like/strategy game built with unity.
 
 
 **Ultimate Todo List:**
-________________________________________________________________________________________
+=======================================================================================
 	
 ~~Reset tile checker~~ (a little buggy)
 
@@ -39,23 +39,23 @@ At end of level queue harder level/increase dificulty from stage to stage
 
 
 **Overall Plan**
-______________________________________________________________________________
+==================================================================================
 
 -Prototype-
-   
-   \/
+ 
+ 	\/
 
 Test/Generate Content
-   
-   \/
+  
+  	\/
    
 Refine Game
 
-   \/
+	\/
    
 Generate Content
 
-   \/
+	\/
    
 Test/Polish...Forever! or until Done!
  	 
