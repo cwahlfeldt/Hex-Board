@@ -7,6 +7,7 @@ public class Attack : MonoBehaviour {
 
 	private GameObject player, enemy, dest, actions;
 	private CharController charController;
+	private CharacterController enemyCont;
 
 	public bool playerattack = false, enemyattack = false, isattackover = false;
 
@@ -32,6 +33,7 @@ public class Attack : MonoBehaviour {
 		speed = 7f;
 
 		enemyComponent = enemy.GetComponent<EnemyPath> ();
+		enemyCont = enemy.GetComponent<CharacterController> ();
 		charController = player.GetComponent<CharController> ();
 		playerHealth = player.GetComponent<Health> ();
 
@@ -62,16 +64,17 @@ public class Attack : MonoBehaviour {
 		// for enemy attack
 		if (enemyattack == true) {
 			quat = Quaternion.LookRotation (relPosition1);
-			enemy.transform.rotation = Quaternion.Slerp (player.transform.rotation, quat, (speed + 5) * Time.deltaTime);
+			//enemy.transform.rotation = Quaternion.Slerp (player.transform.rotation, quat, (speed + 5) * Time.deltaTime);
 
-			playerHealth.health--;
-
-			if (Vector3.Distance(enemy.transform.position, player.transform.position) > 3.5) {
-				if (enemy != null)
-					enemyComponent.enabled = !enemyComponent.enabled;
+			i++;
+			// busted ass timer works for now though...
+			if (i == 100) {
+				if (enemy != null) 
+					enemyCont.enabled = !enemyCont.enabled;
 
 				isattackover = true;
 				enemyattack = false;
+				i= 0;
 			}
 		}
 	}
@@ -92,10 +95,10 @@ public class Attack : MonoBehaviour {
 
 				// player
 				if (hitter.transform.renderer.material.mainTexture == Resources.Load("textures/trans-tile-attack")) {
-					if (enemy != null)
+					if (enemy != null) {
 						enemyComponent.enabled = !enemyComponent.enabled;
 
-
+					}
 
 					charController.enabled = !charController.enabled;
 
@@ -106,10 +109,11 @@ public class Attack : MonoBehaviour {
 
 				// enemy
 				if (hitter.transform.renderer.material.mainTexture == Resources.Load("textures/trans-tile-enemy")) {
-					if (enemy != null)
-						enemyComponent.enabled = !enemyComponent.enabled;
+					playerHealth.health--;
+					 
+					enemyCont.enabled = !enemyCont.enabled;
 
-					//isattackover = false;
+					isattackover = false;
 					enemyattack = true;
 				}
 			}

@@ -3,8 +3,9 @@
 
 This is a turn-based/rouge-like/strategy game built with unity.
 
-**Ultimate Things Todo List:**
-----------
+
+**Ultimate Todo List:**
+________________________________________________________________________________________
 	
 ~~Reset tile checker~~ (a little buggy)
 
@@ -12,9 +13,11 @@ This is a turn-based/rouge-like/strategy game built with unity.
 
 Multiple enemies on board at once
 
-Graphical representation of health
+~~Graphical representation of health~~
 
-Make it so the enemy cannot move to player tile
+~~Make it so the enemy cannot move to player tile~~ (little on the buggy side but works)
+
+Make tiles all the same so that you dont know which tiles to go to
 
 Fix when enemies can move after the player has moved
 
@@ -35,6 +38,24 @@ Save game (maybe?)
 At end of level queue harder level/increase dificulty from stage to stage
 
 
-===========================================================================
+**Overall Plan**
+______________________________________________________________________________
 
+-Prototype-
+   
+   \/
+
+Test/Generate Content
+   
+   \/
+   
+Refine Game
+
+   \/
+   
+Generate Content
+
+   \/
+   
+Test/Polish...Forever! or until Done!
  	 

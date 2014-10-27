@@ -92,7 +92,9 @@ public class EnemyPath : MonoBehaviour {
 		Vector3 dir = (path.vectorPath[currentWaypoint]-transform.position);
 		dir *= speed * Time.fixedDeltaTime;
 		RotateTowards (dir);
-		controller.Move (dir);
+
+		if (controller.enabled == true)
+			controller.Move (dir);
 	}
 
 	public void EnemyPathChecker () {
