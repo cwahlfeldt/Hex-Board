@@ -4,7 +4,8 @@ using System.Collections;
 // handles who is attacked and when currently attacking just destroys enemies
 public class NeighborTiles : MonoBehaviour {
 	//gets current player and enemy objects
-	private GameObject player, enemy;
+	private GameObject player;
+	private GameObject[] enemy;
 
 	// current enemy tile and player tile
 	private GameObject playerTile, enemyTile;
@@ -38,7 +39,7 @@ public class NeighborTiles : MonoBehaviour {
 
 		// initializes the two game objects player and enemy
 		player = GameObject.FindGameObjectWithTag("Player");
-		enemy = GameObject.FindGameObjectWithTag("Enemy");
+
 
 		playerCharC = player.GetComponent<CharController> ();
 
@@ -47,7 +48,9 @@ public class NeighborTiles : MonoBehaviour {
 
 		// intializes the current tile
 		CurrentTileOnBoard(player);
-		CurrentTileOnBoard(enemy);
+		//CurrentTileOnBoard(enemy);
+
+		enemy = GameObject.FindGameObjectsWithTag("Enemy");
 
 		GetNeighborTiles(playerTile);
 	}
@@ -57,8 +60,10 @@ public class NeighborTiles : MonoBehaviour {
 
 		// always gets tile on update
 		CurrentTileOnBoard(player);
-		if (enemy != null)
-			CurrentTileOnBoard(enemy);
+		foreach (GameObject enemies in enemy) {
+			if (enemies != null)
+				CurrentTileOnBoard(enemies);
+		}
 
 		// this is the jam!!!
 		NeighborFinder ();

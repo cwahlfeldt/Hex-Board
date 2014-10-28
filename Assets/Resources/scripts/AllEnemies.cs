@@ -6,7 +6,7 @@ public class AllEnemies : MonoBehaviour {
 	public GameObject[] enemies;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		enemies = GameObject.FindGameObjectsWithTag ("Enemy");
 	}
 	
