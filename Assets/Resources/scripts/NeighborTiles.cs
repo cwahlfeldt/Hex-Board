@@ -4,8 +4,7 @@ using System.Collections;
 // handles who is attacked and when currently attacking just destroys enemies
 public class NeighborTiles : MonoBehaviour {
 	//gets current player and enemy objects
-	private GameObject player;
-	private GameObject[] enemy;
+	private GameObject player, enemy;
 
 	// current enemy tile and player tile
 	private GameObject playerTile, enemyTile;
@@ -39,7 +38,7 @@ public class NeighborTiles : MonoBehaviour {
 
 		// initializes the two game objects player and enemy
 		player = GameObject.FindGameObjectWithTag("Player");
-
+		enemy = this.gameObject;
 
 		playerCharC = player.GetComponent<CharController> ();
 
@@ -48,9 +47,7 @@ public class NeighborTiles : MonoBehaviour {
 
 		// intializes the current tile
 		CurrentTileOnBoard(player);
-		//CurrentTileOnBoard(enemy);
-
-		enemy = GameObject.FindGameObjectsWithTag("Enemy");
+		CurrentTileOnBoard(enemy); 
 
 		GetNeighborTiles(playerTile);
 	}
@@ -60,11 +57,10 @@ public class NeighborTiles : MonoBehaviour {
 
 		// always gets tile on update
 		CurrentTileOnBoard(player);
-		foreach (GameObject enemies in enemy) {
-			if (enemies != null)
-				CurrentTileOnBoard(enemies);
-		}
 
+		if (enemy != null)
+				CurrentTileOnBoard(enemy);
+	
 		// this is the jam!!!
 		NeighborFinder ();
 
@@ -90,7 +86,9 @@ public class NeighborTiles : MonoBehaviour {
 			
 			if (Vector3.Distance(playerTile.transform.position, neighbors.transform.position) <= 3 &&
 			    Vector3.Distance(enemyTile.transform.position, neighbors.transform.position) <= 3 &&
-			    Vector3.Distance(playerTile.transform.position, enemyTile.transform.position) > 3 && enemy != null) {
+			   	(Mathf.Round(Vector3.Distance(playerTile.transform.position, enemyTile.transform.position)) == 5 ||
+			 	Mathf.Round(Vector3.Distance(playerTile.transform.position, enemyTile.transform.position)) == 4)
+			  && enemy != null) {
 				
 				attackTiles.Add (neighbors);
 				foreach (GameObject atkneighbors in attackTiles)

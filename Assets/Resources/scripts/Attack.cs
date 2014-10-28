@@ -6,6 +6,7 @@ public class Attack : MonoBehaviour {
 	private RaycastHit hitter;
 
 	private GameObject player, enemy, dest, actions;
+	private GameObject[] enemies;
 	private CharController charController;
 	private CharacterController enemyCont;
 
@@ -20,7 +21,7 @@ public class Attack : MonoBehaviour {
 	private EnemyPath enemyComponent;
 	private Health playerHealth;
 
-	// this will help decide if the enemie was killed
+	// this will help decide if the enemy was killed
 	public int enemiesKilled;
 	private int i = 0;
 
@@ -29,6 +30,7 @@ public class Attack : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		enemy = GameObject.FindGameObjectWithTag ("Enemy");
 		actions = GameObject.Find ("Actions");
+		enemies = GameObject.FindGameObjectsWithTag ("Enemy");
 
 		speed = 7f;
 
