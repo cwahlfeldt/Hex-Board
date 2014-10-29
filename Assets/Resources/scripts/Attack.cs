@@ -5,10 +5,11 @@ public class Attack : MonoBehaviour {
 
 	private RaycastHit hitter;
 
-	private GameObject player, enemy, dest, actions;
+	private GameObject player, dest, actions;
 	private GameObject[] enemies;
 	private CharController charController;
 	private CharacterController enemyCont;
+	private ArrayList correctship;
 
 	public bool playerattack = false, enemyattack = false, isattackover = false;
 
@@ -28,16 +29,17 @@ public class Attack : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		correctship = new ArrayList ();
 		player = GameObject.FindGameObjectWithTag ("Player");
-		enemy = GameObject.FindGameObjectWithTag ("Enemy");
+//		enemy = GameObject.FindGameObjectWithTag ("Enemy");
 		actions = GameObject.Find ("Actions");
 		enemies = GameObject.FindGameObjectsWithTag ("Enemy");
 		all = actions.GetComponent<All> ();
 
 		speed = 7f;
 
-		enemyComponent = enemy.GetComponent<EnemyPath> ();
-		enemyCont = enemy.GetComponent<CharacterController> ();
+//		enemyComponent = enemy.GetComponent<EnemyPath> ();
+//		enemyCont = enemy.GetComponent<CharacterController> ();
 		charController = player.GetComponent<CharController> ();
 		playerHealth = player.GetComponent<Health> ();
 
@@ -45,6 +47,24 @@ public class Attack : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		foreach (GameObject enemy in enemies) {
+			i++;
+			//print (i + " " + Vector3.Distance(enemy.transform.position, player.transform.position));
+
+			if (Vector3.Distance(enemy.transform.position, player.transform.position) <= 3.2)
+				correctship.Add(enemy);
+			else
+				correctship.Clear ();
+
+			foreach (GameObject ship in correctship) {
+				if (ship != null) {
+					ship.GetComponent<CharacterController> ().enabled = !ship.GetComponent<CharacterController> ().enabled;
+				}
+			}
+		}
+//
+//		}
 //		Clicked ();
 //
 //		// for player attack only
@@ -98,44 +118,44 @@ public class Attack : MonoBehaviour {
 
 	}
 
-	void Clicked () {
-
-		if (enemy != null) {
-			relPosition = enemy.transform.position - player.transform.position;
-			relPosition1 = player.transform.position - enemy.transform.position;
-		}
-
-		if (Input.GetKeyDown (KeyCode.Mouse0)) {
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-			isattackover = false;
-
-			if (Physics.Raycast(ray, out hitter)) {
-
-				// player
-				if (hitter.transform.renderer.material.mainTexture == Resources.Load("textures/trans-tile-attack")) {
-					if (enemy != null) {
-						enemyComponent.enabled = !enemyComponent.enabled;
-
-					}
-
-					charController.enabled = !charController.enabled;
-
-					dest = hitter.transform.gameObject;
-
-					playerattack = true;
-				}
-
-				// enemy
-				if (hitter.transform.renderer.material.mainTexture == Resources.Load("textures/trans-tile-enemy")) {
-					playerHealth.health--;
-					 
-					enemyCont.enabled = !enemyCont.enabled;
-
-					isattackover = false;
-					enemyattack = true;
-				}
-			}
-		}
-	}
+//	void Clicked () {
+//
+//		if (enemy != null) {
+//			relPosition = enemy.transform.position - player.transform.position;
+//			relPosition1 = player.transform.position - enemy.transform.position;
+//		}
+//
+//		if (Input.GetKeyDown (KeyCode.Mouse0)) {
+//			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+//
+//			isattackover = false;
+//
+//			if (Physics.Raycast(ray, out hitter)) {
+//
+//				// player
+//				if (hitter.transform.renderer.material.mainTexture == Resources.Load("textures/trans-tile-attack")) {
+//					if (enemy != null) {
+//						enemyComponent.enabled = !enemyComponent.enabled;
+//
+//					}
+//
+//					charController.enabled = !charController.enabled;
+//
+//					dest = hitter.transform.gameObject;
+//
+//					playerattack = true;
+//				}
+//
+//				// enemy
+//				if (hitter.transform.renderer.material.mainTexture == Resources.Load("textures/trans-tile-enemy")) {
+//					playerHealth.health--;
+//					 
+//					enemyCont.enabled = !enemyCont.enabled;
+//
+//					isattackover = false;
+//					enemyattack = true;
+//				}
+//			}
+//		}
+//	}
 }

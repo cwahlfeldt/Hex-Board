@@ -17,7 +17,7 @@ public class NeighborTiles : MonoBehaviour {
 
 	private bool attackRange;
 
-	private ArrayList neighborTiles, attackTiles, playerAttackTiles, enemyTiles;
+	private ArrayList neighborTiles, attackTiles, playerAttackTiles, enemyTiles, dblAtkTiles;
 
 	private GameObject[] tiles;
 
@@ -32,6 +32,7 @@ public class NeighborTiles : MonoBehaviour {
 		attackTiles = new ArrayList ();
 		playerAttackTiles = new ArrayList ();
 		enemyTiles = new ArrayList ();
+		dblAtkTiles = new ArrayList ();
 
 		atk = GameObject.Find ("Actions").GetComponent<Attack> ();
 		atk.playerattack = false;
@@ -108,9 +109,9 @@ public class NeighborTiles : MonoBehaviour {
 				
 				if (Vector3.Distance(enemy.transform.position, neighbors.transform.position) <= 3 &&
 				    Vector3.Distance(enemy.transform.position, neighbors.transform.position) <= 3 &&
-				    (Mathf.Round(Vector3.Distance(playerTile.transform.position, enemy.transform.position)) == 5 ||
-				 Mathf.Round(Vector3.Distance(playerTile.transform.position, enemy.transform.position)) == 4)
-				    && enemy != null) {
+				    ((Mathf.Round(Vector3.Distance(playerTile.transform.position, enemy.transform.position))) == 5 ||
+					(Mathf.Round(Vector3.Distance(playerTile.transform.position, enemy.transform.position))) == 4) && 
+				    enemy != null) {
 					
 					attackTiles.Add (neighbors);
 					foreach (GameObject atkneighbors in attackTiles)
@@ -144,11 +145,23 @@ public class NeighborTiles : MonoBehaviour {
 			et.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile-player");
 		} // end of eney tile check
 
-		foreach (GameObject enemy in enemies) {
-			foreach (GameObject pAtkTiles in playerAttackTiles) {
-				
-			}
-		}
+
+//		foreach (GameObject neighbors in playerAttackTiles) {
+//			foreach (GameObject enemy in enemies) {
+//				if (Vector3.Distance(enemy.transform.position, neighbors.transform.position) <= 3 &&
+//				    Vector3.Distance(playerTile.transform.position, enemy.transform.position) <= 3 &&
+//				    atk.playerattack != true) {
+//
+//					dblAtkTiles.Add(neighbors);
+//
+//					foreach (GameObject dblatk in dblAtkTiles)
+//						dblatk.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile-dbl");
+//				}
+//				else
+//					dblAtkTiles.Clear ();
+//				
+//			}
+//		}
 
 	}// end of update
 	#endregion
