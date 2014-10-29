@@ -17,7 +17,7 @@ public class NeighborTiles : MonoBehaviour {
 
 	private bool attackRange;
 
-	private ArrayList neighborTiles, attackTiles, playerAttackTiles, dKillEnemies, enemyTiles;
+	private ArrayList neighborTiles, attackTiles, playerAttackTiles, enemyTiles;
 
 	private GameObject[] tiles;
 
@@ -31,7 +31,6 @@ public class NeighborTiles : MonoBehaviour {
 		neighborTiles = new ArrayList ();
 		attackTiles = new ArrayList ();
 		playerAttackTiles = new ArrayList ();
-		dKillEnemies = new ArrayList ();
 		enemyTiles = new ArrayList ();
 
 		atk = GameObject.Find ("Actions").GetComponent<Attack> ();
@@ -57,6 +56,8 @@ public class NeighborTiles : MonoBehaviour {
 	#endregion
 	
 	void Update () {
+
+		enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
 		// always gets tile on update
 		CurrentTileOnBoard(player);
@@ -118,20 +119,7 @@ public class NeighborTiles : MonoBehaviour {
 				else
 					attackTiles.Clear ();
 			} 
-		}
-
-		// end of enemy attack
-
-//		foreach(GameObject GreenTile in playerAttackTiles) {
-//			RaycastHit hitterBaby;
-//			if (Physics.Raycast(GreenTile.transform.position, Vector3.up, out hitterBaby, 5f)) {
-//				foreach (GameObject EnemyShip in enemies){
-//					if (hitterBaby.transform.name == EnemyShip.transform.name) {
-//						dKillEnemies.Add(EnemyShip);
-//					}
-//				}
-//			}
-//		}
+		} // end of enemy attack
 
 		// updates based on current positions
 		if (playerCharC.isontile == false) {
@@ -139,6 +127,8 @@ public class NeighborTiles : MonoBehaviour {
 			foreach (GameObject neighbors in neighborTiles) 
 				neighbors.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile");
 		}
+
+		// checks for enemytiles... anything beyond 2 eneimies this doesnt work..hmmm?
 		foreach (GameObject enemy in enemies) {
 			RaycastHit hitterboi;
 			if (Physics.Raycast (enemy.transform.position, Vector3.down, out hitterboi, 5f)) {
@@ -152,12 +142,16 @@ public class NeighborTiles : MonoBehaviour {
 		}
 		foreach (GameObject et in enemyTiles) {
 			et.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile-player");
+		} // end of eney tile check
+
+		foreach (GameObject enemy in enemies) {
+			foreach (GameObject pAtkTiles in playerAttackTiles) {
+				
+			}
 		}
 
 	}// end of update
 	#endregion
-
-
 
 	// clears the entire board
 	void ReUp () {

@@ -76,7 +76,7 @@ public class CharController: MonoBehaviour {
 		if (dist <= 4) {
 
 			// smooth rotation using slerp
-			//transform.rotation = Quaternion.Slerp(ship.transform.rotation, quat, Time.deltaTime * (speed + 5f));
+			transform.rotation = Quaternion.Slerp(ship.transform.rotation, quat, Time.deltaTime * (speed + 5f));
 
 			// smooth transform position using lerp
 			transform.position = Vector3.Lerp(transform.position, childPieceLocation, Time.deltaTime * (speed - 3f));
