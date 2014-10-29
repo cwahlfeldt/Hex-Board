@@ -107,7 +107,7 @@
      <Compile Include="Assets\AstarPathfindingProject\Utilities\ProfileHelper.cs" />
      <Compile Include="Assets\AstarPathfindingProject\Utilities\UnityReferenceHelper.cs" />
      <Compile Include="Assets\AstarPathfindingProject\changelog.cs" />
-     <Compile Include="Assets\Resources\scripts\AllEnemies.cs" />
+     <Compile Include="Assets\Resources\scripts\All.cs" />
      <Compile Include="Assets\Resources\scripts\Attack.cs" />
      <Compile Include="Assets\Resources\scripts\CameraAspect.cs" />
      <Compile Include="Assets\Resources\scripts\CharController.cs" />

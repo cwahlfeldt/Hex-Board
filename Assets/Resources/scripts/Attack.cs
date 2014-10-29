@@ -20,6 +20,7 @@ public class Attack : MonoBehaviour {
 	private PlayerPath playerComponent;
 	private EnemyPath enemyComponent;
 	private Health playerHealth;
+	private All all;
 
 	// this will help decide if the enemy was killed
 	public int enemiesKilled;
@@ -31,6 +32,7 @@ public class Attack : MonoBehaviour {
 		enemy = GameObject.FindGameObjectWithTag ("Enemy");
 		actions = GameObject.Find ("Actions");
 		enemies = GameObject.FindGameObjectsWithTag ("Enemy");
+		all = actions.GetComponent<All> ();
 
 		speed = 7f;
 
@@ -43,42 +45,57 @@ public class Attack : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Clicked ();
+//		Clicked ();
+//
+//		// for player attack only
+//		if (playerattack == true) {
+//			quat = Quaternion.LookRotation (relPosition);
+//			player.transform.position = Vector3.Lerp (player.transform.position, dest.transform.position, speed * Time.deltaTime);
+//			player.transform.rotation = Quaternion.Slerp (player.transform.rotation, quat, (speed + 5) * Time.deltaTime);
+//
+//			// custom wait timer 26 higher the number longer it takes to kill enemy
+//			i++;
+//			if (i == 40) {
+//				charController.enabled = !charController.enabled;
+//				charController.isontile = false;
+//				Destroy (enemy);
+//				playerattack = false;
+//				isattackover = true;
+//				i = 0;
+//			}
+//		}
+//
+//		// for enemy attack
+//		if (enemyattack == true) {
+//			quat = Quaternion.LookRotation (relPosition1);
+//			//enemy.transform.rotation = Quaternion.Slerp (player.transform.rotation, quat, (speed + 5) * Time.deltaTime);
+//
+//			i++;
+//			// busted ass timer works for now though...
+//			if (i == 100) {
+//				if (enemy != null) 
+//					enemyCont.enabled = !enemyCont.enabled;
+//
+//				isattackover = true;
+//				enemyattack = false;
+//				i= 0;
+//			}
+//		}
 
-		// for player attack only
-		if (playerattack == true) {
-			quat = Quaternion.LookRotation (relPosition);
-			player.transform.position = Vector3.Lerp (player.transform.position, dest.transform.position, speed * Time.deltaTime);
-			player.transform.rotation = Quaternion.Slerp (player.transform.rotation, quat, (speed + 5) * Time.deltaTime);
+		enemies = GameObject.FindGameObjectsWithTag ("Enemy");
 
-			// custom wait timer 26 higher the number longer it takes to kill enemy
-			i++;
-			if (i == 40) {
-				charController.enabled = !charController.enabled;
-				charController.isontile = false;
-				Destroy (enemy);
-				playerattack = false;
-				isattackover = true;
-				i = 0;
-			}
+		foreach (GameObject enemy in all.enemies) {
+
 		}
 
-		// for enemy attack
-		if (enemyattack == true) {
-			quat = Quaternion.LookRotation (relPosition1);
-			//enemy.transform.rotation = Quaternion.Slerp (player.transform.rotation, quat, (speed + 5) * Time.deltaTime);
 
-			i++;
-			// busted ass timer works for now though...
-			if (i == 100) {
-				if (enemy != null) 
-					enemyCont.enabled = !enemyCont.enabled;
 
-				isattackover = true;
-				enemyattack = false;
-				i= 0;
-			}
-		}
+
+
+
+
+
+
 	}
 
 	void Clicked () {

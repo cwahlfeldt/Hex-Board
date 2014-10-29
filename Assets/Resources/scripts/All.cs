@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AllEnemies : MonoBehaviour {
+public class All : MonoBehaviour {
 
 	public GameObject[] enemies;
 
