@@ -12,7 +12,7 @@ This is a turn-based/rouge-like/strategy game built with unity.
 
 ~~Change the character movement to something simpler and easier. (See CharController.cs)~~
 
-Multiple enemies on board at once
+~Multiple enemies on board at once~ (still needs lots of polishing)
 
 ~~Graphical representation of health~~
 

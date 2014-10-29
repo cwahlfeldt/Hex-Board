@@ -1,11 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Resources\scripts\Attack.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="README.md">
     <Files>
-      <File FileName="Assets\Resources\scripts\NeighborTiles.cs" Line="113" Column="75" />
-      <File FileName="README.md" Line="1" Column="1" />
-      <File FileName="Assets\Resources\scripts\CharController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Resources\scripts\Attack.cs" Line="60" Column="46" />
+      <File FileName="README.md" Line="15" Column="68" />
+      <File FileName="Assets/Resources/scripts/Attack.cs" Line="48" Column="35" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

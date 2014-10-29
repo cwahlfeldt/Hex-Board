@@ -52,14 +52,14 @@ public class Attack : MonoBehaviour {
 			i++;
 			//print (i + " " + Vector3.Distance(enemy.transform.position, player.transform.position));
 
-			if (Vector3.Distance(enemy.transform.position, player.transform.position) <= 3.2)
+			if (Vector3.Distance(enemy.transform.position, player.transform.position) <= 2.3)
 				correctship.Add(enemy);
 			else
 				correctship.Clear ();
 
 			foreach (GameObject ship in correctship) {
 				if (ship != null) {
-					ship.GetComponent<CharacterController> ().enabled = !ship.GetComponent<CharacterController> ().enabled;
+					ship.SetActive(false);
 				}
 			}
 		}
