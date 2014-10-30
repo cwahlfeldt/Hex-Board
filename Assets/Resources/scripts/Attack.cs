@@ -48,21 +48,39 @@ public class Attack : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		foreach (GameObject enemy in enemies) {
-			i++;
-			//print (i + " " + Vector3.Distance(enemy.transform.position, player.transform.position));
+		// simple health minus
+		if (Input.GetKeyDown (KeyCode.Mouse0)) {
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+			
+			isattackover = false;
+			
+			if (Physics.Raycast (ray, out hitter)) {
+				
+				// player
+				if (hitter.transform.renderer.material.mainTexture == Resources.Load ("textures/trans-tile-enemy")) {
+					playerHealth.health--;
+				}
+			}
+		}
 
-			if (Vector3.Distance(enemy.transform.position, player.transform.position) <= 2.3)
+		foreach (GameObject enemy in enemies) {
+
+			if (Vector3.Distance(enemy.transform.position, player.transform.position) <= 2.6)
 				correctship.Add(enemy);
 			else
 				correctship.Clear ();
 
 			foreach (GameObject ship in correctship) {
-				if (ship != null) {
-					ship.SetActive(false);
+				if (Input.GetKeyDown(KeyCode.Mouse0)) {
+					if (ship != null && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitter)) {
+						if (hitter.transform.renderer.material.mainTexture == Resources.Load<Texture> ("textures/trans-tile-attack"))
+							ship.SetActive(false);
+					}
 				}
 			}
 		}
+
+	   
 //
 //		}
 //		Clicked ();
@@ -116,6 +134,10 @@ public class Attack : MonoBehaviour {
 
 
 
+	}
+
+	IEnumerator Wait () {
+		yield return new WaitForSeconds(10.0f);
 	}
 
 //	void Clicked () {

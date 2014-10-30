@@ -91,8 +91,10 @@ public class NeighborTiles : MonoBehaviour {
 					
 					playerAttackTiles.Add(neighbors);
 
-					foreach (GameObject playerAtkTiles in playerAttackTiles)
-						playerAtkTiles.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile-attack");
+					foreach (GameObject playerAtkTiles in playerAttackTiles) {
+						if (playerAtkTiles != null)
+							playerAtkTiles.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile-attack");
+					}
 
 				}
 				else
@@ -168,16 +170,18 @@ public class NeighborTiles : MonoBehaviour {
 
 	// clears the entire board
 	void ReUp () {
-		foreach (GameObject thetile in tiles) 
-			thetile.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile");
+		foreach (GameObject thetile in tiles) {
+			if (thetile != null) 
+				thetile.renderer.material.mainTexture = Resources.Load<Texture> ("textures/trans-tile");
+		}
 	}
 
 	#region GetNeighborTiles (GameObject insertTile) insertTile will == player or enemy tiles! 
 	void GetNeighborTiles (GameObject insertTile) {
 
 		foreach (GameObject theTiles in tiles) {
-			if (Vector3.Distance(insertTile.transform.position, theTiles.transform.position) <= 3 && (
-				Vector3.Distance(insertTile.transform.position, theTiles.transform.position) != 0) && theTiles) {
+			if ((theTiles != null) && Vector3.Distance(insertTile.transform.position, theTiles.transform.position) <= 3 && (
+				Vector3.Distance(insertTile.transform.position, theTiles.transform.position) != 0)) {
 				ReUp ();
 				neighborTiles.Add (theTiles);
 			}

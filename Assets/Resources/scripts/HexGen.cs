@@ -96,10 +96,11 @@ public class HexGen : MonoBehaviour {
 		go.transform.rotation = this.transform.rotation;
 
 		//UV TESTING
-		Material transparent = new Material ( Shader.Find("Transparent/Diffuse") );
+		Material transparent = new Material (Shader.Find("Transparent/Diffuse"));
+
+		transparent.mainTexture = texture;
 					
 		go.renderer.material = transparent;
-		go.renderer.material.mainTexture = texture;
 	
 	}
 	

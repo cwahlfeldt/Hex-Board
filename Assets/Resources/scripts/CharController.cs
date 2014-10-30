@@ -14,7 +14,7 @@ public class CharController: MonoBehaviour {
 	public Vector3 relPosition;
 	public Quaternion quat;
 	public bool isontile;
-
+	private int i = 0;
 	void Start() {
 
 		// initializes vars
@@ -25,6 +25,7 @@ public class CharController: MonoBehaviour {
 	}
 	
 	void Update() {
+		i++;
 
 		if (Physics.Raycast (transform.position, Vector3.down, out hitter, 1f)) {
 			if (hitter.transform.name == go.transform.name) {
@@ -32,6 +33,10 @@ public class CharController: MonoBehaviour {
 			}
 			else
 				isontile = false;
+		}
+
+		if (i == 2) {
+			AstarPath.active.Scan ();
 		}
 
 		//finds the ship on update so that it updates the coordinates
