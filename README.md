@@ -2,10 +2,11 @@
 ========================================================================================
 __________________________________________________________________________________
 
-This is a turn-based/rouge-like/strategy/"boardgame" game built with unity. The game will feature movement based attacking which will require strategic 
-thinking when moving to different places on the "board". The theme is space and will use a "lowpoly" style for modeling to keep things 
-simple and I also think it looks good.
+This is a turn-based/rouge-like/strategy/"boardgame" game built with unity. The game will feature movement based attacking which will require strategic thinking when moving to different places on the "board". The theme is space and will use "lowpoly" style for modeling to keep thingssimple and I also think it looks good.
 
+To start using this repo either clone or download somewhere onto your computer and import the project into unity (currently using free version). What i do is just click on my scene that is located in the assests folder and it will start the project from there.
+
+feel free to fork if you like.
 
 **Ultimate Todo List:**
 =======================================================================================
@@ -20,7 +21,7 @@ simple and I also think it looks good.
 
 ~~Make it so the enemy cannot move to player tile~~ (little on the buggy side but works)
 
-Add funtionality to "red tiles" so that the enemy can hurt the player (make an array of all)
+~~Add funtionality to "red tiles" so that the enemy can hurt the player (make an array of all)~~ (very basic)
 
 Fix when enemies can move after the player has moved (this already kind of works..could be more "turn based")
 
