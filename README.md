@@ -23,6 +23,8 @@ feel free to fork if you like.
 
 ~~Add funtionality to "red tiles" so that the enemy can hurt the player (make an array of all)~~ (very basic)
 
+update pathfinding for enemies to not be able to run onto same tile as player and enemy
+
 Fix when enemies can move after the player has moved (this already kind of works..could be more "turn based")
 
 Multiple Types of enemies e.g. (archer, mage, bomber, berzerker...) this also means different AI behavior for each type
