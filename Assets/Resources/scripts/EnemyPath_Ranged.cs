@@ -11,7 +11,7 @@ public class EnemyPath_Ranged : MonoBehaviour {
 	//private GameObject player;
 	private CharacterController controller;
 	
-	private GameObject player, enemySpawn;
+	private GameObject player, enemySpawn, playerSpawn;
 	
 	//The calculated path
 	public Path path;
@@ -48,7 +48,8 @@ public class EnemyPath_Ranged : MonoBehaviour {
 		playerCharC = player.GetComponent<CharController> ();
 
 		enemySpawn = GameObject.Find ("piece100");
-		
+		playerSpawn = GameObject.Find ("piece101");
+
 	}
 	
 	public void FixedUpdate () {
@@ -84,8 +85,10 @@ public class EnemyPath_Ranged : MonoBehaviour {
 					player = GameObject.FindGameObjectWithTag("Player");
 
 					// the new logic for ranged characters
-					if (Vector3.Distance(this.gameObject.transform.position, player.transform.position) < 5)
+					if (Vector3.Distance(this.gameObject.transform.position, player.transform.position) < 7)
 						targetPosition = enemySpawn.transform.position;
+					else if (Vector3.Distance(this.gameObject.transform.position, enemySpawn.transform.position) < 5)
+						targetPosition = playerSpawn.transform.position;
 					else
 						targetPosition = player.transform.position;
 

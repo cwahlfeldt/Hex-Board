@@ -31,15 +31,12 @@ public class Attack : MonoBehaviour {
 	void Start () {
 		correctship = new ArrayList ();
 		player = GameObject.FindGameObjectWithTag ("Player");
-//		enemy = GameObject.FindGameObjectWithTag ("Enemy");
 		actions = GameObject.Find ("Actions");
 		enemies = GameObject.FindGameObjectsWithTag ("Enemy");
 		all = actions.GetComponent<All> ();
 
 		speed = 7f;
 
-//		enemyComponent = enemy.GetComponent<EnemyPath> ();
-//		enemyCont = enemy.GetComponent<CharacterController> ();
 		charController = player.GetComponent<CharController> ();
 		playerHealth = player.GetComponent<Health> ();
 
@@ -47,6 +44,8 @@ public class Attack : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		enemies = GameObject.FindGameObjectsWithTag ("Enemy");
 
 		// simple health minus
 		if (Input.GetKeyDown (KeyCode.Mouse0)) {
@@ -63,9 +62,10 @@ public class Attack : MonoBehaviour {
 			}
 		}
 
+		// for player attack
 		foreach (GameObject enemy in enemies) {
 
-			if (Vector3.Distance(enemy.transform.position, player.transform.position) <= 2.6)
+			if (Vector3.Distance(enemy.transform.position, player.transform.position) <= 3.0)
 				correctship.Add(enemy);
 			else
 				correctship.Clear ();
@@ -73,111 +73,24 @@ public class Attack : MonoBehaviour {
 			foreach (GameObject ship in correctship) {
 				if (Input.GetKeyDown(KeyCode.Mouse0)) {
 					if (ship != null && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitter)) {
-						if (hitter.transform.renderer.material.mainTexture == Resources.Load<Texture> ("textures/trans-tile-attack"))
+						if (hitter.transform.renderer.material.mainTexture == Resources.Load<Texture> ("textures/trans-tile-attack") &&
+						    Vector3.Distance (hitter.transform.position, ship.transform.position) <= 3) {
+
 							ship.SetActive(false);
+						}
 					}
 				}
 			}
 		}
 
-	   
-//
-//		}
-//		Clicked ();
-//
-//		// for player attack only
-//		if (playerattack == true) {
-//			quat = Quaternion.LookRotation (relPosition);
-//			player.transform.position = Vector3.Lerp (player.transform.position, dest.transform.position, speed * Time.deltaTime);
-//			player.transform.rotation = Quaternion.Slerp (player.transform.rotation, quat, (speed + 5) * Time.deltaTime);
-//
-//			// custom wait timer 26 higher the number longer it takes to kill enemy
-//			i++;
-//			if (i == 40) {
-//				charController.enabled = !charController.enabled;
-//				charController.isontile = false;
-//				Destroy (enemy);
-//				playerattack = false;
-//				isattackover = true;
-//				i = 0;
-//			}
-//		}
-//
-//		// for enemy attack
-//		if (enemyattack == true) {
-//			quat = Quaternion.LookRotation (relPosition1);
-//			//enemy.transform.rotation = Quaternion.Slerp (player.transform.rotation, quat, (speed + 5) * Time.deltaTime);
-//
-//			i++;
-//			// busted ass timer works for now though...
-//			if (i == 100) {
-//				if (enemy != null) 
-//					enemyCont.enabled = !enemyCont.enabled;
-//
-//				isattackover = true;
-//				enemyattack = false;
-//				i= 0;
-//			}
-//		}
+	} // end of update
 
-		enemies = GameObject.FindGameObjectsWithTag ("Enemy");
-
-		foreach (GameObject enemy in all.enemies) {
-
-		}
-
-
-
-
-
-
-
-
-
+	void PauseEnemies () {
 	}
-
-	IEnumerator Wait () {
-		yield return new WaitForSeconds(10.0f);
-	}
-
-//	void Clicked () {
-//
-//		if (enemy != null) {
-//			relPosition = enemy.transform.position - player.transform.position;
-//			relPosition1 = player.transform.position - enemy.transform.position;
-//		}
-//
-//		if (Input.GetKeyDown (KeyCode.Mouse0)) {
-//			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-//
-//			isattackover = false;
-//
-//			if (Physics.Raycast(ray, out hitter)) {
-//
-//				// player
-//				if (hitter.transform.renderer.material.mainTexture == Resources.Load("textures/trans-tile-attack")) {
-//					if (enemy != null) {
-//						enemyComponent.enabled = !enemyComponent.enabled;
-//
-//					}
-//
-//					charController.enabled = !charController.enabled;
-//
-//					dest = hitter.transform.gameObject;
-//
-//					playerattack = true;
-//				}
-//
-//				// enemy
-//				if (hitter.transform.renderer.material.mainTexture == Resources.Load("textures/trans-tile-enemy")) {
-//					playerHealth.health--;
-//					 
-//					enemyCont.enabled = !enemyCont.enabled;
-//
-//					isattackover = false;
-//					enemyattack = true;
-//				}
-//			}
-//		}
-//	}
 }
+
+
+
+
+
+

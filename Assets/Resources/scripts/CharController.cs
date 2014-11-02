@@ -5,22 +5,30 @@ using Pathfinding;
 // Moves the charObject to a tile object when the tile is clicked
 public class CharController: MonoBehaviour {
 
-	public float speed;
+	private float speed;
 	public HexGen hexGen;
 	public RaycastHit hit, hitter;
-	public GameObject go;
+	private GameObject go;
+	private GameObject[] enemies;
 	public Vector3 childPieceLocation;
-	public float dist;
-	public Vector3 relPosition;
-	public Quaternion quat;
-	public bool isontile;
+	private float dist;
+	private Vector3 relPosition;
+	private Quaternion quat;
+	public bool isontile, restrictor;
 	private int i = 0;
+
+	// this is how you calculate velocity w/ out a rigid body or character controller
+	//public float velocity = (current - previous) / Time.deltaTime;
+
 	void Start() {
 
 		// initializes vars
+		restrictor = false;
 		isontile = false;
 		speed = 8f;
 		go = new GameObject ();
+
+		enemies =  GameObject.FindGameObjectsWithTag("Enemy");
 
 	}
 	
@@ -84,9 +92,18 @@ public class CharController: MonoBehaviour {
 			transform.rotation = Quaternion.Slerp(ship.transform.rotation, quat, Time.deltaTime * (speed + 5f));
 
 			// smooth transform position using lerp
-			transform.position = Vector3.Lerp(transform.position, childPieceLocation, Time.deltaTime * (speed - 3f));
+			transform.position = Vector3.Lerp(transform.position, childPieceLocation, Time.deltaTime * (speed - 5f));
 
 		}
+
+		// this doesnt work.
+//		foreach (GameObject enemy in enemies) {
+//			if (enemy == null) {
+//				speed = 2f;
+//				restrictor = true;
+//			}
+//		}
+		enemies =  GameObject.FindGameObjectsWithTag("Enemy");
 		
 	} // end of update function
 	

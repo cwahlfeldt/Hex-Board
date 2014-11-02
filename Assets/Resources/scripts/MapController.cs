@@ -12,12 +12,15 @@ public class MapController : MonoBehaviour {
 
 		GameObject[] pieces = GameObject.FindGameObjectsWithTag("pieceTag");
 
-		int rando = (int)Random.Range(18f, 25f);
-		int rando1 = (int)Random.Range(18f, 25f);
-		int rando3 = (int)Random.Range(18f, 25f);
-		int rando5 = (int)Random.Range(18f, 25f);
+		int rando = (int)Random.Range(18f, 50f);
+		int rando1 = (int)Random.Range(18f, 50f);
+		int rando3 = (int)Random.Range(18f, 50f);
+		int rando5 = (int)Random.Range(18f, 50f);
 		int rando6 = (int)Random.Range(0f, 1f);
 		int rando7 = (int)Random.Range(0f, 1f);
+		int rando8 = (int)Random.Range(18f, 50f);
+		int rando9 = (int)Random.Range(5f, 50f);
+		int rando10 = (int)Random.Range(12f, 50f);
 
 		Destroy (pieces [rando]);
 		Destroy (pieces [rando1]);
@@ -26,6 +29,9 @@ public class MapController : MonoBehaviour {
 		Destroy (pieces [rando6]);
 		Destroy (pieces [rando7]);
 		Destroy (pieces [rando7]);
+		Destroy (pieces [rando10]);
+		Destroy (pieces [rando9]);
+		Destroy (pieces [rando8]);
 
 	}
 }
