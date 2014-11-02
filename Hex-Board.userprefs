@@ -1,15 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="README.md">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/scripts/Attack.cs">
     <Files>
-      <File FileName="Assets\Resources\scripts\Attack.cs" Line="36" Column="38" />
-      <File FileName="Assets\Resources\scripts\HexGen.cs" Line="1" Column="1" />
-      <File FileName="README.md" Line="18" Column="1" />
-      <File FileName="Assets\Resources\scripts\CharController.cs" Line="18" Column="20" />
-      <File FileName="Assets\Resources\scripts\NeighborTiles.cs" Line="186" Column="1" />
-      <File FileName="Assets\Resources\scripts\EnemyPath_Ranged.cs" Line="95" Column="76" />
-      <File FileName="Assets\Resources\scripts\EnemyPath.cs" Line="110" Column="73" />
-      <File FileName="Assets\Resources\scripts\MapController.cs" Line="34" Column="26" />
+      <File FileName="Assets/Resources/scripts/Attack.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

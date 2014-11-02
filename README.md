@@ -38,6 +38,8 @@ Make tiles all the same so that you dont know which tiles to go to (only when pr
 
 Main Menu (either new scene or in the current scene it self chris prefers the latter)
 
+At end of level queue harder level/increase dificulty from stage to stage
+
 Start Screen
 
 End Game
@@ -48,7 +50,19 @@ Pause Game
 
 Save game (maybe?)
 
-At end of level queue harder level/increase dificulty from stage to stage
+
+**Ideas**
+==================================================================================
+
+Make a "galaxy map" like a world map of all the levels you can go to but a galaxy map because you go to different galaxies. levels would unlock over time or with certain amount of resources.
+
+Take a more 4xish approach, as in: every tile is a planet (which I want to do regardless of taking this approach) and when going to the planet you get options to get resources or other items or it triggers enemies etc... With this approach i would also make a spawn timer until the enemies would populate the board thus making you rush to get resources and what not before the fighting begins. Fighting could also begin when you first go to the level.
+
+Enemies come in waves and you cant leave world or seek planets if enemies are on board
+
+Spend resources to upgrade your ship.. ie (sheild, ftl boosts, sniper attacks, bombs, ) also upgrades look of ship.
+
+The Story is simple and minimal. You are trapped in the void of space and you must get home. home will be in the last galaxy of the galaxy map. you find "artifacts" to reach more galaxies in the universe. Each universe contains up to 3 artifacts.
 
 
 **Overall Plan**
