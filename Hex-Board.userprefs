@@ -1,11 +1,14 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/scripts/CharController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Resources\scripts\EnemyPath_Ranged.cs">
     <Files>
-      <File FileName="Assets/Resources/scripts/All.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/scripts/Attack.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/scripts/NeighborTiles.cs" Line="184" Column="89" />
-      <File FileName="Assets/Resources/scripts/CharController.cs" Line="45" Column="3" />
+      <File FileName="Assets\Resources\scripts\MapController.cs" Line="25" Column="28" />
+      <File FileName="Assets\Resources\scripts\All.cs" Line="10" Column="3" />
+      <File FileName="Assets\Resources\scripts\Attack.cs" Line="50" Column="19" />
+      <File FileName="Assets\Resources\scripts\NeighborTiles.cs" Line="5" Column="45" />
+      <File FileName="Assets\Resources\scripts\CharController.cs" Line="76" Column="64" />
+      <File FileName="Assets\Resources\scripts\EnemyPath.cs" Line="45" Column="53" />
+      <File FileName="Assets\Resources\scripts\EnemyPath_Ranged.cs" Line="84" Column="42" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
