@@ -28,7 +28,7 @@ public class CharController: MonoBehaviour {
 		speed = 8f;
 		go = new GameObject ();
 
-		enemies =  GameObject.FindGameObjectsWithTag("Enemy");
+		enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
 	}
 	
@@ -57,7 +57,6 @@ public class CharController: MonoBehaviour {
 			Plane playerPlane = new Plane(Vector3.up, transform.position);
 
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
 			
 			float hitdist = 0.0f;
 			
