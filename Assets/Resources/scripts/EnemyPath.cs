@@ -31,6 +31,8 @@ public class EnemyPath : MonoBehaviour {
 
 	public bool turn;
 
+	private GraphUpdateScene gus;
+
 	private CharController playerCharC;
 
 	public void Awake () {
@@ -46,6 +48,8 @@ public class EnemyPath : MonoBehaviour {
 
 		player = GameObject.FindGameObjectWithTag("Player");
 		playerCharC = player.GetComponent<CharController> ();
+
+		gus = player.GetComponent<GraphUpdateScene> ();
 
 	}
 
@@ -64,7 +68,7 @@ public class EnemyPath : MonoBehaviour {
 		}
 
 		// kind of buggy but gives the ai some character...
-		if (playerCharC.isontile != false)
+//		if (playerCharC.velocity < 15 && playerCharC.velocity > -15)
 			Move ();
 
 		//Check if we are close enough to the next waypoint
@@ -82,10 +86,16 @@ public class EnemyPath : MonoBehaviour {
 					player = GameObject.FindGameObjectWithTag("Player");
 						
 					targetPosition = player.transform.position;
-					seeker.StartPath (transform.position, targetPosition, OnPathComplete);
+
 				}
 			}
+
+			if (playerCharC.velocity < 6 && playerCharC.velocity > -6) {
+				//gus.Apply ();
+				seeker.StartPath (transform.position, targetPosition, OnPathComplete);
+			}
 		}
+
 	}
 
 	public void Move () {
@@ -102,6 +112,7 @@ public class EnemyPath : MonoBehaviour {
 			if (currentWaypoint != 1) {
 				currentWaypoint++;
 			}
+			else
 			return;
 		}
 	}

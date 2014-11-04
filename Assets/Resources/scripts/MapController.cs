@@ -3,13 +3,13 @@ using System.Collections;
 using Pathfinding;
 
 public class MapController : MonoBehaviour {
-	
+
+	private int i = 0;
 
 	// Use this for initialization
 	void Start () {
 
 		// gets and stores all of the game objects by tag and destroys the specified game object
-
 		GameObject[] pieces = GameObject.FindGameObjectsWithTag("pieceTag");
 
 		int rando = (int)Random.Range(18f, 50f);
@@ -34,4 +34,13 @@ public class MapController : MonoBehaviour {
 		Destroy (pieces [rando8]);
 
 	}
+
+	void Update () {
+		i++;
+
+		if (i == 2) {
+			AstarPath.active.Scan ();
+		}
+	}
+
 }

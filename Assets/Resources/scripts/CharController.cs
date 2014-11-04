@@ -15,36 +15,32 @@ public class CharController: MonoBehaviour {
 	private Vector3 relPosition;
 	private Quaternion quat;
 	public bool isontile, restrictor;
-	private int i = 0;
+	private Bounds bounds;
+	private GraphUpdateScene gus;
 
 	// this is how you calculate velocity w/ out a rigid body or character controller
-	//public float velocity = (current - previous) / Time.deltaTime;
+	public float velocity = 0f;
 
 	void Start() {
-
+	
 		// initializes vars
 		restrictor = false;
 		isontile = false;
 		speed = 8f;
 		go = new GameObject ();
 
-		enemies = GameObject.FindGameObjectsWithTag("Enemy");
+		gus = GetComponent<GraphUpdateScene> ();
 
+		enemies = GameObject.FindGameObjectsWithTag("Enemy");
 	}
 	
 	void Update() {
-		i++;
 
 		if (Physics.Raycast (transform.position, Vector3.down, out hitter, 1f)) {
-			if (hitter.transform.name == go.transform.name) {
+			if (hitter.transform.name == go.transform.name)
 				isontile = true;
-			}
 			else
 				isontile = false;
-		}
-
-		if (i == 2) {
-			AstarPath.active.Scan ();
 		}
 
 		//finds the ship on update so that it updates the coordinates
@@ -52,7 +48,7 @@ public class CharController: MonoBehaviour {
 
 		// when mouse button is clicked...(for touch controls CHANGE THIS)
 		if (Input.GetKeyDown(KeyCode.Mouse0)) {
-
+		
 			// creates a plane for the character and it acts as the 'ground'
 			Plane playerPlane = new Plane(Vector3.up, transform.position);
 
@@ -77,9 +73,11 @@ public class CharController: MonoBehaviour {
 
 				// sets a quaternion where to rotate basd on the relative position 
 				quat = Quaternion.LookRotation (relPosition);
-
 			}
 		}
+
+		velocity = (childPieceLocation.magnitude - ship.transform.position.magnitude) / Time.deltaTime;
+		print (velocity);
 
 		// draws a ray to the tile clicked
 		Debug.DrawRay (ship.transform.position, childPieceLocation - ship.transform.position, Color.green);
@@ -95,15 +93,18 @@ public class CharController: MonoBehaviour {
 
 		}
 
-		// this doesnt work.
-//		foreach (GameObject enemy in enemies) {
-//			if (enemy == null) {
-//				speed = 2f;
-//				restrictor = true;
-//			}
-//		}
-		enemies =  GameObject.FindGameObjectsWithTag("Enemy");
+		NNConstraint nodeConstraint = new NNConstraint();
+		nodeConstraint.constrainWalkability = false;
+		nodeConstraint.walkable = false;
 		
+		NNInfo nodeInfo = AstarPath.active.GetNearest (transform.position, nodeConstraint);
+
+		if (isontile == true)
+			nodeInfo.node.Walkable = false;
+		else
+			nodeInfo.node.Walkable = true;
+
+
 	} // end of update function
 	
 } // end of class
