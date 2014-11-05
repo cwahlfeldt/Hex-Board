@@ -95,6 +95,8 @@ public class HexGen : MonoBehaviour {
 		go.transform.position = this.transform.position;
 		go.transform.rotation = this.transform.rotation;
 
+		go.transform.localScale = Vector3.Scale (go.transform.localScale, new Vector3(1.15f, 1.15f, 1.15f));
+
 		//UV TESTING
 		Material transparent = new Material (Shader.Find("Transparent/Diffuse"));
 
@@ -103,7 +105,7 @@ public class HexGen : MonoBehaviour {
 		go.renderer.material = transparent;
 	
 	}
-	
+
 }
 
 

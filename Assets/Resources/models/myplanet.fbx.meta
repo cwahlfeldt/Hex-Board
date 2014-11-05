@@ -11,7 +11,7 @@ ModelImporter:
     9500000: //RootNode
   materials:
     importMaterials: 1
-    materialName: 1
+    materialName: 0
     materialSearch: 0
   animations:
     legacyGenerateAnimations: 4
@@ -42,7 +42,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
   tangentSpace:
-    normalSmoothAngle: 0
+    normalSmoothAngle: 1
     splitTangentsAcrossUV: 1
     normalImportMode: 1
     tangentImportMode: 1
