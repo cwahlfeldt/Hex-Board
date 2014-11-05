@@ -31,7 +31,7 @@ public class MapController : MonoBehaviour {
 		Destroy (pieces [rando6]);
 		Destroy (pieces [rando7]);
 		Destroy (pieces [rando7]);
-		Destroy (pieces [rando10]);
+		//Destroy (pieces [rando10]);
 		Destroy (pieces [rando9]);
 		Destroy (pieces [rando8]);
 
@@ -66,9 +66,12 @@ public class MapController : MonoBehaviour {
 		int i = 0;
 
 	 	foreach (GameObject tile in randoTiles) {
-			int randomNum = (int)Random.Range(0,4);
+			//int randomNum = (int)Random.Range(0,6);
 
-			GameObject planet = planets[randomNum];
+			GameObject planet = planets[i];
+			i++;
+			if (i == 8)
+				i = 0 ;
 
 			Vector3 planetSpawn = new Vector3 (tile.transform.position.x, tile.transform.position.y - 1f, tile.transform.position.z);
 

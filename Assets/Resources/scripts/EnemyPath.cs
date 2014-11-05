@@ -68,7 +68,7 @@ public class EnemyPath : MonoBehaviour {
 		}
 
 		// kind of buggy but gives the ai some character...
-//		if (playerCharC.velocity < 15 && playerCharC.velocity > -15)
+		if (playerCharC.isontile != false)
 			Move ();
 
 		//Check if we are close enough to the next waypoint
