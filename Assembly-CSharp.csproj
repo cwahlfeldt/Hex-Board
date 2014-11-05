@@ -122,6 +122,7 @@
      <Compile Include="Assets\Resources\scripts\oldyetstillval\AIPath.cs" />
      <Compile Include="Assets\Resources\scripts\oldyetstillval\EnemyAIPath.cs" />
      <Compile Include="Assets\Resources\scripts\oldyetstillval\testshit.cs" />
+     <Compile Include="Assets\Resources\scripts\smoothfollow.cs" />
      <Compile Include="Assets\RotateAroundShip.cs" />
      <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh2.shader" />
      <None Include="Assets\AstarPathfindingProject\Plugins\DotNetZip\License.txt" />

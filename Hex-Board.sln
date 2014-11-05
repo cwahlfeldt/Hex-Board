@@ -5,6 +5,8 @@ Project("{798C941A-C6DC-734F-BCF7-AFD32692CC0A}") = "Hex-Board", "Assembly-CShar
 EndProject
 Project("{798C941A-C6DC-734F-BCF7-AFD32692CC0A}") = "Hex-Board", "Assembly-CSharp-Editor.csproj", "{AE797739-D9B2-2888-0377-5D67D0EC9AF8}"
 EndProject
+Project("{798C941A-C6DC-734F-BCF7-AFD32692CC0A}") = "Hex-Board", "Assembly-UnityScript.unityproj", "{13C57AD5-0698-1C8E-9E1C-D03C3C1C2594}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,11 +21,15 @@ Global
 		{AE797739-D9B2-2888-0377-5D67D0EC9AF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE797739-D9B2-2888-0377-5D67D0EC9AF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE797739-D9B2-2888-0377-5D67D0EC9AF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13C57AD5-0698-1C8E-9E1C-D03C3C1C2594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13C57AD5-0698-1C8E-9E1C-D03C3C1C2594}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13C57AD5-0698-1C8E-9E1C-D03C3C1C2594}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13C57AD5-0698-1C8E-9E1C-D03C3C1C2594}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																																																																																																																																																								GlobalSection(MonoDevelopProperties) = preSolution
+																																																																																																																																																																																																																GlobalSection(MonoDevelopProperties) = preSolution
 =======
 																																																																																																																																																									GlobalSection(MonoDevelopProperties) = preSolution
 >>>>>>> e6f305a586ede3c256b70f4e74a788d66ef4ca8f
