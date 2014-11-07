@@ -46,7 +46,7 @@ public class MapController : MonoBehaviour {
 		i++;
 
 		if (i == 2) {
-			AstarPath.active.Scan ();
+			//AstarPath.active.Scan ();
 			PlanetGenerator ();
 		}
 	}

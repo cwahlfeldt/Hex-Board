@@ -14,6 +14,7 @@ public class EnemyAI : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		closestTiles = new ArrayList ();
+		correctTiles = new ArrayList ();
 
 		tiles = GameObject.FindGameObjectsWithTag ("tile");
 		enemies = GameObject.FindGameObjectsWithTag ("Enemy");
@@ -21,7 +22,9 @@ public class EnemyAI : MonoBehaviour {
 		player = GameObject.Find ("Player");
 		playerCharC = player.GetComponent<CharController> ();
 
-		FrontOfEnemy = GameObject.Find ("FrontOfEnemy");
+		// this is causing a problem with multiple enemies
+		string str = transform.name;
+		FrontOfEnemy = GameObject.Find ("FrontOfEnemy-" + str);
 	
 	}
 	
@@ -30,29 +33,46 @@ public class EnemyAI : MonoBehaviour {
 
 		transform.LookAt(player.transform, Vector3.up);
 
-		foreach (GameObject tile in tiles) {
-			if (Vector3.Distance (tile.transform.position, FrontOfEnemy.transform.position) <= 1.6 && 
-			    Vector3.Distance (tile.transform.position, FrontOfEnemy.transform.position) > 0 && closestTiles.Count != 2) {
-
-				closestTiles.Add (tile);
-			}
-			else if (closestTiles.Count == 2)
-				closestTiles.Clear ();
-
-		}
-
-		foreach (GameObject closestTile in closestTiles) {
-			print (closestTile.name);
-			target = closestTile.transform.position;
-		}
+		tiles = GameObject.FindGameObjectsWithTag ("tile");
 
 		if (Input.GetKeyDown(KeyCode.Mouse0)) {
-			dist = Vector3.Distance (transform.position, target);
+
+//			foreach (GameObject tile in tiles) {
+//				RaycastHit hitter;
+////				Debug.DrawRay (tile.transform.position, Vector3.up);
+//				if (Physics.Raycast (tile.transform.position, Vector3.down, out hitter, 10)) {
+////					print ("pressed");
+////					print (hitter.transform.name);
+//
+//					if (hitter.transform.tag != "Enemy" && hitter.transform.name != "Player")
+//						correctTiles.Add (tile);
+//
+//				}
+//			}
+
+			foreach (GameObject tile in tiles) {
+				if (Vector3.Distance (tile.transform.position, FrontOfEnemy.transform.position) <= 1.5 && 
+				    Vector3.Distance (tile.transform.position, FrontOfEnemy.transform.position) > 0 && closestTiles.Count != 2) {
+
+					closestTiles.Add (tile.gameObject);
+				}
+				else if (closestTiles.Count == 2)
+					closestTiles.Clear ();
+
+			}
+
+			foreach (GameObject closestTile in closestTiles) {
+				print (closestTile.name);
+				target = closestTile.transform.position;
+			}
+
+			dist = Vector3.Distance (this.transform.position, target);
+			//print (dist);
+		
 		}
 
-		if (dist <= 2.4 && dist != 0)
-			transform.position = Vector3.Lerp(transform.position, target, Time.deltaTime * 3);
-		else
-			return;
+		if (Vector3.Distance (this.transform.position, target) < 4)
+			transform.position = Vector3.Lerp(transform.position, target, Time.deltaTime * 6);
+
 	}
 }
