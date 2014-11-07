@@ -1,11 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/scripts/EnemyAI.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Resources\scripts\LookAtPlayer.cs">
     <Files>
-      <File FileName="Assets/Resources/scripts/EnemyAI.cs" Line="63" Column="54" />
-      <File FileName="Assets/Resources/scripts/CharController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/scripts/NeighborTiles.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/scripts/MapController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Resources\scripts\smoothfollow.cs" Line="23" Column="3" />
+      <File FileName="Assets\Resources\scripts\EnemyAI.cs" Line="34" Column="3" />
+      <File FileName="Assets\Resources\scripts\CharController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Resources\scripts\NeighborTiles.cs" Line="1" Column="1" />
+      <File FileName="Assets\Resources\scripts\MapController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Resources\scripts\LookAtPlayer.cs" Line="9" Column="21" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
