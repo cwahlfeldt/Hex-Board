@@ -35,22 +35,21 @@ public class EnemyAI : MonoBehaviour {
 
 		tiles = GameObject.FindGameObjectsWithTag ("tile");
 
-		if (Input.GetKeyDown(KeyCode.Mouse0)) {
+		if (Input.GetKeyUp(KeyCode.Mouse0)) {
 
-//			foreach (GameObject tile in tiles) {
-//				RaycastHit hitter;
-////				Debug.DrawRay (tile.transform.position, Vector3.up);
-//				if (Physics.Raycast (tile.transform.position, Vector3.down, out hitter, 10)) {
-////					print ("pressed");
-////					print (hitter.transform.name);
-//
-//					if (hitter.transform.tag != "Enemy" && hitter.transform.name != "Player")
-//						correctTiles.Add (tile);
-//
-//				}
-//			}
+			correctTiles.Clear();
 
 			foreach (GameObject tile in tiles) {
+				RaycastHit hitter;
+				//				Debug.DrawRay (tile.transform.position, Vector3.up);
+				if (Vector3.Distance (transform.position, tile.transform.position) > 2) {
+					//print ("pressed");
+					//					print (hitter.transform.name);
+					correctTiles.Add (tile);
+				}
+			}
+
+			foreach (GameObject tile in correctTiles) {
 				if (Vector3.Distance (tile.transform.position, FrontOfEnemy.transform.position) <= 1.5 && 
 				    Vector3.Distance (tile.transform.position, FrontOfEnemy.transform.position) > 0 && closestTiles.Count != 2) {
 
@@ -62,7 +61,6 @@ public class EnemyAI : MonoBehaviour {
 			}
 
 			foreach (GameObject closestTile in closestTiles) {
-				print (closestTile.name);
 				target = closestTile.transform.position;
 			}
 
