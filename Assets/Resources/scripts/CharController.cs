@@ -17,6 +17,7 @@ public class CharController: MonoBehaviour {
 	public bool isontile, restrictor;
 	private Bounds bounds;
 	private GraphUpdateScene gus;
+	public EnemyAI enemyAi;
 
 	// this is how you calculate velocity w/ out a rigid body or character controller
 	public float velocity = 0f;
@@ -76,8 +77,9 @@ public class CharController: MonoBehaviour {
 			}
 		}
 
-		velocity = (childPieceLocation.magnitude - ship.transform.position.magnitude) / Time.deltaTime;
-		print (velocity);
+//		velocity = (childPieceLocation.magnitude - ship.transform.position.magnitude) / Time.deltaTime;
+
+		//print (Vector3.Distance (transform.position, childPieceLocation) * 8);
 
 		// draws a ray to the tile clicked
 		Debug.DrawRay (ship.transform.position, childPieceLocation - ship.transform.position, Color.green);
@@ -93,16 +95,17 @@ public class CharController: MonoBehaviour {
 
 		}
 
-		NNConstraint nodeConstraint = new NNConstraint();
-		nodeConstraint.constrainWalkability = false;
-		nodeConstraint.walkable = false;
-		
-		NNInfo nodeInfo = AstarPath.active.GetNearest (transform.position, nodeConstraint);
 
-		if (isontile == true)
-			nodeInfo.node.Walkable = false;
-		else
-			nodeInfo.node.Walkable = true;
+//		NNConstraint nodeConstraint = new NNConstraint();
+//		nodeConstraint.constrainWalkability = false;
+//		nodeConstraint.walkable = false;
+//		
+//		NNInfo nodeInfo = AstarPath.active.GetNearest (transform.position, nodeConstraint);
+//
+//		if (isontile == true)
+//			nodeInfo.node.Walkable = false;
+//		else
+//			nodeInfo.node.Walkable = true;
 
 
 	} // end of update function

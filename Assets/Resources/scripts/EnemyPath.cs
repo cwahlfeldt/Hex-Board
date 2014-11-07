@@ -68,12 +68,33 @@ public class EnemyPath : MonoBehaviour {
 		}
 
 		// kind of buggy but gives the ai some character...
-		if (playerCharC.isontile != false)
+		if (Vector3.Distance (player.transform.position, playerCharC.childPieceLocation) <= 2.3)
 			Move ();
+
+//		NNConstraint nodeConstraint = new NNConstraint();
+//		nodeConstraint.constrainWalkability = false;
+//		nodeConstraint.walkable = false;
+//		
+//		NNInfo nodeInfo = AstarPath.active.GetNearest (transform.position, nodeConstraint);
+//		
+//		if (playerCharC.isontile == true)
+//			nodeInfo.node.Walkable = false;
+//		else
+//			nodeInfo.node.Walkable = true;
 
 		//Check if we are close enough to the next waypoint
 		//If we are, proceed to follow the next waypoint
 		EnemyPathChecker ();
+
+//		NNConstraint nodeConstraint = new NNConstraint();
+//		nodeConstraint.constrainWalkability = false;
+//		nodeConstraint.walkable = false;
+//		
+//		NNInfo nodeInfo = AstarPath.active.GetNearest (transform.position, nodeConstraint);
+//		
+//		if (playerCharC.isontile == true)
+//			nodeInfo.node.Walkable = false;
+
 	}
 
 	public void LeftMouseClick () {
@@ -87,13 +108,11 @@ public class EnemyPath : MonoBehaviour {
 						
 					targetPosition = player.transform.position;
 
+					if (Vector3.Distance (player.transform.position, playerCharC.childPieceLocation) <= 2)
+						seeker.StartPath (transform.position, targetPosition, OnPathComplete);
 				}
 			}
 
-			if (playerCharC.velocity < 6 && playerCharC.velocity > -6) {
-				//gus.Apply ();
-				seeker.StartPath (transform.position, targetPosition, OnPathComplete);
-			}
 		}
 
 	}
