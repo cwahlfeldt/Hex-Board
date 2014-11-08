@@ -60,14 +60,15 @@ public class EnemyAI : MonoBehaviour {
 
 			}
 
-			foreach (GameObject closestTile in closestTiles) {
-				target = closestTile.transform.position;
-			}
-
-			dist = Vector3.Distance (this.transform.position, target);
 			//print (dist);
 		
 		}
+
+		foreach (GameObject closestTile in closestTiles) {
+			target = closestTile.transform.position;
+		}
+		
+		dist = Vector3.Distance (this.transform.position, target);
 
 		if (Vector3.Distance (this.transform.position, target) < 4)
 			transform.position = Vector3.Lerp(transform.position, target, Time.deltaTime * 6);
