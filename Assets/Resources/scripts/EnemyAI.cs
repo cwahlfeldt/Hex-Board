@@ -34,47 +34,47 @@ public class EnemyAI : MonoBehaviour {
 
 		tiles = GameObject.FindGameObjectsWithTag ("tile");
 
+//		foreach (GameObject tile in tiles) {
+//			if (Vector3.Distance (tile.transform.position, FrontOfEnemy.transform.position) < 1.7 && Vector3.Distance (FrontOfEnemy.transform.position, tile.transform.position) > 1.6)
+//				
+//		}
+
+		foreach (GameObject tile in tiles) {
+			RaycastHit hitter;
+			if (Vector3.Distance (FrontOfEnemy.transform.position, tile.transform.position) > 1.6) {
+				correctTiles.Add (tile);
+			}
+		}
+
 		if (Input.GetKeyUp(KeyCode.Mouse0)) {
 
-			transform.LookAt(player.transform, Vector3.up);
-
-			correctTiles.Clear();
-
+			// causing major problems !!!!!!!
 			foreach (GameObject tile in tiles) {
-				RaycastHit hitter;
-				//				Debug.DrawRay (tile.transform.position, Vector3.up);
-				if (Vector3.Distance (transform.position, tile.transform.position) > 2) {
-					//print ("pressed");
-					//					print (hitter.transform.name);
-					correctTiles.Add (tile);
+				if (Vector3.Distance (tile.transform.position, FrontOfEnemy.transform.position) < 2.2 && 
+				    Vector3.Distance (tile.transform.position, FrontOfEnemy.transform.position) >= 1.7) {
+
+					//print (tile.name);
+
+					closestTiles.Add (tile);
 				}
 			}
-
-			foreach (GameObject tile in correctTiles) {
-				if (Vector3.Distance (tile.transform.position, FrontOfEnemy.transform.position) <= 2.2 && 
-				    Vector3.Distance (tile.transform.position, FrontOfEnemy.transform.position) > 0 && closestTiles.Count != 2) {
-
-					closestTiles.Add (tile.gameObject);
-				}
-				else if (closestTiles.Count == 2)
-					closestTiles.Clear ();
-
-			}
-
-			//print (dist);
-		
+	
+			correctTiles.Clear();
+			
 		}
 
 		foreach (GameObject closestTile in closestTiles) {
 			target = closestTile.transform.position;
 
-			print (Vector3.Distance (FrontOfEnemy.transform.position, closestTile.transform.position));
+			print (closestTile.name);
 		}
-		
+
+		closestTiles.Clear ();
 		dist = Vector3.Distance (this.transform.position, target);
 
-		if (Vector3.Distance (this.transform.position, target) < 4)
+		if (dist < 4.5) {
 			transform.position = Vector3.Lerp(transform.position, target, Time.deltaTime * 6);
+		}
 
 	}
 }
