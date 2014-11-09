@@ -22,7 +22,6 @@ public class EnemyAI : MonoBehaviour {
 		player = GameObject.Find ("Player");
 		playerCharC = player.GetComponent<CharController> ();
 
-		// this is causing a problem with multiple enemies
 		string str = transform.name;
 		FrontOfEnemy = GameObject.Find ("FrontOfEnemy-" + str);
 	
@@ -37,6 +36,8 @@ public class EnemyAI : MonoBehaviour {
 
 		if (Input.GetKeyUp(KeyCode.Mouse0)) {
 
+			transform.LookAt(player.transform, Vector3.up);
+
 			correctTiles.Clear();
 
 			foreach (GameObject tile in tiles) {
@@ -50,7 +51,7 @@ public class EnemyAI : MonoBehaviour {
 			}
 
 			foreach (GameObject tile in correctTiles) {
-				if (Vector3.Distance (tile.transform.position, FrontOfEnemy.transform.position) <= 1.5 && 
+				if (Vector3.Distance (tile.transform.position, FrontOfEnemy.transform.position) <= 2.2 && 
 				    Vector3.Distance (tile.transform.position, FrontOfEnemy.transform.position) > 0 && closestTiles.Count != 2) {
 
 					closestTiles.Add (tile.gameObject);
@@ -66,6 +67,8 @@ public class EnemyAI : MonoBehaviour {
 
 		foreach (GameObject closestTile in closestTiles) {
 			target = closestTile.transform.position;
+
+			print (Vector3.Distance (FrontOfEnemy.transform.position, closestTile.transform.position));
 		}
 		
 		dist = Vector3.Distance (this.transform.position, target);
