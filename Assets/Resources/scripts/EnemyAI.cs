@@ -16,6 +16,8 @@ public class EnemyAI : MonoBehaviour {
 		closestTiles = new ArrayList ();
 		correctTiles = new ArrayList ();
 
+		turn = false;
+
 		tiles = GameObject.FindGameObjectsWithTag ("tile");
 		enemies = GameObject.FindGameObjectsWithTag ("Enemy");
 
@@ -33,11 +35,7 @@ public class EnemyAI : MonoBehaviour {
 		transform.LookAt(player.transform, Vector3.up);
 
 		tiles = GameObject.FindGameObjectsWithTag ("tile");
-
-//		foreach (GameObject tile in tiles) {
-//			if (Vector3.Distance (tile.transform.position, FrontOfEnemy.transform.position) < 1.7 && Vector3.Distance (FrontOfEnemy.transform.position, tile.transform.position) > 1.6)
-//				
-//		}
+		playerCharC = player.GetComponent<CharController> ();
 
 		foreach (GameObject tile in tiles) {
 			RaycastHit hitter;
@@ -46,33 +44,46 @@ public class EnemyAI : MonoBehaviour {
 			}
 		}
 
-		if (Input.GetKeyUp(KeyCode.Mouse0)) {
-
-			// causing major problems !!!!!!!
-			foreach (GameObject tile in tiles) {
-				if (Vector3.Distance (tile.transform.position, FrontOfEnemy.transform.position) < 2.2 && 
-				    Vector3.Distance (tile.transform.position, FrontOfEnemy.transform.position) >= 1.7) {
-
-					//print (tile.name);
-
-					closestTiles.Add (tile);
-				}
-			}
-	
-			correctTiles.Clear();
+		if (Input.GetKeyDown (KeyCode.Mouse0) && playerCharC.velocity < 15) {
+			turn = true;
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+			if (Physics.Raycast (ray, out hit))
+				if (hit.transform.renderer.material.mainTexture == Resources.Load<Texture>("textures/trans-tile-player") ||
+				    hit.transform.renderer.material.mainTexture == Resources.Load<Texture>("textures/trans-tile-enemy") ||
+				    hit.transform.renderer.material.mainTexture == Resources.Load<Texture>("textures/trans-tile-attack") ){
 			
+					// causing major problems !!!!!!!
+					foreach (GameObject tile in tiles) {
+						if (Vector3.Distance (tile.transform.position, FrontOfEnemy.transform.position) < 2.7 && 
+						    Vector3.Distance (tile.transform.position, FrontOfEnemy.transform.position) >= 1.7) {
+
+							closestTiles.Add (tile);
+							//target = tile.transform.position;
+						}
+					}
+			
+					correctTiles.Clear();
+			}
 		}
 
 		foreach (GameObject closestTile in closestTiles) {
 			target = closestTile.transform.position;
 
-			print (closestTile.name);
+			//print (closestTile.name);
 		}
 
 		closestTiles.Clear ();
 		dist = Vector3.Distance (this.transform.position, target);
 
-		if (dist < 4.5) {
+		print (playerCharC.velocity);
+
+		if (Vector3.Distance (this.transform.position, target) < 0) {
+			turn = false;
+		}
+
+
+		if (dist < 4.0 && turn == true) {
 			transform.position = Vector3.Lerp(transform.position, target, Time.deltaTime * 6);
 		}
 

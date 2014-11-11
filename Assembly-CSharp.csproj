@@ -121,6 +121,7 @@
      <Compile Include="Assets\Resources\scripts\NeighborTiles.cs" />
      <Compile Include="Assets\Resources\scripts\PlanetRotator.cs" />
      <Compile Include="Assets\Resources\scripts\PlayerPath.cs" />
+     <Compile Include="Assets\Resources\scripts\Transmorgifier.cs" />
      <Compile Include="Assets\Resources\scripts\oldyetstillval\AIPath.cs" />
      <Compile Include="Assets\Resources\scripts\oldyetstillval\EnemyAIPath.cs" />
      <Compile Include="Assets\Resources\scripts\oldyetstillval\testshit.cs" />

@@ -26,13 +26,17 @@ public class CharController: MonoBehaviour {
 	
 		// initializes vars
 		restrictor = false;
-		isontile = false;
+		isontile = true;
 		speed = 8f;
 		go = new GameObject ();
 
 		gus = GetComponent<GraphUpdateScene> ();
 
 		enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+		childPieceLocation = GameObject.Find ("piece101").transform.position;
+
+		transform.position = Vector3.Lerp(transform.position, childPieceLocation, Time.deltaTime * (speed - 5f));
 	}
 	
 	void Update() {
@@ -47,8 +51,10 @@ public class CharController: MonoBehaviour {
 		//finds the ship on update so that it updates the coordinates
 		GameObject ship = GameObject.FindGameObjectWithTag("Player");
 
+		velocity = (childPieceLocation.magnitude - ship.transform.position.magnitude) / Time.deltaTime;
+
 		// when mouse button is clicked...(for touch controls CHANGE THIS)
-		if (Input.GetKeyDown(KeyCode.Mouse0)) {
+		if (Input.GetKeyDown(KeyCode.Mouse0) && velocity < 15) {
 		
 			// creates a plane for the character and it acts as the 'ground'
 			Plane playerPlane = new Plane(Vector3.up, transform.position);
@@ -58,7 +64,7 @@ public class CharController: MonoBehaviour {
 			float hitdist = 0.0f;
 			
 			// checks for distance to tile and sets it to the target position
-			if (playerPlane.Raycast(ray, out hitdist) && Physics.Raycast(ray, out hit) && !hit.transform.Equals("")) {
+			if ((Physics.Raycast(ray, out hit)) && !hit.transform.Equals("")) {
 
 				// gets current clicked child piece
 				go = GameObject.Find(hit.transform.gameObject.name);
@@ -77,7 +83,6 @@ public class CharController: MonoBehaviour {
 			}
 		}
 
-//		velocity = (childPieceLocation.magnitude - ship.transform.position.magnitude) / Time.deltaTime;
 
 		//print (Vector3.Distance (transform.position, childPieceLocation) * 8);
 
@@ -95,19 +100,11 @@ public class CharController: MonoBehaviour {
 
 		}
 
-
-//		NNConstraint nodeConstraint = new NNConstraint();
-//		nodeConstraint.constrainWalkability = false;
-//		nodeConstraint.walkable = false;
-//		
-//		NNInfo nodeInfo = AstarPath.active.GetNearest (transform.position, nodeConstraint);
-//
-//		if (isontile == true)
-//			nodeInfo.node.Walkable = false;
-//		else
-//			nodeInfo.node.Walkable = true;
-
-
 	} // end of update function
 	
 } // end of class
+
+
+
+
+

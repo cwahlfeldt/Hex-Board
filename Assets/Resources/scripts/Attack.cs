@@ -48,7 +48,7 @@ public class Attack : MonoBehaviour {
 		enemies = GameObject.FindGameObjectsWithTag ("Enemy");
 
 		// simple health minus
-		if (Input.GetKeyDown (KeyCode.Mouse0)) {
+		if (Input.GetKeyDown (KeyCode.Mouse0) && charController.velocity < 15) {
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			
 			isattackover = false;
@@ -56,13 +56,14 @@ public class Attack : MonoBehaviour {
 			if (Physics.Raycast (ray, out hitter)) {
 				
 				// player
-				if (hitter.transform.renderer.material.mainTexture == Resources.Load ("textures/trans-tile-enemy")) {
+				if ((hitter.transform.renderer.material.mainTexture == Resources.Load<Texture> ("textures/trans-tile-enemy") || 
+				     hitter.transform.renderer.material.mainTexture == Resources.Load<Texture> ("textures/trans-tile-dbl"))) {
 					playerHealth.health--;
 				}
 			}
 		}
 
-		// for player attack
+		// for enemy attack
 		foreach (GameObject enemy in enemies) {
 
 			if (Vector3.Distance(enemy.transform.position, player.transform.position) <= 3.0)
@@ -71,9 +72,10 @@ public class Attack : MonoBehaviour {
 				correctship.Clear ();
 
 			foreach (GameObject ship in correctship) {
-				if (Input.GetKeyDown(KeyCode.Mouse0)) {
+				if (Input.GetKeyDown(KeyCode.Mouse0) && charController.velocity < 15) {
 					if (ship != null && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitter)) {
-						if (hitter.transform.renderer.material.mainTexture == Resources.Load<Texture> ("textures/trans-tile-attack") &&
+						if ((hitter.transform.renderer.material.mainTexture == Resources.Load<Texture> ("textures/trans-tile-attack") || 
+						     hitter.transform.renderer.material.mainTexture == Resources.Load<Texture> ("textures/trans-tile-dbl")) &&
 						    Vector3.Distance (hitter.transform.position, ship.transform.position) <= 3) {
 
 							ship.SetActive(false);
