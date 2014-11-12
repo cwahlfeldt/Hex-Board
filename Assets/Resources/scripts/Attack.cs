@@ -78,7 +78,7 @@ public class Attack : MonoBehaviour {
 						     hitter.transform.renderer.material.mainTexture == Resources.Load<Texture> ("textures/trans-tile-dbl")) &&
 						    Vector3.Distance (hitter.transform.position, ship.transform.position) <= 3) {
 
-							ship.SetActive(false);
+							Destroy (ship);
 						}
 					}
 				}

@@ -30,7 +30,7 @@ public class CharController: MonoBehaviour {
 		isontile = true;
 		ftl = false;
 		speed = 8f;
-		go = new GameObject ();
+		go = GameObject.Find ("child-piece101");
 
 		enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
@@ -41,8 +41,9 @@ public class CharController: MonoBehaviour {
 	
 	void Update() {
 
-		if (Physics.Raycast (transform.position, Vector3.down, out hitter, 1f)) {
-			if (hitter.transform.name == go.transform.name)
+		if (Physics.Raycast (transform.position, Vector3.down, out hitter, 5f)) {
+//			print (hitter.transform.name);
+			if (hitter.transform.tag == "tile")
 				isontile = true;
 			else
 				isontile = false;
@@ -57,7 +58,7 @@ public class CharController: MonoBehaviour {
 		velocity = (childPieceLocation.magnitude - ship.transform.position.magnitude) / Time.deltaTime;
 
 		// when mouse button is clicked...(for touch controls CHANGE THIS)
-		if (Input.GetKeyDown(KeyCode.Mouse0) && velocity < 15) {
+		if (Input.GetKeyDown(KeyCode.Mouse0)) {
 		
 			// creates a plane for the character and it acts as the 'ground'
 			Plane playerPlane = new Plane(Vector3.up, transform.position);
@@ -98,7 +99,7 @@ public class CharController: MonoBehaviour {
 			maxDistance = 7;
 		}
 		else
-			maxDistance = 4;
+			maxDistance = 4.0f;
 
 		// will only move to one tile at a time.
 		if (dist <= maxDistance) {

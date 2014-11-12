@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// *****!!!!****!!!!!
+// This has to be attached to a character, for it to work. Whether it be the PLAYER or AI.
+// *****!!!!****!!!!!
+
 // handles who is attacked and when currently attacking just destroys enemies
 public class NeighborTiles : MonoBehaviour {
 	//gets current player and enemy objects
@@ -86,8 +90,11 @@ public class NeighborTiles : MonoBehaviour {
 		GetNeighborTiles(playerTile);
 
 		// sets players range tiles
-		foreach (GameObject neighbors in neighborTiles) {
-			neighbors.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile-player");
+		foreach (GameObject enemy in enemies) {
+			foreach (GameObject neighbors in neighborTiles) {
+				if (enemy != null)
+					neighbors.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile-player");
+			}
 		}
 		
 		// for player attack
@@ -105,7 +112,6 @@ public class NeighborTiles : MonoBehaviour {
 						if (playerAtkTiles != null)
 							playerAtkTiles.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile-attack");
 					}
-
 				}
 				else
 					playerAttackTiles.Clear ();
@@ -142,6 +148,11 @@ public class NeighborTiles : MonoBehaviour {
 				neighbors.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile");
 		}
 
+		foreach (GameObject enemy in enemies) {
+			if (enemy == null)
+				ReUp ();
+		}
+			
 	}// end of update
 	#endregion
 
@@ -163,7 +174,8 @@ public class NeighborTiles : MonoBehaviour {
 			else 
 				maxDistance = 3;
 
-			if ((theTiles != null) && Vector3.Distance(insertTile.transform.position, theTiles.transform.position) <= maxDistance && (
+			if ((theTiles != null) && 
+			    Vector3.Distance(insertTile.transform.position, theTiles.transform.position) <= maxDistance && (
 				Vector3.Distance(insertTile.transform.position, theTiles.transform.position) != 0)) {
 				ReUp ();
 				neighborTiles.Add (theTiles);
