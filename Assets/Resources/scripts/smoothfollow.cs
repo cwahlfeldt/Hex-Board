@@ -10,6 +10,7 @@ public class smoothfollow : MonoBehaviour
 {
 	
 	// The target we are following
+	private int i = 0;
 	public Transform target;
 	// The distance in the x-z plane to the target
 	public float distance = 10.0f;
@@ -21,9 +22,14 @@ public class smoothfollow : MonoBehaviour
 	
 	void FixedUpdate ()
 	{
+		i++;
 		// Early out if we don't have a target
 		if (!target)
 			return;
+
+		if (i <= 25)
+			return;
+
 		
 		// Calculate the current rotation angles
 		float wantedRotationAngle = target.eulerAngles.y;

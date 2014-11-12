@@ -14,10 +14,11 @@ public class CharController: MonoBehaviour {
 	private float dist;
 	private Vector3 relPosition;
 	private Quaternion quat;
-	public bool isontile, restrictor;
+	public bool isontile, restrictor, ftl;
 	private Bounds bounds;
 	private GraphUpdateScene gus;
 	public EnemyAI enemyAi;
+	private NeighborTiles neighbors;
 
 	// this is how you calculate velocity w/ out a rigid body or character controller
 	public float velocity = 0f;
@@ -27,10 +28,9 @@ public class CharController: MonoBehaviour {
 		// initializes vars
 		restrictor = false;
 		isontile = true;
+		ftl = false;
 		speed = 8f;
 		go = new GameObject ();
-
-		gus = GetComponent<GraphUpdateScene> ();
 
 		enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
@@ -48,6 +48,9 @@ public class CharController: MonoBehaviour {
 				isontile = false;
 		}
 
+		if (Input.GetKeyUp ("f")) 
+			ftl = !ftl;
+		
 		//finds the ship on update so that it updates the coordinates
 		GameObject ship = GameObject.FindGameObjectWithTag("Player");
 
@@ -89,8 +92,16 @@ public class CharController: MonoBehaviour {
 		// draws a ray to the tile clicked
 		Debug.DrawRay (ship.transform.position, childPieceLocation - ship.transform.position, Color.green);
 
+		float maxDistance;
+
+		if (ftl == true) {
+			maxDistance = 7;
+		}
+		else
+			maxDistance = 4;
+
 		// will only move to one tile at a time.
-		if (dist <= 4) {
+		if (dist <= maxDistance) {
 
 			// smooth rotation using slerp
 			transform.rotation = Quaternion.Slerp(ship.transform.rotation, quat, Time.deltaTime * (speed + 5f));

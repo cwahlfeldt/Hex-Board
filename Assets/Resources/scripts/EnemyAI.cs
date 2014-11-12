@@ -76,7 +76,7 @@ public class EnemyAI : MonoBehaviour {
 		closestTiles.Clear ();
 		dist = Vector3.Distance (this.transform.position, target);
 
-		print (playerCharC.velocity);
+		//print (playerCharC.velocity);
 
 		if (Vector3.Distance (this.transform.position, target) < 0) {
 			turn = false;
