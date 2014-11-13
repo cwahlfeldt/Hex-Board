@@ -19,6 +19,7 @@ public class CharController: MonoBehaviour {
 	private GraphUpdateScene gus;
 	public EnemyAI enemyAi;
 	private NeighborTiles neighbors;
+	public int turnCounter = 1;
 
 	// this is how you calculate velocity w/ out a rigid body or character controller
 	public float velocity = 0f;
@@ -59,6 +60,7 @@ public class CharController: MonoBehaviour {
 
 		// when mouse button is clicked...(for touch controls CHANGE THIS)
 		if (Input.GetKeyDown(KeyCode.Mouse0)) {
+			turnCounter++;
 		
 			// creates a plane for the character and it acts as the 'ground'
 			Plane playerPlane = new Plane(Vector3.up, transform.position);
