@@ -7,7 +7,7 @@ public class EnemySpawn : MonoBehaviour {
 	private GameObject[] enemies, tiles;
 	private GameObject enemy;
 	private CharController playerCharC;
-	public int lvlOne = 5, lvlTwo = 10, lvlThree = 20, randomNum;
+	public int lvlOne = 5, lvlTwo = 15, lvlThree = 25, randomNum;
 
 	// Use this for initialization
 	void Start () {
@@ -24,7 +24,10 @@ public class EnemySpawn : MonoBehaviour {
 	
 		if (playerCharC.turnCounter == lvlOne) {
 			Spawner (lvlOne);
-			playerCharC.turnCounter = 1;
+		}
+		else if (playerCharC.turnCounter == lvlTwo) {
+			Spawner (lvlTwo);
+
 		}
 		else
 			return;
@@ -39,6 +42,16 @@ public class EnemySpawn : MonoBehaviour {
 			enemies[1] = enemy;
 
 			lvlOne = 0;
+		}
+		else if (waveLevel == lvlTwo) {
+			enemies = new GameObject[4];
+
+			enemies[0] = enemy;
+			enemies[1] = enemy;
+			enemies[2] = enemy;
+			enemies[3] = enemy;
+
+			lvlTwo = 0;
 		}
 
 		if (tiles[randomNum] != null) {

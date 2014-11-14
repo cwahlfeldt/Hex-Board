@@ -59,12 +59,12 @@ public class CharController: MonoBehaviour {
 
 		// when mouse button is clicked...(for touch controls CHANGE THIS)
 		if (Input.GetKeyDown(KeyCode.Mouse0)) {
-			turnCounter++;
 
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
 			// checks for distance to tile and sets it to the target position
 			if ((Physics.Raycast(ray, out hit)) && !hit.transform.Equals("")) {
+				turnCounter++;
 
 				// gets current clicked child piece
 				go = GameObject.Find(hit.transform.gameObject.name);

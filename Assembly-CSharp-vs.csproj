@@ -107,7 +107,6 @@
      <Compile Include="Assets\AstarPathfindingProject\Utilities\ProfileHelper.cs" />
      <Compile Include="Assets\AstarPathfindingProject\Utilities\UnityReferenceHelper.cs" />
      <Compile Include="Assets\AstarPathfindingProject\changelog.cs" />
-     <Compile Include="Assets\EnemySpawn.cs" />
      <Compile Include="Assets\Resources\scripts\All.cs" />
      <Compile Include="Assets\Resources\scripts\Attack.cs" />
      <Compile Include="Assets\Resources\scripts\CameraAspect.cs" />
@@ -115,6 +114,7 @@
      <Compile Include="Assets\Resources\scripts\EnemyAI.cs" />
      <Compile Include="Assets\Resources\scripts\EnemyPath.cs" />
      <Compile Include="Assets\Resources\scripts\EnemyPath_Ranged.cs" />
+     <Compile Include="Assets\Resources\scripts\EnemySpawn.cs" />
      <Compile Include="Assets\Resources\scripts\Health.cs" />
      <Compile Include="Assets\Resources\scripts\HexGen.cs" />
      <Compile Include="Assets\Resources\scripts\LookAtPlayer.cs" />
