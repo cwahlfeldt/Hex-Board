@@ -4,10 +4,14 @@ using Pathfinding;
 
 public class MapController : MonoBehaviour {
 
+	#region Global Variables
 	private int i = 0;
 	private GameObject[] pieces;
 	private GameObject[] planets;
+	private GameObject[] enemies;
+	#endregion
 
+	#region Update
 	void Update () {
 		// using i as a timer, because this function is basically a loop
 		i++;
@@ -22,7 +26,9 @@ public class MapController : MonoBehaviour {
 		if (i == 15)
 			this.enabled = !this.enabled;
 	}
+	#endregion
 
+	#region BoardGenerator
 	public void BoardGenerator () {
 		// gets and stores all of the game objects by tag and destroys the specified game object
 		pieces = GameObject.FindGameObjectsWithTag("pieceTag");
@@ -53,7 +59,9 @@ public class MapController : MonoBehaviour {
 		foreach (GameObject planet in planets)
 			print (planet.name);
 	}
-	
+	#endregion
+
+	#region PlanetGenerator
 	public void PlanetGenerator () {
 		pieces = GameObject.FindGameObjectsWithTag ("pieceTag");
 
@@ -80,9 +88,7 @@ public class MapController : MonoBehaviour {
 
 			GameObject.Instantiate (planet, planetSpawn, planet.transform.rotation);
 		}
-
-
-
 	}
+	#endregion
 
 }

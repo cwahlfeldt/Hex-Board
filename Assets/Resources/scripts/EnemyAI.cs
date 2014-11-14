@@ -24,9 +24,7 @@ public class EnemyAI : MonoBehaviour {
 		player = GameObject.Find ("Player");
 		playerCharC = player.GetComponent<CharController> ();
 
-		string str = transform.name;
-		FrontOfEnemy = GameObject.Find ("FrontOfEnemy-" + str);
-	
+		FrontOfEnemy = GameObject.Find (transform.name + "/FrontOfEnemy");
 	}
 	
 	// Update is called once per frame
