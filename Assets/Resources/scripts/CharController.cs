@@ -43,7 +43,6 @@ public class CharController: MonoBehaviour {
 	void Update() {
 
 		if (Physics.Raycast (transform.position, Vector3.down, out hitter, 5f)) {
-//			print (hitter.transform.name);
 			if (hitter.transform.tag == "tile")
 				isontile = true;
 			else
@@ -61,14 +60,9 @@ public class CharController: MonoBehaviour {
 		// when mouse button is clicked...(for touch controls CHANGE THIS)
 		if (Input.GetKeyDown(KeyCode.Mouse0)) {
 			turnCounter++;
-		
-			// creates a plane for the character and it acts as the 'ground'
-			Plane playerPlane = new Plane(Vector3.up, transform.position);
 
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			
-			float hitdist = 0.0f;
-			
+
 			// checks for distance to tile and sets it to the target position
 			if ((Physics.Raycast(ray, out hit)) && !hit.transform.Equals("")) {
 
