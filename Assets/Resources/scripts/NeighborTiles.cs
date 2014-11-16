@@ -84,7 +84,7 @@ public class NeighborTiles : MonoBehaviour {
 	#region NeighborFinder () = Finds neighbor tiles in realtime!! fucking awesome!!!
 	void NeighborFinder () {
 
-		if (neighborTiles != null )
+		if (neighborTiles != null)
 			neighborTiles.Clear();
 		
 		GetNeighborTiles(playerTile);
