@@ -5,7 +5,7 @@ public class Attack : MonoBehaviour {
 
 	private RaycastHit hitter;
 
-	private GameObject player, dest, actions;
+	private GameObject player, dest, actions, theEnemy;
 	private GameObject[] enemies;
 	private CharController charController;
 	private CharacterController enemyCont;
@@ -35,6 +35,8 @@ public class Attack : MonoBehaviour {
 		enemies = GameObject.FindGameObjectsWithTag ("Enemy");
 		all = actions.GetComponent<All> ();
 
+		theEnemy = new GameObject ();
+
 		speed = 7f;
 
 		charController = player.GetComponent<CharController> ();
@@ -47,18 +49,30 @@ public class Attack : MonoBehaviour {
 
 		enemies = GameObject.FindGameObjectsWithTag ("Enemy");
 
+		foreach (GameObject enemy in enemies) {
+			if (Vector3.Distance(player.transform.position, enemy.transform.position) < 5.5) {
+				print (enemy.name);
+				theEnemy = enemy;
+			}
+		}
+
 		// simple health minus
 		if (Input.GetKeyDown (KeyCode.Mouse0) && charController.velocity < 15) {
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			
 			isattackover = false;
-			
+
 			if (Physics.Raycast (ray, out hitter)) {
 				
 				// player
-				if ((hitter.transform.renderer.material.mainTexture == Resources.Load<Texture> ("textures/trans-tile-enemy") || 
+				if ( (hitter.transform.renderer.material.mainTexture == Resources.Load<Texture> ("textures/trans-tile-enemy") || 
 				     hitter.transform.renderer.material.mainTexture == Resources.Load<Texture> ("textures/trans-tile-dbl"))) {
-					playerHealth.health--;
+
+					if (theEnemy.transform.renderer.material.mainTexture == Resources.Load<Texture> ("textures/vehicle_enemyShip_red_dff"))
+						playerHealth.health--;
+					else if (theEnemy.transform.renderer.material.mainTexture == Resources.Load<Texture> ("textures/vehicle_playerShip_orange_dff")) {
+						playerHealth.health -= 2;
+					}
 				}
 			}
 		}

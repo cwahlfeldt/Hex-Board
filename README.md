@@ -22,11 +22,11 @@ To start using this repo either clone or download somewhere onto your computer a
 
 ~~Add funtionality to "red tiles" so that the enemy can hurt the player (make an array of all)~~ (very basic)
 
-Update pathfinding for enemies to not be able to run onto same tile as player and enemy
+~~Update pathfinding for enemies to not be able to run onto same tile as player and enemy~~
 
-Randomly instantiate enemies onto different tiles at start of game
+~~Randomly instantiate enemies onto different tiles at start of game~~
 
-Fix when enemies can move after the player has moved (this already kind of works..could be more "turn based")
+~~Fix when enemies can move after the player has moved (this already kind of works..could be more "turn based")~~
 
 Multiple Types of enemies e.g. (archer, mage, bomber, berzerker...) this also means different AI behavior for each type
 
@@ -49,6 +49,9 @@ Reset Game
 Pause Game
 
 Save game (maybe?)
+
+SEE ISSUES
+----------
 
 
 **Ideas**

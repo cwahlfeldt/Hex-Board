@@ -1,12 +1,15 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/scripts/CharController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Resources\scripts\Health.cs">
     <Files>
-      <File FileName="Assets/Resources/scripts/MapController.cs" Line="91" Column="24" />
-      <File FileName="Assets/Resources/scripts/CharController.cs" Line="95" Column="19" />
-      <File FileName="Assets/Resources/scripts/EnemySpawn.cs" Line="28" Column="32" />
-      <File FileName="Assets/Resources/scripts/NeighborTiles.cs" Line="173" Column="20" />
-      <File FileName="Assets/Resources/scripts/EnemyAI.cs" Line="35" Column="36" />
+      <File FileName="Assets\Resources\scripts\NeighborTiles.cs" Line="185" Column="12" />
+      <File FileName="Assets\Resources\scripts\MapController.cs" Line="106" Column="1" />
+      <File FileName="Assets\Resources\scripts\CharController.cs" Line="100" Column="4" />
+      <File FileName="Assets\Resources\scripts\EnemySpawn.cs" Line="61" Column="15" />
+      <File FileName="Assets\Resources\scripts\EnemyAI.cs" Line="41" Column="1" />
+      <File FileName="Assets\Resources\scripts\Transmorgifier.cs" Line="21" Column="3" />
+      <File FileName="Assets\Resources\scripts\Attack.cs" Line="73" Column="136" />
+      <File FileName="Assets\Resources\scripts\Health.cs" Line="31" Column="29" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

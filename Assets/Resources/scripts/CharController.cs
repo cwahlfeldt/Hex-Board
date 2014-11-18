@@ -42,12 +42,10 @@ public class CharController: MonoBehaviour {
 	
 	void Update() {
 
-		if (Physics.Raycast (transform.position, Vector3.down, out hitter, 5f)) {
-			if (hitter.transform.tag == "tile")
+		if (Vector3.Distance (childPieceLocation, transform.transform.position) < 2)
 				isontile = true;
-			else
+		else
 				isontile = false;
-		}
 
 		if (Input.GetKeyUp ("f")) 
 			ftl = !ftl;
@@ -58,7 +56,7 @@ public class CharController: MonoBehaviour {
 		velocity = (childPieceLocation.magnitude - ship.transform.position.magnitude) / Time.deltaTime;
 
 		// when mouse button is clicked...(for touch controls CHANGE THIS)
-		if (Input.GetKeyDown(KeyCode.Mouse0)) {
+		if (Input.GetKeyUp(KeyCode.Mouse0)) {
 
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -104,7 +102,7 @@ public class CharController: MonoBehaviour {
 			transform.rotation = Quaternion.Slerp(ship.transform.rotation, quat, Time.deltaTime * (speed + 5f));
 
 			// smooth transform position using lerp
-			transform.position = Vector3.Lerp(transform.position, childPieceLocation, Time.deltaTime * (speed - 5f));
+			transform.position = Vector3.Lerp(transform.position, childPieceLocation, Time.deltaTime * (speed - 6f));
 
 		}
 

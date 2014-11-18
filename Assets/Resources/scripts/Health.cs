@@ -24,12 +24,16 @@ public class Health : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		
 		if (health == 2) 
 			health3.SetActive(false);
-		if (health == 1)
+		if (health == 1) {
+			health3.SetActive(false);
 			health2.SetActive(false);
-		if (health == 0) {
+		}
+		if (health <= 0) {
+			health3.SetActive(false);
+			health2.SetActive(false);
 			health1.SetActive(false);
 			player.SetActive(false);
 		}

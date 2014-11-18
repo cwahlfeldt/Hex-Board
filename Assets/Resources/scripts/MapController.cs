@@ -90,7 +90,10 @@ public class MapController : MonoBehaviour {
 
 		for (int e = 0; e < 9; e++) {
 
-			randomNum = (int)Random.Range(4f, 49f);
+			if (e < 4)
+				randomNum = (int)Random.Range(4f, 24f);
+			else
+				randomNum = (int)Random.Range(25f, 49f);
 
 			if (pieces[randomNum] != null)
 				randoTiles.Add (pieces[randomNum]);

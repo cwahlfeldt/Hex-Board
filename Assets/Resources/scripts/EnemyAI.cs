@@ -54,7 +54,7 @@ public class EnemyAI : MonoBehaviour {
 			
 					// causing major problems !!!!!!!
 					foreach (GameObject tile in tiles) {
-						if (Vector3.Distance (tile.transform.position, FrontOfEnemy.transform.position) < 2.7 && 
+						if ((FrontOfEnemy != null) && Vector3.Distance (tile.transform.position, FrontOfEnemy.transform.position) < 2.7 && 
 						    Vector3.Distance (tile.transform.position, FrontOfEnemy.transform.position) >= 1.7) {
 
 							closestTiles.Add (tile);
@@ -83,7 +83,7 @@ public class EnemyAI : MonoBehaviour {
 
 
 		if (dist < 4.0 && turn == true) {
-			transform.position = Vector3.Lerp(transform.position, target, Time.deltaTime * 6);
+			transform.position = Vector3.Lerp(transform.position, target, Time.deltaTime * 2);
 		}
 
 	}
