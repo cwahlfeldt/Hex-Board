@@ -112,7 +112,6 @@
      <Compile Include="Assets\Resources\scripts\CameraAspect.cs" />
      <Compile Include="Assets\Resources\scripts\CharController.cs" />
      <Compile Include="Assets\Resources\scripts\EnemyAI.cs" />
-     <Compile Include="Assets\Resources\scripts\EnemyPath.cs" />
      <Compile Include="Assets\Resources\scripts\EnemyPath_Ranged.cs" />
      <Compile Include="Assets\Resources\scripts\EnemySpawn.cs" />
      <Compile Include="Assets\Resources\scripts\Health.cs" />
@@ -125,6 +124,7 @@
      <Compile Include="Assets\Resources\scripts\Transmorgifier.cs" />
      <Compile Include="Assets\Resources\scripts\oldyetstillval\AIPath.cs" />
      <Compile Include="Assets\Resources\scripts\oldyetstillval\EnemyAIPath.cs" />
+     <Compile Include="Assets\Resources\scripts\oldyetstillval\EnemyPath.cs" />
      <Compile Include="Assets\Resources\scripts\oldyetstillval\testshit.cs" />
      <Compile Include="Assets\Resources\scripts\smoothfollow.cs" />
      <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh2.shader" />

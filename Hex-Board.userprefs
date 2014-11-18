@@ -1,11 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/scripts/NeighborTiles.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/scripts/CharController.cs">
     <Files>
-      <File FileName="Assets/Resources/scripts/CharController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/scripts/MapController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/scripts/EnemySpawn.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/scripts/NeighborTiles.cs" Line="87" Column="28" />
+      <File FileName="Assets/Resources/scripts/MapController.cs" Line="91" Column="24" />
+      <File FileName="Assets/Resources/scripts/CharController.cs" Line="95" Column="19" />
+      <File FileName="Assets/Resources/scripts/EnemySpawn.cs" Line="28" Column="32" />
+      <File FileName="Assets/Resources/scripts/NeighborTiles.cs" Line="173" Column="20" />
+      <File FileName="Assets/Resources/scripts/EnemyAI.cs" Line="35" Column="36" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -31,11 +31,11 @@ public class CharController: MonoBehaviour {
 		isontile = true;
 		ftl = false;
 		speed = 8f;
-		go = GameObject.Find ("child-piece101");
+		go = GameObject.Find ("child-piece1");
 
 		enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-		childPieceLocation = GameObject.Find ("piece101").transform.position;
+		childPieceLocation = GameObject.Find ("piece1").transform.position;
 
 		transform.position = Vector3.Lerp(transform.position, childPieceLocation, Time.deltaTime * (speed - 5f));
 	}
@@ -92,7 +92,7 @@ public class CharController: MonoBehaviour {
 		float maxDistance;
 
 		if (ftl == true) {
-			maxDistance = 7;
+			maxDistance = 9;
 		}
 		else
 			maxDistance = 4.0f;

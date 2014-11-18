@@ -7,7 +7,7 @@ public class EnemySpawn : MonoBehaviour {
 	private GameObject[] enemies, tiles;
 	private GameObject enemy;
 	private CharController playerCharC;
-	public int lvlOne = 5, lvlTwo = 15, lvlThree = 25, randomNum;
+	public int lvlOne = 5, lvlTwo = 7, lvlThree = 9, randomNum;
 
 	// Use this for initialization
 	void Start () {
@@ -21,13 +21,20 @@ public class EnemySpawn : MonoBehaviour {
 
 		if (playerCharC.turnCounter == 2)
 			tiles = GameObject.FindGameObjectsWithTag("tile");
+
+		enemies = GameObject.FindGameObjectsWithTag ("Enemy");
+
+		if (enemies.Length > 1)
+			playerCharC.turnCounter = 1;
 	
 		if (playerCharC.turnCounter == lvlOne) {
 			Spawner (lvlOne);
 		}
 		else if (playerCharC.turnCounter == lvlTwo) {
 			Spawner (lvlTwo);
-
+		}
+		else if (playerCharC.turnCounter == lvlThree) {
+			Spawner (lvlThree);
 		}
 		else
 			return;
@@ -44,7 +51,7 @@ public class EnemySpawn : MonoBehaviour {
 			lvlOne = 0;
 		}
 		else if (waveLevel == lvlTwo) {
-			enemies = new GameObject[4];
+			enemies = new GameObject [4];
 
 			enemies[0] = enemy;
 			enemies[1] = enemy;
@@ -53,13 +60,27 @@ public class EnemySpawn : MonoBehaviour {
 
 			lvlTwo = 0;
 		}
+		else if (waveLevel == lvlThree) {
+			enemies = new GameObject [7];
+			
+			enemies[0] = enemy;
+			enemies[1] = enemy;
+			enemies[2] = enemy;
+			enemies[3] = enemy;
+			enemies[4] = enemy;
+			enemies[5] = enemy;
+			enemies[6] = enemy;
+			
+			lvlThree = 0;
+		}
 
 		if (tiles[randomNum] != null) {
 			foreach (GameObject enemy in enemies) {
-				randomNum = (int)Random.Range (12, 40);
+				randomNum = (int)Random.Range (5, 40);
 				enemy.name = "enemy" + randomNum;
 				GameObject.Instantiate (enemy, tiles[randomNum].transform.position, enemy.transform.rotation);
 			}
+			playerCharC.turnCounter = 1;
 		}
 
 	}

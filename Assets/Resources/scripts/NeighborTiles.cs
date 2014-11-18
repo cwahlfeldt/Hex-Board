@@ -170,7 +170,7 @@ public class NeighborTiles : MonoBehaviour {
 		foreach (GameObject theTiles in tiles) {
 			
 			if (playerCharC.ftl == true)
-				maxDistance = 7;
+				maxDistance = 9;
 			else 
 				maxDistance = 3;
 

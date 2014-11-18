@@ -36,9 +36,10 @@ public class EnemyAI : MonoBehaviour {
 		playerCharC = player.GetComponent<CharController> ();
 
 		foreach (GameObject tile in tiles) {
-			RaycastHit hitter;
-			if (Vector3.Distance (FrontOfEnemy.transform.position, tile.transform.position) > 1.6) {
-				correctTiles.Add (tile);
+			if (FrontOfEnemy != null) {
+				if (Vector3.Distance (FrontOfEnemy.transform.position, tile.transform.position) > 1.6) {
+					correctTiles.Add (tile);
+				}
 			}
 		}
 
