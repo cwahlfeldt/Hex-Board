@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Pathfinding;
 
 public class MapController : MonoBehaviour {
 

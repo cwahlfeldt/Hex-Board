@@ -10,18 +10,15 @@ public class Attack : MonoBehaviour {
 	private CharController charController;
 	private CharacterController enemyCont;
 	private ArrayList correctship;
-	private Quaternion quat;
 
 	public bool playerattack = false, enemyattack = false, isattackover = false, attack = false;
 	
 	private Vector3 relPosition, relPosition1;
 
-	private PlayerPath playerComponent;
-	private EnemyPath enemyComponent;
 	private Health playerHealth;
 
 	// this will help decide if the enemy was killed
-	public int enemiesKilled, i;
+	public int enemiesKilled;
 
 	// Use this for initialization
 	void Start () {
@@ -29,7 +26,6 @@ public class Attack : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		actions = GameObject.Find ("Actions");
 		enemies = GameObject.FindGameObjectsWithTag ("Enemy");
-		quat = new Quaternion ();
 		theEnemy = new GameObject ();
 
 		charController = player.GetComponent<CharController> ();
@@ -86,34 +82,13 @@ public class Attack : MonoBehaviour {
 						     Vector3.Distance (hitter.transform.position, ship.transform.position) <= 3) {
 
 							ship.GetComponent<EnemyAI> ().enabled = !(ship.GetComponent<EnemyAI> ().enabled);
-
-							playerattack = true;
-
-
-							//Destroy (ship);
+						
+							Destroy (ship);
 						}
 					}
 				}
 			}
 
-		}
-
-		// doesnt work
-		if (playerattack == true && correctship != null) {
-			foreach (GameObject ship in correctship) {
-				player.transform.LookAt(ship.transform);
-				
-				if (i == 50) {
-					Destroy (ship);
-					i = 0;
-					playerattack = false;
-
-					correctship.Clear();
-
-					//break;
-				}
-			}
-			i++;
 		}
 	
 //		if (playerattack == true && enemy1 != null) {

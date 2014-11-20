@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Pathfinding;
 
 // Moves the charObject to a tile object when the tile is clicked
 public class CharController: MonoBehaviour {
@@ -16,7 +15,6 @@ public class CharController: MonoBehaviour {
 	private Quaternion quat;
 	public bool isontile, restrictor, ftl;
 	private Bounds bounds;
-	private GraphUpdateScene gus;
 	public EnemyAI enemyAi;
 	private NeighborTiles neighbors;
 	public int turnCounter = 1;
@@ -102,7 +100,7 @@ public class CharController: MonoBehaviour {
 			transform.rotation = Quaternion.Slerp(ship.transform.rotation, quat, Time.deltaTime * (speed + 5f));
 
 			// smooth transform position using lerp
-			transform.position = Vector3.Lerp(transform.position, childPieceLocation, Time.deltaTime * (speed - 6f));
+			transform.position = Vector3.Lerp(transform.position, childPieceLocation, Time.deltaTime * (speed - 5f));
 
 		}
 
