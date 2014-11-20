@@ -5,27 +5,23 @@ public class Attack : MonoBehaviour {
 
 	private RaycastHit hitter;
 
-	private GameObject player, dest, actions, theEnemy;
+	private GameObject player, dest, actions, theEnemy, enemy1;
 	private GameObject[] enemies;
 	private CharController charController;
 	private CharacterController enemyCont;
 	private ArrayList correctship;
-
-	public bool playerattack = false, enemyattack = false, isattackover = false;
-
-	private float speed;
-
 	private Quaternion quat;
+
+	public bool playerattack = false, enemyattack = false, isattackover = false, attack = false;
+	
 	private Vector3 relPosition, relPosition1;
 
 	private PlayerPath playerComponent;
 	private EnemyPath enemyComponent;
 	private Health playerHealth;
-	private All all;
 
 	// this will help decide if the enemy was killed
-	public int enemiesKilled;
-	private int i = 0;
+	public int enemiesKilled, i;
 
 	// Use this for initialization
 	void Start () {
@@ -33,11 +29,8 @@ public class Attack : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		actions = GameObject.Find ("Actions");
 		enemies = GameObject.FindGameObjectsWithTag ("Enemy");
-		all = actions.GetComponent<All> ();
-
+		quat = new Quaternion ();
 		theEnemy = new GameObject ();
-
-		speed = 7f;
 
 		charController = player.GetComponent<CharController> ();
 		playerHealth = player.GetComponent<Health> ();
@@ -77,7 +70,7 @@ public class Attack : MonoBehaviour {
 			}
 		}
 
-		// for enemy attack
+		// for player attack
 		foreach (GameObject enemy in enemies) {
 
 			if (Vector3.Distance(enemy.transform.position, player.transform.position) <= 3.0)
@@ -90,19 +83,49 @@ public class Attack : MonoBehaviour {
 					if (ship != null && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitter)) {
 						if ((hitter.transform.renderer.material.mainTexture == Resources.Load<Texture> ("textures/trans-tile-attack") || 
 						     hitter.transform.renderer.material.mainTexture == Resources.Load<Texture> ("textures/trans-tile-dbl")) &&
-						    Vector3.Distance (hitter.transform.position, ship.transform.position) <= 3) {
+						     Vector3.Distance (hitter.transform.position, ship.transform.position) <= 3) {
 
-							Destroy (ship);
+							ship.GetComponent<EnemyAI> ().enabled = !(ship.GetComponent<EnemyAI> ().enabled);
+
+							playerattack = true;
+
+
+							//Destroy (ship);
 						}
 					}
 				}
 			}
+
 		}
 
-	} // end of update
+		// doesnt work
+		if (playerattack == true && correctship != null) {
+			foreach (GameObject ship in correctship) {
+				player.transform.LookAt(ship.transform);
+				
+				if (i == 50) {
+					Destroy (ship);
+					i = 0;
+					playerattack = false;
 
-	void PauseEnemies () {
-	}
+					correctship.Clear();
+
+					//break;
+				}
+			}
+			i++;
+		}
+	
+//		if (playerattack == true && enemy1 != null) {
+//			i++;
+//
+//			if (i == 50) {
+//				Destroy (enemy1);
+//			}
+//		}
+
+	} // end of update
+	
 }
 
 
