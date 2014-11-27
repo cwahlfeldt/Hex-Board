@@ -59,8 +59,8 @@
      <Compile Include="Assets\Resources\scripts\MapController.cs" />
      <Compile Include="Assets\Resources\scripts\NeighborTiles.cs" />
      <Compile Include="Assets\Resources\scripts\PlanetRotator.cs" />
+     <Compile Include="Assets\Resources\scripts\SmoothFollow.cs" />
      <Compile Include="Assets\Resources\scripts\Transmorgifier.cs" />
-     <Compile Include="Assets\Resources\scripts\smoothfollow.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,7 +6,7 @@ using System.Collections;
 // Place the script in the Camera-Control group in the component menu
 [AddComponentMenu("Camera-Control/Smooth Follow CSharp")]
 
-public class smoothfollow : MonoBehaviour
+public class SmoothFollow : MonoBehaviour
 {
 	
 	// The target we are following
