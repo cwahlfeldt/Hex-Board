@@ -21,13 +21,15 @@ public class NeighborTiles : MonoBehaviour {
 
 	private bool attackRange;
 
-	private ArrayList neighborTiles, attackTiles, playerAttackTiles, enemyTiles, dblAtkTiles;
+	private ArrayList neighborTiles, attackTiles, playerAttackTiles;
 
 	private GameObject[] tiles;
 
 	private Attack atk;
 
 	private float maxDistance = 3f;
+
+	private LongRangedAttack LRangeAtk;
 
 	// Use this for initialization
 	#region Start ()
@@ -37,8 +39,6 @@ public class NeighborTiles : MonoBehaviour {
 		neighborTiles = new ArrayList ();
 		attackTiles = new ArrayList ();
 		playerAttackTiles = new ArrayList ();
-		enemyTiles = new ArrayList ();
-		dblAtkTiles = new ArrayList ();
 
 		atk = GameObject.Find ("Actions").GetComponent<Attack> ();
 		atk.playerattack = false;
@@ -49,12 +49,14 @@ public class NeighborTiles : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag("Player");
 		enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-		enemy = transform.gameObject;
+		enemy = this.transform.gameObject;
 
 		playerCharC = player.GetComponent<CharController> ();
 
 		playerTile = GameObject.Find("child-piece1");
 		enemyTile = GameObject.Find("child-piece25");
+
+		LRangeAtk = GameObject.Find ("Actions").GetComponent<LongRangedAttack> ();
 
 		// intializes the current tile
 		CurrentTileOnBoard(player);
@@ -79,7 +81,7 @@ public class NeighborTiles : MonoBehaviour {
 		// this is the jam!!!
 		NeighborFinder ();
 
-	}
+	} // end of update
 
 	#region NeighborFinder () = Finds neighbor tiles in realtime!! fucking awesome!!!
 	void NeighborFinder () {
@@ -140,6 +142,18 @@ public class NeighborTiles : MonoBehaviour {
 					attackTiles.Clear ();
 			} 
 		} // end of enemy attack
+		/*
+	
+			!!!!!!!!make the code below for each enemies current tile.!!!!!!!
+			
+		 */
+		if (enemyTile != null && LRangeAtk.longrange == true) {
+			if (enemyTile.renderer.material.mainTexture == Resources.Load<Texture>("textures/trans-tile-attack") || 
+			    enemyTile.renderer.material.mainTexture == Resources.Load<Texture>("textures/trans-tile-enemy") || 
+			    enemyTile.renderer.material.mainTexture == Resources.Load<Texture>("textures/trans-tile-player")) {
+				enemyTile.renderer.material.mainTexture = Resources.Load<Texture> ("textures/trans-tile-long");
+			}
+		}
 
 		// updates based on current positions
 		if (playerCharC.isontile == false) {
@@ -153,7 +167,7 @@ public class NeighborTiles : MonoBehaviour {
 				ReUp ();
 		}
 			
-	}// end of update
+	}
 	#endregion
 
 	// clears the entire board
@@ -169,7 +183,7 @@ public class NeighborTiles : MonoBehaviour {
 	
 		foreach (GameObject theTiles in tiles) {
 			
-			if (playerCharC.ftl == true)
+			if (playerCharC.ftl == true || LRangeAtk.longrange == true)
 				maxDistance = 9;
 			else 
 				maxDistance = 3;

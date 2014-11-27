@@ -4,6 +4,8 @@ using System.Collections;
 public class LongRangedAttack : MonoBehaviour {
 
 	private GameObject[] enemies;
+	private RaycastHit hitter;
+	public bool longrange = false;
 
 	// Use this for initialization
 	void Start () {
@@ -13,15 +15,31 @@ public class LongRangedAttack : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		if (Input.GetKeyUp ("l")) {
+			longrange = !longrange;
+		}
+
 		enemies = GameObject.FindGameObjectsWithTag ("Enemy");
 
-		if (enemies != null) {
+		if (enemies.Length > 1 && longrange == true) {
 			foreach (GameObject enemy in enemies) {
-				
+				if (Physics.Raycast(enemy.transform.position, Vector3.down, out hitter, 5f)) {
+					GameObject enemyTile = (GameObject) hitter.transform.gameObject;
+
+					print (enemyTile.renderer.material.mainTexture.name);
+
+					if (enemyTile.renderer.material.mainTexture == Resources.Load<Texture> ("textures/trans-tile-attack")) {
+						enemyTile.renderer.material.mainTexture = Resources.Load<Texture> ("textures/trans-tile-long");
+					}
+
+				}
 			}
 
 		}
-		else
+		else {
 			return;
+		}
+
+
 	}
 }

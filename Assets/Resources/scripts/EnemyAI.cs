@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemyAI : MonoBehaviour {
 
-	private GameObject[] tiles, enemies;
+	private GameObject[] tiles;
 	private GameObject player, FrontOfEnemy;
 	private ArrayList correctTiles, closestTiles;
 	private Vector3 target; 
@@ -19,7 +19,6 @@ public class EnemyAI : MonoBehaviour {
 		turn = false;
 
 		tiles = GameObject.FindGameObjectsWithTag ("tile");
-		enemies = GameObject.FindGameObjectsWithTag ("Enemy");
 
 		player = GameObject.Find ("Player");
 		playerCharC = player.GetComponent<CharController> ();

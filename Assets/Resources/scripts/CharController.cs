@@ -8,7 +8,6 @@ public class CharController: MonoBehaviour {
 	public HexGen hexGen;
 	public RaycastHit hit, hitter;
 	private GameObject go;
-	private GameObject[] enemies;
 	public Vector3 childPieceLocation;
 	private float dist;
 	private Vector3 relPosition;
@@ -30,8 +29,6 @@ public class CharController: MonoBehaviour {
 		ftl = false;
 		speed = 8f;
 		go = GameObject.Find ("child-piece1");
-
-		enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
 		childPieceLocation = GameObject.Find ("piece1").transform.position;
 

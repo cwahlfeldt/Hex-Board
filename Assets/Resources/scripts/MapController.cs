@@ -8,11 +8,9 @@ public class MapController : MonoBehaviour {
 	private GameObject[] pieces = new GameObject[49];
 	private GameObject[] planets;
 	private GameObject[] enemies;
-	private ArrayList tiles;
 	#endregion
 
 	void Start () {
-		tiles = new ArrayList ();
 		planets = GameObject.FindGameObjectsWithTag ("planet");
 
 		for (int i = 0; i < pieces.Length; i++) {
@@ -75,12 +73,6 @@ public class MapController : MonoBehaviour {
 	#endregion
 
 	#region PlanetGenerator 
-	// rewirte this!!!!!
-	/*
-	
-		fuckk this
-		
-	 */
 	public void PlanetGenerator () {
 
 		int randomNum = 6;

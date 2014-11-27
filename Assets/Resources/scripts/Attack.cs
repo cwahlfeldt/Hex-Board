@@ -5,7 +5,7 @@ public class Attack : MonoBehaviour {
 
 	private RaycastHit hitter;
 
-	private GameObject player, dest, actions, theEnemy, enemy1;
+	private GameObject player, dest, theEnemy, enemy1;
 	private GameObject[] enemies;
 	private CharController charController;
 	private CharacterController enemyCont;
@@ -24,7 +24,6 @@ public class Attack : MonoBehaviour {
 	void Start () {
 		correctship = new ArrayList ();
 		player = GameObject.FindGameObjectWithTag ("Player");
-		actions = GameObject.Find ("Actions");
 		enemies = GameObject.FindGameObjectsWithTag ("Enemy");
 		theEnemy = new GameObject ();
 
@@ -40,7 +39,7 @@ public class Attack : MonoBehaviour {
 
 		foreach (GameObject enemy in enemies) {
 			if (Vector3.Distance(player.transform.position, enemy.transform.position) < 5.5) {
-				print (enemy.name);
+				//print (enemy.name);
 				theEnemy = enemy;
 			}
 		}
