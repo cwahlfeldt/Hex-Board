@@ -1,6 +1,4 @@
-﻿// Converted from UnityScript to C# at http://www.M2H.nl/files/js_to_c.php - by Mike Hergaarden
-
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 // Place the script in the Camera-Control group in the component menu

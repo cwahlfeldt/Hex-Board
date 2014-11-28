@@ -21,7 +21,7 @@ public class NeighborTiles : MonoBehaviour {
 
 	private bool attackRange;
 
-	private ArrayList neighborTiles, attackTiles, playerAttackTiles;
+	private ArrayList neighborTiles, attackTiles, playerAttackTiles, longRangeTiles;
 
 	private GameObject[] tiles;
 
@@ -39,6 +39,7 @@ public class NeighborTiles : MonoBehaviour {
 		neighborTiles = new ArrayList ();
 		attackTiles = new ArrayList ();
 		playerAttackTiles = new ArrayList ();
+		longRangeTiles = new ArrayList ();
 
 		atk = GameObject.Find ("Actions").GetComponent<Attack> ();
 		atk.playerattack = false;
@@ -73,6 +74,7 @@ public class NeighborTiles : MonoBehaviour {
 	void Update () {
 
 		enemies = GameObject.FindGameObjectsWithTag("Enemy");
+		tiles = GameObject.FindGameObjectsWithTag("tile");
 
 		// always gets tile on update
 		CurrentTileOnBoard (player);
@@ -142,18 +144,34 @@ public class NeighborTiles : MonoBehaviour {
 					attackTiles.Clear ();
 			} 
 		} // end of enemy attack
+
 		/*
 	
 			!!!!!!!!make the code below for each enemies current tile.!!!!!!!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!re write this!!!!!
 			
 		 */
-		if (enemyTile != null && LRangeAtk.longrange == true) {
-			if (enemyTile.renderer.material.mainTexture == Resources.Load<Texture>("textures/trans-tile-attack") || 
-			    enemyTile.renderer.material.mainTexture == Resources.Load<Texture>("textures/trans-tile-enemy") || 
-			    enemyTile.renderer.material.mainTexture == Resources.Load<Texture>("textures/trans-tile-player")) {
-				enemyTile.renderer.material.mainTexture = Resources.Load<Texture> ("textures/trans-tile-long");
+		if (LRangeAtk.longrange == true && enemies.Length > 1) {
+			foreach (GameObject enemy in enemies) {
+
+				foreach (GameObject tile in tiles) {
+					if (Vector3.Distance (tile.transform.position, enemy.transform.position) < 1)
+						longRangeTiles.Add (tile);
+					else
+						longRangeTiles.Clear ();
+				}
 			}
-		}
+
+			foreach (GameObject enemyTiler in longRangeTiles) {
+				if (enemyTiler.renderer.material.mainTexture == Resources.Load<Texture>("textures/trans-tile-attack") || 
+				    enemyTiler.renderer.material.mainTexture == Resources.Load<Texture>("textures/trans-tile-enemy") || 
+				    enemyTiler.renderer.material.mainTexture == Resources.Load<Texture>("textures/trans-tile-player")) {
+					
+					enemyTiler.renderer.material.mainTexture = Resources.Load<Texture> ("textures/trans-tile-long");
+				}
+			}
+		} // end of longragne stuff
 
 		// updates based on current positions
 		if (playerCharC.isontile == false) {

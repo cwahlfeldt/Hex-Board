@@ -21,6 +21,8 @@ public class HexGen : MonoBehaviour {
 		// generates single hexagon at the location of an empty object
 		GameObject go = new GameObject(this.gameObject.name);
 		HexGenerator (go);
+
+		texture = Resources.Load<Texture> ("textures/trans-tile");
 	}
 
 	void HexGenerator (GameObject go) {

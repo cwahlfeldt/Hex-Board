@@ -37,7 +37,7 @@ public class CharController: MonoBehaviour {
 	
 	void Update() {
 
-		if (Vector3.Distance (childPieceLocation, transform.transform.position) < 2)
+		if (Vector3.Distance (childPieceLocation, transform.transform.position) < 1)
 				isontile = true;
 		else
 				isontile = false;
