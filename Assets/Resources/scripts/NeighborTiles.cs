@@ -27,7 +27,7 @@ public class NeighborTiles : MonoBehaviour {
 
 	private Attack atk;
 
-	private float maxDistance = 3f;
+	private float maxDistance = 3f, sentient = 3f;
 
 	private LongRangedAttack LRangeAtk;
 
@@ -78,10 +78,47 @@ public class NeighborTiles : MonoBehaviour {
 
 		// always gets tile on update
 		CurrentTileOnBoard (player);
-		CurrentTileOnBoard (enemy);
 	
 		// this is the jam!!!
 		NeighborFinder ();
+
+		/*
+			!!!make the code below for each enemies current tile.!!!!
+
+			!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! re write this !!!!
+		 */
+		if (LRangeAtk.longrange == true && enemies.Length > 1) {
+			foreach (GameObject enemy in enemies) {
+				
+				foreach (GameObject tile in tiles) {
+					if (Vector3.Distance (tile.transform.position, enemy.transform.position) < 2)
+						longRangeTiles.Add (tile);
+				}
+			}
+			
+			foreach (GameObject enemyTiler in longRangeTiles) {
+				if (enemyTiler.renderer.material.mainTexture == Resources.Load<Texture>("textures/trans-tile-attack") || 
+				    enemyTiler.renderer.material.mainTexture == Resources.Load<Texture>("textures/trans-tile-enemy") || 
+				    enemyTiler.renderer.material.mainTexture == Resources.Load<Texture>("textures/trans-tile-player")) {
+					
+					enemyTiler.renderer.material.mainTexture = Resources.Load<Texture> ("textures/trans-tile-long");
+				}
+			}
+			
+			//			longRangeTiles.TrimToSize();
+			//			int i = 0;
+			//			foreach (GameObject tile in longRangeTiles) {
+			//				i++;
+			//				if (Vector3.Distance(tile.transform.position, enemy.transform.position) > 1) {
+			//					longRangeTiles.RemoveAt(i);
+			//					longRangeTiles.TrimToSize();
+			//					i = 0;
+			//				}
+			//			}
+		} // end of longrange stuff
+
+		if (Input.GetKeyUp (KeyCode.Mouse0))
+			sentient = 1;
 
 	} // end of update
 
@@ -145,36 +182,11 @@ public class NeighborTiles : MonoBehaviour {
 			} 
 		} // end of enemy attack
 
-		/*
-	
-			!!!!!!!!make the code below for each enemies current tile.!!!!!!!
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!re write this!!!!!
-			
-		 */
-		if (LRangeAtk.longrange == true && enemies.Length > 1) {
-			foreach (GameObject enemy in enemies) {
-
-				foreach (GameObject tile in tiles) {
-					if (Vector3.Distance (tile.transform.position, enemy.transform.position) < 1)
-						longRangeTiles.Add (tile);
-					else
-						longRangeTiles.Clear ();
-				}
-			}
-
-			foreach (GameObject enemyTiler in longRangeTiles) {
-				if (enemyTiler.renderer.material.mainTexture == Resources.Load<Texture>("textures/trans-tile-attack") || 
-				    enemyTiler.renderer.material.mainTexture == Resources.Load<Texture>("textures/trans-tile-enemy") || 
-				    enemyTiler.renderer.material.mainTexture == Resources.Load<Texture>("textures/trans-tile-player")) {
-					
-					enemyTiler.renderer.material.mainTexture = Resources.Load<Texture> ("textures/trans-tile-long");
-				}
-			}
-		} // end of longragne stuff
 
 		// updates based on current positions
 		if (playerCharC.isontile == false) {
+			longRangeTiles.Clear();
 			ReUp ();
 			foreach (GameObject neighbors in neighborTiles) 
 				neighbors.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile");
@@ -201,7 +213,7 @@ public class NeighborTiles : MonoBehaviour {
 	
 		foreach (GameObject theTiles in tiles) {
 			
-			if (playerCharC.ftl == true || LRangeAtk.longrange == true)
+			if ((playerCharC.ftl == true || LRangeAtk.longrange == true))
 				maxDistance = 9;
 			else 
 				maxDistance = 3;
