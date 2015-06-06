@@ -26,10 +26,10 @@ public class LongRangedAttack : MonoBehaviour {
 				if (Physics.Raycast(enemy.transform.position, Vector3.down, out hitter, 5f)) {
 					GameObject enemyTile = (GameObject) hitter.transform.gameObject;
 
-					print (enemyTile.renderer.material.mainTexture.name);
+					print (enemyTile.GetComponent<Renderer>().material.mainTexture.name);
 
-					if (enemyTile.renderer.material.mainTexture == Resources.Load<Texture> ("textures/trans-tile-attack")) {
-						enemyTile.renderer.material.mainTexture = Resources.Load<Texture> ("textures/trans-tile-long");
+					if (enemyTile.GetComponent<Renderer>().material.mainTexture == Resources.Load<Texture> ("textures/trans-tile-attack")) {
+						enemyTile.GetComponent<Renderer>().material.mainTexture = Resources.Load<Texture> ("textures/trans-tile-long");
 					}
 
 				}

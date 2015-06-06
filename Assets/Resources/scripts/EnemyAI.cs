@@ -46,10 +46,10 @@ public class EnemyAI : MonoBehaviour {
 			turn = true;
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
-			if (Physics.Raycast (ray, out hit))
-				if (hit.transform.renderer.material.mainTexture == Resources.Load<Texture>("textures/trans-tile-player") ||
-				    hit.transform.renderer.material.mainTexture == Resources.Load<Texture>("textures/trans-tile-enemy") ||
-				    hit.transform.renderer.material.mainTexture == Resources.Load<Texture>("textures/trans-tile-attack") ){
+			if (Physics.Raycast (ray, out hit)) {
+				if (hit.transform.GetComponent<Renderer>().material.mainTexture == Resources.Load<Texture>("textures/trans-tile-player") ||
+				    hit.transform.GetComponent<Renderer>().material.mainTexture == Resources.Load<Texture>("textures/trans-tile-enemy") ||
+				    hit.transform.GetComponent<Renderer>().material.mainTexture == Resources.Load<Texture>("textures/trans-tile-attack") ){
 			
 					// causing major problems !!!!!!!
 					foreach (GameObject tile in tiles) {
@@ -62,6 +62,7 @@ public class EnemyAI : MonoBehaviour {
 					}
 			
 					correctTiles.Clear();
+				}
 			}
 		}
 

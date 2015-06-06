@@ -103,7 +103,7 @@ public class HexGen : MonoBehaviour {
 
 		transparent.mainTexture = texture;
 					
-		go.renderer.material = transparent;
+		go.GetComponent<Renderer>().material = transparent;
 	
 	}
 

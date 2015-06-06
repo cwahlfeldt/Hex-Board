@@ -53,12 +53,12 @@ public class Attack : MonoBehaviour {
 			if (Physics.Raycast (ray, out hitter)) {
 				
 				// player
-				if ( (hitter.transform.renderer.material.mainTexture == Resources.Load<Texture> ("textures/trans-tile-enemy") || 
-				     hitter.transform.renderer.material.mainTexture == Resources.Load<Texture> ("textures/trans-tile-dbl"))) {
+				if ( (hitter.transform.GetComponent<Renderer>().material.mainTexture == Resources.Load<Texture> ("textures/trans-tile-enemy") || 
+				     hitter.transform.GetComponent<Renderer>().material.mainTexture == Resources.Load<Texture> ("textures/trans-tile-dbl"))) {
 
-					if (theEnemy.transform.renderer.material.mainTexture == Resources.Load<Texture> ("textures/vehicle_enemyShip_red_dff"))
+					if (theEnemy.transform.GetComponent<Renderer>().material.mainTexture == Resources.Load<Texture> ("textures/vehicle_enemyShip_red_dff"))
 						playerHealth.health--;
-					else if (theEnemy.transform.renderer.material.mainTexture == Resources.Load<Texture> ("textures/vehicle_playerShip_orange_dff")) {
+					else if (theEnemy.transform.GetComponent<Renderer>().material.mainTexture == Resources.Load<Texture> ("textures/vehicle_playerShip_orange_dff")) {
 						playerHealth.health -= 2;
 					}
 				}
@@ -76,8 +76,8 @@ public class Attack : MonoBehaviour {
 			foreach (GameObject ship in correctship) {
 				if (Input.GetKeyDown(KeyCode.Mouse0) && charController.velocity < 15) {
 					if (ship != null && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitter)) {
-						if ((hitter.transform.renderer.material.mainTexture == Resources.Load<Texture> ("textures/trans-tile-attack") || 
-						     hitter.transform.renderer.material.mainTexture == Resources.Load<Texture> ("textures/trans-tile-dbl")) &&
+						if ((hitter.transform.GetComponent<Renderer>().material.mainTexture == Resources.Load<Texture> ("textures/trans-tile-attack") || 
+						     hitter.transform.GetComponent<Renderer>().material.mainTexture == Resources.Load<Texture> ("textures/trans-tile-dbl")) &&
 						     Vector3.Distance (hitter.transform.position, ship.transform.position) <= 3) {
 
 							ship.GetComponent<EnemyAI> ().enabled = !(ship.GetComponent<EnemyAI> ().enabled);

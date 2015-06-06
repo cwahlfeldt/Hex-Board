@@ -7,13 +7,15 @@ public class EnemySpawn : MonoBehaviour {
 	private GameObject[] enemies, tiles;
 	private GameObject enemy;
 	private CharController playerCharC;
-	public int lvlOne = 5, lvlTwo = 7, lvlThree = 9, randomNum;
+	public int lvlOne = 5, 
+			   lvlTwo = 7, 
+	           lvlThree = 9, 
+	           randomNum = 0;
 
 	// Use this for initialization
 	void Start () {
 		enemy = (GameObject) Resources.Load ("Prefabs/enemy");
 		playerCharC = GameObject.Find ("Player").GetComponent<CharController> ();
-	
 	}
 	
 	// Update is called once per frame
@@ -36,9 +38,7 @@ public class EnemySpawn : MonoBehaviour {
 		else if (playerCharC.turnCounter == lvlThree) {
 			Spawner (lvlThree);
 		}
-		else
-			return;
-	
+		else return;
 	}
 
 	void Spawner (int waveLevel) {

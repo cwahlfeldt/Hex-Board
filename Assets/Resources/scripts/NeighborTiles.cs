@@ -66,7 +66,7 @@ public class NeighborTiles : MonoBehaviour {
 		GetNeighborTiles(playerTile);
 
 		foreach (GameObject neighbors in neighborTiles) {
-			neighbors.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile-player");
+			neighbors.GetComponent<Renderer>().material.mainTexture = Resources.Load<Texture>("textures/trans-tile-player");
 		}
 	}
 	#endregion
@@ -97,11 +97,11 @@ public class NeighborTiles : MonoBehaviour {
 			}
 			
 			foreach (GameObject enemyTiler in longRangeTiles) {
-				if (enemyTiler.renderer.material.mainTexture == Resources.Load<Texture>("textures/trans-tile-attack") || 
-				    enemyTiler.renderer.material.mainTexture == Resources.Load<Texture>("textures/trans-tile-enemy") || 
-				    enemyTiler.renderer.material.mainTexture == Resources.Load<Texture>("textures/trans-tile-player")) {
+				if (enemyTiler.GetComponent<Renderer>().material.mainTexture == Resources.Load<Texture>("textures/trans-tile-attack") || 
+				    enemyTiler.GetComponent<Renderer>().material.mainTexture == Resources.Load<Texture>("textures/trans-tile-enemy") || 
+				    enemyTiler.GetComponent<Renderer>().material.mainTexture == Resources.Load<Texture>("textures/trans-tile-player")) {
 					
-					enemyTiler.renderer.material.mainTexture = Resources.Load<Texture> ("textures/trans-tile-long");
+					enemyTiler.GetComponent<Renderer>().material.mainTexture = Resources.Load<Texture> ("textures/trans-tile-long");
 				}
 			}
 			
@@ -134,7 +134,7 @@ public class NeighborTiles : MonoBehaviour {
 		foreach (GameObject enemy in enemies) {
 			foreach (GameObject neighbors in neighborTiles) {
 				if (enemy != null)
-					neighbors.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile-player");
+					neighbors.GetComponent<Renderer>().material.mainTexture = Resources.Load<Texture>("textures/trans-tile-player");
 			}
 		}
 		
@@ -151,7 +151,7 @@ public class NeighborTiles : MonoBehaviour {
 
 					foreach (GameObject playerAtkTiles in playerAttackTiles) {
 						if (playerAtkTiles != null)
-							playerAtkTiles.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile-attack");
+							playerAtkTiles.GetComponent<Renderer>().material.mainTexture = Resources.Load<Texture>("textures/trans-tile-attack");
 					}
 				}
 				else
@@ -171,10 +171,10 @@ public class NeighborTiles : MonoBehaviour {
 					
 					attackTiles.Add (neighbors);
 					foreach (GameObject atkneighbors in attackTiles) {
-						if (atkneighbors.renderer.material.mainTexture == Resources.Load<Texture>("textures/trans-tile-attack"))
-							atkneighbors.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile-dbl");
+						if (atkneighbors.GetComponent<Renderer>().material.mainTexture == Resources.Load<Texture>("textures/trans-tile-attack"))
+							atkneighbors.GetComponent<Renderer>().material.mainTexture = Resources.Load<Texture>("textures/trans-tile-dbl");
 						else
-							atkneighbors.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile-enemy");
+							atkneighbors.GetComponent<Renderer>().material.mainTexture = Resources.Load<Texture>("textures/trans-tile-enemy");
 					}
 				}
 				else
@@ -189,7 +189,7 @@ public class NeighborTiles : MonoBehaviour {
 			longRangeTiles.Clear();
 			ReUp ();
 			foreach (GameObject neighbors in neighborTiles) 
-				neighbors.renderer.material.mainTexture = Resources.Load<Texture>("textures/trans-tile");
+				neighbors.GetComponent<Renderer>().material.mainTexture = Resources.Load<Texture>("textures/trans-tile");
 		}
 
 		foreach (GameObject enemy in enemies) {
@@ -204,7 +204,7 @@ public class NeighborTiles : MonoBehaviour {
 	void ReUp () {
 		foreach (GameObject thetile in tiles) {
 			if (thetile != null) 
-				thetile.renderer.material.mainTexture = Resources.Load<Texture> ("textures/trans-tile");
+				thetile.GetComponent<Renderer>().material.mainTexture = Resources.Load<Texture> ("textures/trans-tile");
 		}
 	}
 
